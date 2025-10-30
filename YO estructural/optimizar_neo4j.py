@@ -116,9 +116,14 @@ def main():
     # Conectar a Neo4j
     neo4j_config = config.get('neo4j', {})
     
+    # Construir URI desde host y puerto
+    host = neo4j_config.get('host', 'localhost')
+    port = neo4j_config.get('port', 7687)
+    uri = neo4j_config.get('uri', f'bolt://{host}:{port}')
+    
     try:
         connection = Neo4jConnection(
-            neo4j_config.get('uri', 'bolt://localhost:7687'),
+            uri,
             neo4j_config.get('username', 'neo4j'),
             neo4j_config.get('password', 'password'),
             database=neo4j_config.get('database'),

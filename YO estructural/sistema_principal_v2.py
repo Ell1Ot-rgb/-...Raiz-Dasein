@@ -229,17 +229,42 @@ class SistemaFenomenologicoV2:
         self.logger.info("Evaluando contradicciones de 4° orden...")
         estado_actual = self._preparar_estado_evaluacion()
         
-        resultado_contradicciones = self.motor_yo.evaluar_contradicciones_4o(estado_actual)
+        resultado_contradicciones = self.motor_yo.evaluar_contradicciones(estado_actual)
         
-        if resultado_contradicciones["requiere_reconfiguracion"]:
+        if resultado_contradicciones["requiere_reconfig"]:
             self.logger.warning("Iniciando reconfiguración estructural")
-            resultado_reconfig = self.motor_yo.reconfigurar_estructura_interna()
+            resultado_reconfig = self.motor_yo.activar_reconfiguracion(resultado_contradicciones)
             
-            if resultado_reconfig["exito"]:
+            if resultado_reconfig.get("exito", False):
                 self.logger.info("Reconfiguración completada exitosamente")
             else:
                 self.logger.error("Falló la reconfiguración estructural")
                 self._registrar_pendientes_reanalisis(resultado_contradicciones)
+    
+    def _preparar_estado_evaluacion(self) -> dict:
+        """Prepara el estado actual del sistema para evaluación de contradicciones.
+        
+        Returns:
+            dict: Estado del sistema con métricas relevantes para evaluación
+        """
+        return {
+            'nivel_yo': self.motor_yo.estado_actual.tipo.value if hasattr(self.motor_yo.estado_actual, 'tipo') else 0,
+            'coherencia_interna': self.motor_yo.estado_actual.activacion if hasattr(self.motor_yo.estado_actual, 'activacion') else 0.0,
+            'contextos_activos': self.motor_yo.estado_actual.contextos_activos if hasattr(self.motor_yo.estado_actual, 'contextos_activos') else [],
+            'reflexiones': self.motor_yo.estado_actual.reflexiones if hasattr(self.motor_yo.estado_actual, 'reflexiones') else [],
+            'timestamp': self.motor_yo.estado_actual.timestamp if hasattr(self.motor_yo.estado_actual, 'timestamp') else '',
+            'version': self.motor_yo.estado_actual.version if hasattr(self.motor_yo.estado_actual, 'version') else 0
+        }
+    
+    def _registrar_pendientes_reanalisis(self, contradicciones: dict):
+        """Registra contradicciones pendientes de reanálisis.
+        
+        Args:
+            contradicciones: Diccionario con información de contradicciones detectadas
+        """
+        self.logger.warning(f"Contradicciones pendientes de reanálisis: {contradicciones.get('tensiones', {})}")
+        # TODO: Implementar sistema de seguimiento de contradicciones pendientes
+        # Podría guardar en archivo, base de datos o cola de procesamiento
     
     def _contar_archivos_yaml(self, subcarpeta: str) -> int:
         """Cuenta los archivos YAML en una subcarpeta específica del modelo semántico"""

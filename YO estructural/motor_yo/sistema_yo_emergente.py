@@ -38,6 +38,8 @@ class EstadoEstructural:
     contextos_activos: List[str]
     timestamp: str
     version: int = 0
+    tipo: TipoYO = TipoYO.PROTO_YO  # Tipo de YO emergente
+    activacion: float = 0.0  # Nivel de activación (0.0 a 1.0)
 
 @dataclass
 class MetricasCoherencia:
@@ -536,6 +538,27 @@ class SistemaYoEmergente:
         self.sincronizar_con_neo4j()
         
         return resultado
+    
+    def _actualizar_tipo_yo(self, coherencia_total: float, num_contextos: int):
+        """Actualiza el tipo de YO emergente basado en métricas.
+        
+        Args:
+            coherencia_total: Valor de coherencia narrativa total (0.0 a 1.0)
+            num_contextos: Número de contextos activos
+        """
+        # Lógica de emergencia fenomenológica del YO
+        if coherencia_total >= 0.9 and num_contextos >= 5:
+            self.estado_actual.tipo = TipoYO.YO_NARRATIVO
+        elif coherencia_total >= 0.75 and num_contextos >= 4:
+            self.estado_actual.tipo = TipoYO.YO_SIMBOLICO
+        elif coherencia_total >= 0.6 and num_contextos >= 3:
+            self.estado_actual.tipo = TipoYO.YO_REFLEXIVO
+        elif coherencia_total >= 0.4 and num_contextos >= 2:
+            self.estado_actual.tipo = TipoYO.YO_AFECTIVO
+        elif coherencia_total >= 0.2 and num_contextos >= 1:
+            self.estado_actual.tipo = TipoYO.YO_SENSORIAL
+        else:
+            self.estado_actual.tipo = TipoYO.PROTO_YO
         
     def evaluar_emergencia(self, contextos_activos, fenomenos_activos):
         """Evalúa la emergencia del YO a partir de contextos y fenómenos activos.
@@ -559,6 +582,10 @@ class SistemaYoEmergente:
         
         # Determinar si hay emergencia del YO basado en métricas
         emergencia_detectada = coherencia["coherencia_total"] > 0.6 and not contradicciones["contradiccion_detectada"]
+        
+        # Actualizar tipo de YO y nivel de activación basado en coherencia
+        self._actualizar_tipo_yo(coherencia["coherencia_total"], len(contextos_activos))
+        self.estado_actual.activacion = coherencia["coherencia_total"]
         
         # Registrar el evento de evaluación
         self._notificar_evento("evaluacion_emergencia", {

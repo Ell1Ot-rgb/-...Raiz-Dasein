@@ -184,7 +184,7 @@ class SistemaFenomenologicoV2:
             "vohexistencias_detectadas": len(vohexistencias),
             "instancias_procesadas": len(instancias),
             "emergencia_detectada": emergencia_detectada,
-            "timestamp": datetime.datetime.now().isoformat()
+            "timestamp": datetime.now().isoformat()
         }
         
         print(f"✅ Sistema completado. YO emergente: {self.motor_yo.estado_actual.tipo.name}")

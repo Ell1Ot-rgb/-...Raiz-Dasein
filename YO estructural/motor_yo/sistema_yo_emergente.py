@@ -292,21 +292,6 @@ class SistemaYoEmergente:
             'coherencia_interna': 0.3
         }
 
-    def ejecutar_reconfiguracion(self) -> Dict:
-        """Ejecuta el proceso de reconfiguración"""
-        resultado = self.activar_reconfiguracion()
-        if resultado.get('reconfig_exitosa'):
-            return {'exito': True}
-        return {'exito': False}
-
-    def regenerar_narrativa_completa(self) -> Dict:
-        """Regenera la narrativa completa después de una reconfiguración"""
-        resultado = self.regenerar_narrativa()
-        return {
-            'narrativa_coherente': resultado.get('coherencia_nueva', 0) > 0.6,
-            'coherencia': resultado.get('coherencia_nueva', 0)
-        }
-
     def obtener_estado_completo(self) -> Dict:
         """Obtiene el estado completo del sistema incluyendo métricas de coherencia"""
         coherencia = self._analizar_coherencia_narrativa()
@@ -615,11 +600,26 @@ class SistemaYoEmergente:
             "timestamp": self.estado_actual.timestamp
         }
     
-    def activar_reconfiguracion(self, contradiccion):
-        """Activa reconfiguración y actualiza Neo4j"""
-        resultado = self._ejecutar_reconfiguracion(contradiccion)
+    def _ejecutar_reconfiguracion(self, contradiccion: Dict = None) -> Dict:
+        """Método interno para ejecutar reconfiguración"""
+        estado_previo = copy.deepcopy(self.estado_actual)
         
-        # Actualizar estado en Neo4j
-        self.sincronizar_con_neo4j()
+        # Incrementar versión
+        self.estado_actual.version += 1
+        self.estado_actual.timestamp = datetime.datetime.now().isoformat()
         
-        return resultado
+        # Crear nueva reflexión
+        nueva_reflexion = {
+            "mensaje": f"Reconfiguración ejecutada v{self.estado_actual.version}",
+            "timestamp": self.estado_actual.timestamp,
+            "tipo": "reconfig_auto",
+            "contradiccion": contradiccion if contradiccion else {}
+        }
+        
+        self.estado_actual.reflexiones.append(nueva_reflexion)
+        
+        return {
+            "reconfig_exitosa": True,
+            "version_nueva": self.estado_actual.version,
+            "cambios": self._describir_cambios(estado_previo.__dict__, self.estado_actual.__dict__)
+        }

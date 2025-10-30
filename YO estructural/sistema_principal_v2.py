@@ -53,7 +53,6 @@ class SistemaFenomenologicoV2:
     
     def _configurar_logging_detallado(self):
         """Configura logging detallado para modo diagnóstico"""
-        import logging
         logging.basicConfig(
             level=logging.DEBUG,
             format='[%(asctime)s] [%(levelname)s] [%(module)s] %(message)s',
@@ -96,19 +95,6 @@ class SistemaFenomenologicoV2:
         
         # Inicializar el motor YO con la conexión Neo4j
         self.motor_yo = SistemaYoEmergente(self.config_path, self.neo4j._driver)
-    
-    def _configurar_logging_detallado(self):
-        """Configura logging detallado para modo diagnóstico"""
-        import logging
-        logging.basicConfig(
-            level=logging.DEBUG,
-            format='[%(asctime)s] [%(levelname)s] [%(module)s] %(message)s',
-            handlers=[
-                logging.FileHandler('logs_sistema/diagnostico_detallado.log'),
-                logging.StreamHandler()
-            ]
-        )
-        self.logger = logging.getLogger(__name__)
         
     def _debug_print(self, mensaje: str, nivel: str = "INFO"):
         """Imprime mensajes de diagnóstico si está activado"""

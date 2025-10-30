@@ -21,7 +21,7 @@ neo4j:
   port: 7687
   username: "neo4j"
   password: "fenomenologia2024"
-  database: "yo_estructural"
+  database: "neo4j"  # Cambiado a 'neo4j' (Community Edition no soporta múltiples BDs)
   timeout: 30
   max_retry: 3
   pool_size: 50

@@ -7,6 +7,47 @@ Crea índices y constraints necesarios para mejorar el rendimiento
 
 import yaml
 from database import Neo4jConnection
+from neo4j.exceptions import ClientError
+
+def crear_base_datos(uri, username, password, database_name):
+    """Crea la base de datos si no existe (conectándose a la BD system)"""
+    
+    print(f"\n🔨 Verificando base de datos '{database_name}'...")
+    
+    try:
+        # Conectar a la base de datos 'system' para crear la BD
+        system_connection = Neo4jConnection(
+            uri, username, password,
+            database='system',  # Conectar a system para crear BDs
+            timeout=30
+        )
+        
+        # Verificar si la base de datos existe
+        query_verificar = "SHOW DATABASES"
+        databases = system_connection.query(query_verificar)
+        
+        db_existe = False
+        for db in databases:
+            if db.get('name') == database_name:
+                db_existe = True
+                print(f"   ✅ La base de datos '{database_name}' ya existe")
+                break
+        
+        # Crear la base de datos si no existe
+        if not db_existe:
+            print(f"   ⚠️  La base de datos '{database_name}' no existe. Creándola...")
+            query_crear = f"CREATE DATABASE `{database_name}` IF NOT EXISTS"
+            system_connection.query(query_crear)
+            print(f"   ✅ Base de datos '{database_name}' creada exitosamente")
+        
+        system_connection.close()
+        return True
+        
+    except Exception as e:
+        print(f"   ⚠️  No se pudo verificar/crear la BD: {str(e)}")
+        print(f"   ℹ️  Esto es normal si tu usuario no tiene permisos de administrador")
+        print(f"   ℹ️  Asegúrate de que la BD '{database_name}' exista manualmente")
+        return False
 
 def crear_indices_y_constraints(db_connection):
     """Crea todos los índices y constraints necesarios para optimizar Neo4j"""
@@ -120,13 +161,19 @@ def main():
     host = neo4j_config.get('host', 'localhost')
     port = neo4j_config.get('port', 7687)
     uri = neo4j_config.get('uri', f'bolt://{host}:{port}')
+    username = neo4j_config.get('username', 'neo4j')
+    password = neo4j_config.get('password', 'password')
+    database = neo4j_config.get('database', 'neo4j')
+    
+    # Paso 1: Crear la base de datos si no existe
+    crear_base_datos(uri, username, password, database)
     
     try:
         connection = Neo4jConnection(
             uri,
-            neo4j_config.get('username', 'neo4j'),
-            neo4j_config.get('password', 'password'),
-            database=neo4j_config.get('database'),
+            username,
+            password,
+            database=database,
             timeout=neo4j_config.get('timeout', 30),
             max_retry=neo4j_config.get('max_retry', 3),
             pool_size=neo4j_config.get('pool_size', 50)

@@ -175,9 +175,8 @@ class SistemaFenomenologicoV2:
         print("📈 Calculando métricas de éxito...")
         self._calcular_metricas_finales()
         
-        # 8. Generar exportación Neo4j
-        print("🗄️ Generando exportación Neo4j...")
-        self._generar_exportacion_neo4j()
+        # 8. Sincronizar estado final con Neo4j (ya se hizo en evaluar_emergencia)
+        print("🗄️ Estado del YO sincronizado con Neo4j")
         
         resultado = {
             "estado_yo": self.motor_yo.estado_actual.__dict__,

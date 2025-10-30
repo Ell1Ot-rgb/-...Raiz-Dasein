@@ -607,6 +607,9 @@ class SistemaYoEmergente:
             print(f"[DIAGNÓSTICO] Coherencia total: {coherencia['coherencia_total']:.2f}")
             print(f"[DIAGNÓSTICO] Contradicciones: {contradicciones['contradiccion_detectada']}")
         
+        # Sincronizar estado con Neo4j después de evaluar emergencia
+        self.sincronizar_con_neo4j()
+        
         return {
             "emergencia_detectada": emergencia_detectada,
             "coherencia": coherencia["coherencia_total"],

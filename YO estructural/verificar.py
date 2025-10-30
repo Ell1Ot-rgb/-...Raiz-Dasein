@@ -270,7 +270,7 @@ def main():
         print("\n" + "=" * 80)
         print("🎉 EJECUCIÓN COMPLETADA EXITOSAMENTE")
         print("=" * 80)
-        print(f"📁 Diagnósticos guardados en: {diagnosticador.directorio_diagnostivos}")
+        print(f"📁 Diagnósticos guardados en: {diagnosticador.directorio_diagnosticos}")
         print(f"🧠 Estado del YO: {sistema.motor_yo.estado_actual.tipo.name if hasattr(sistema.motor_yo.estado_actual, 'tipo') else 'DESCONOCIDO'}")
         print(f"📊 Instancias procesadas: {resultado.get('instancias_procesadas', 0)}")
         print(f"🔗 Vohexistencias detectadas: {resultado.get('vohexistencias_detectadas', 0)}")

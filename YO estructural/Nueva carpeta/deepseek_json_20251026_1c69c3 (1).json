@@ -1,0 +1,38 @@
+[
+  {
+    "parameters": {
+      "method": "POST",
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+      "authentication": "genericCredentialType",
+      "genericAuthType": "httpBearerAuth",
+      "sendBody": true,
+      "specifyBody": "json",
+      "jsonBody": "={\\n \\\"file_id\\\": \\\"={{ $json.doc_ID }}\\\",\\n \\\"file_name\\\": \\\"={{ $json.name }}\\\",\\n \\\"mime_type\\\": \\\"{{ $json.doc_type }}\\\",\\n \\\"prompt\\\": \\\"Analiza este documento PDF en busca de texto, tablas y diagramas, y devuelve una representación completa en formato markdown. Incluye los campos clave extraídos en la metadata.\\\"\\n}",
+      "fullResponse": true
+    },
+    "name": "Gemini PDF Analysis (API Call)",
+    "description": "REEMPLAZO DEL EXTRACTOR NATIVO. Envía el PDF a la API de Gemini (visión multimodal) para análisis avanzado y OCR [1, 3].",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+      1050,
+      -300
+    ],
+    "id": "6gemini_pdf_api_call",
+    "credentials": {}
+  },
+  {
+    "parameters": {
+      "functionCode": "/*\\n  Formateador de Contenido de PDF con Gemini (Node 7)\\n  Toma la respuesta JSON de Gemini (OCR/Análisis) y la estandariza para el Formateador Multimodal (Node 16/15).\\n*/\\n\\nconst item = $input.item.json;\\n// Referencia al nodo HTTP Request anterior\\nconst geminiApiResponse = $node[''Gemini PDF Analysis (API Call)''].json;\\n\\nlet extractedMarkdown = \\\"\\\";\\nlet aiFields = {};\\n\\ntry {\\n    // --- Lógica de Extracción de Gemini (Placeholder) ---\\n    // La implementación real debe extraer el texto/markdown del JSON de respuesta de la API. Este código simula la extracción de contenido y metadatos.\\n    \\n    if (geminiApiResponse.candidates && geminiApiResponse.candidates.content) {\\n        // Asumimos que Gemini proporciona una salida markdown y metadatos enriquecidos (fields).\\n        extractedMarkdown = geminiApiResponse.candidates.content.parts.text || ''Contenido no encontrado.'';\\n        // Los LMMs permiten generar metadatos IA (Extracción de campos).\\n        aiFields = { AnalysisType: ''Document_AI_Gemini'', ExtractionAccuracy: ''100% esperado'' };\\n    } else {\\n        extractedMarkdown = ''ERROR: No se pudo obtener el contenido de la respuesta de Gemini.'';\\n        aiFields = { ErrorStatus: ''API_Response_Issue'' };\\n    }\\n\\n    // 2. Formato de la salida estructurada para el nodo Multimodal Data Formatter (Node 16).\\n    const structuredOutput = {\\n        markdown: extractedMarkdown,\\n        fields: aiFields\\n    };\\n    \\n    return [{ \\n        json: { \\n            extracted_data: structuredOutput, \\n            multimodal_type: ''document_pdf'' \\n        } \\n    }];\\n\\n} catch (error) {\\n    // Manejo de errores implementado (try...catch) para evitar la ruptura del flujo.\\n    console.error(\\\"Fallo en el procesamiento de PDF con Gemini:\\\", item.doc_ID, error.message);\\n    return [{ \\n        json: { \\n            error: true, \\n            errorMessage: `Error en la extracción de PDF con Gemini: ${error.message}`,\\n            doc_ID: item.doc_ID\\n        } \\n    }];\\n}"
+    },
+    "name": "PDF Content Formatter (Gemini)",
+    "description": "Formatea la salida JSON de Gemini (OCR/Análisis) en una cadena estructurada que incluye metadatos enriquecidos, lista para el Text Splitter.",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 1,
+    "position": [
+      1250,
+      -300
+    ],
+    "id": "7pdf_content_formatter"
+  }
+]

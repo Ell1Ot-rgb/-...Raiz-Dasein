@@ -1,0 +1,27 @@
+2025-10-28 16:49:54,978 [INFO] DiagnosticadorSistema: Iniciando diagnóstico completo del sistema - 20251028_164954
+2025-10-28 16:49:54,982 [INFO] DiagnosticadorSistema: === VERIFICACIÓN DE PREREQUISITOS ===
+2025-10-28 16:49:54,992 [INFO] DiagnosticadorSistema: ✓ Directorio entrada_bruta existe
+2025-10-28 16:49:54,994 [INFO] DiagnosticadorSistema: ✓ Directorio procesado existe
+2025-10-28 16:49:54,997 [INFO] DiagnosticadorSistema: ✓ Directorio logs_sistema existe
+2025-10-28 16:49:54,998 [INFO] DiagnosticadorSistema: ✓ Directorio configuracion existe
+2025-10-28 16:49:55,001 [INFO] DiagnosticadorSistema: ✓ Archivo de configuración encontrado
+2025-10-28 16:49:55,003 [INFO] DiagnosticadorSistema: ✓ Encontrados 24 archivos de texto en entrada_bruta
+2025-10-28 16:49:55,017 [INFO] DiagnosticadorSistema: === VERIFICACIÓN COMPLETA DEL SISTEMA ===
+2025-10-28 16:49:55,018 [ERROR] DiagnosticadorSistema: ✗ Error en verificación del sistema: name 'verificar_sistema' is not defined
+2025-10-28 16:49:55,026 [INFO] DiagnosticadorSistema: === EJECUCIÓN DEL SISTEMA PRINCIPAL ===
+2025-10-28 16:49:55,201 [DEBUG] neo4j.pool: [#0000]  _: <POOL> created, direct address IPv4Address(('172.23.111.142', 7687))
+2025-10-28 16:49:55,260 [INFO] SistemaFenomenologico: Sistema inicializado con configuración cargada
+2025-10-28 16:49:55,262 [INFO] DiagnosticadorSistema: Sistema inicializado correctamente
+2025-10-28 16:49:55,264 [ERROR] DiagnosticadorSistema: ✗ Error en ejecución del sistema: type object 'datetime.datetime' has no attribute 'datetime'
+2025-10-28 16:49:55,268 [ERROR] DiagnosticadorSistema: Traceback (most recent call last):
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\verificar.py", line 119, in ejecutar_sistema_principal
+    resultado = sistema.procesar_flujo_completo('entrada_bruta')
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\sistema_principal_v2.py", line 142, in procesar_flujo_completo
+    self._debug_print("Iniciando flujo completo del sistema")
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\sistema_principal_v2.py", line 117, in _debug_print
+    timestamp = datetime.datetime.now().strftime("%H:%M:%S.%f")[:-3]
+                ^^^^^^^^^^^^^^^^^
+AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
+
+2025-10-28 16:49:55,352 [DEBUG] neo4j.pool: [#0000]  _: <POOL> close

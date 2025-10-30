@@ -1,0 +1,25 @@
+2025-10-28 17:20:41,193 [INFO] DiagnosticadorSistema: Iniciando diagnóstico completo del sistema - 20251028_172041
+2025-10-28 17:20:41,196 [INFO] DiagnosticadorSistema: === VERIFICACIÓN DE PREREQUISITOS ===
+2025-10-28 17:20:41,198 [INFO] DiagnosticadorSistema: ✓ Directorio entrada_bruta existe
+2025-10-28 17:20:41,199 [INFO] DiagnosticadorSistema: ✓ Directorio procesado existe
+2025-10-28 17:20:41,205 [INFO] DiagnosticadorSistema: ✓ Directorio logs_sistema existe
+2025-10-28 17:20:41,206 [INFO] DiagnosticadorSistema: ✓ Directorio configuracion existe
+2025-10-28 17:20:41,211 [INFO] DiagnosticadorSistema: ✓ Archivo de configuración encontrado
+2025-10-28 17:20:41,218 [INFO] DiagnosticadorSistema: ✓ Encontrados 24 archivos de texto en entrada_bruta
+2025-10-28 17:20:41,229 [INFO] DiagnosticadorSistema: === VERIFICACIÓN COMPLETA DEL SISTEMA ===
+2025-10-28 17:20:41,235 [ERROR] DiagnosticadorSistema: ✗ Error en verificación del sistema: name 'verificar_sistema' is not defined
+2025-10-28 17:20:41,300 [INFO] DiagnosticadorSistema: === EJECUCIÓN DEL SISTEMA PRINCIPAL ===
+2025-10-28 17:20:41,455 [DEBUG] neo4j.pool: [#0000]  _: <POOL> created, direct address IPv4Address(('172.23.111.142', 7687))
+2025-10-28 17:20:41,515 [INFO] SistemaFenomenologico: Sistema inicializado con configuración cargada
+2025-10-28 17:20:41,516 [INFO] DiagnosticadorSistema: Sistema inicializado correctamente
+2025-10-28 17:20:41,521 [INFO] SistemaFenomenologico: Iniciando flujo completo del sistema
+2025-10-28 17:20:41,605 [ERROR] DiagnosticadorSistema: ✗ Error en ejecución del sistema: 'SistemaFenomenologicoV2' object has no attribute '_generar_preinstancias_desde_analisis'
+2025-10-28 17:20:41,612 [ERROR] DiagnosticadorSistema: Traceback (most recent call last):
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\verificar.py", line 119, in ejecutar_sistema_principal
+    resultado = sistema.procesar_flujo_completo('entrada_bruta')
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\sistema_principal_v2.py", line 155, in procesar_flujo_completo
+    preinstancias = self._generar_preinstancias_desde_analisis(analisis_textos)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SistemaFenomenologicoV2' object has no attribute '_generar_preinstancias_desde_analisis'
+
+2025-10-28 17:20:41,735 [DEBUG] neo4j.pool: [#0000]  _: <POOL> close

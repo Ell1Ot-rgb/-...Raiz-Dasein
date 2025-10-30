@@ -1,0 +1,244 @@
+2025-10-29 13:21:36,740 [INFO] DiagnosticadorSistema: Iniciando diagnóstico completo del sistema - 20251029_132136
+2025-10-29 13:21:36,743 [INFO] DiagnosticadorSistema: === VERIFICACIÓN DE PREREQUISITOS ===
+2025-10-29 13:21:36,745 [INFO] DiagnosticadorSistema: ✓ Directorio entrada_bruta existe
+2025-10-29 13:21:36,747 [INFO] DiagnosticadorSistema: ✓ Directorio procesado existe
+2025-10-29 13:21:36,748 [INFO] DiagnosticadorSistema: ✓ Directorio logs_sistema existe
+2025-10-29 13:21:36,749 [INFO] DiagnosticadorSistema: ✓ Directorio configuracion existe
+2025-10-29 13:21:36,751 [INFO] DiagnosticadorSistema: ✓ Archivo de configuración encontrado
+2025-10-29 13:21:36,761 [INFO] DiagnosticadorSistema: ✓ Encontrados 24 archivos de texto en entrada_bruta
+2025-10-29 13:21:36,774 [INFO] DiagnosticadorSistema: === VERIFICACIÓN COMPLETA DEL SISTEMA ===
+2025-10-29 13:21:36,783 [INFO] DiagnosticadorSistema: ✓ Verificación del sistema completada exitosamente
+2025-10-29 13:21:36,808 [INFO] DiagnosticadorSistema: === EJECUCIÓN DEL SISTEMA PRINCIPAL ===
+2025-10-29 13:21:36,888 [DEBUG] neo4j.pool: [#0000]  _: <POOL> created, direct address IPv4Address(('192.168.1.37', 7687))
+2025-10-29 13:21:36,888 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> routing towards fixed database: yo_estructural
+2025-10-29 13:21:36,892 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> pinning database: 'yo_estructural'
+2025-10-29 13:21:36,894 [DEBUG] neo4j.pool: [#0000]  _: <POOL> acquire direct connection, access_mode='WRITE', database=AcquisitionDatabase(name='yo_estructural', guessed=False)
+2025-10-29 13:21:36,896 [DEBUG] neo4j.pool: [#0000]  _: <POOL> trying to hand out new connection
+2025-10-29 13:21:36,897 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> in: 192.168.1.37:7687
+2025-10-29 13:21:36,905 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> dns resolver out: 192.168.1.37:7687
+2025-10-29 13:21:36,907 [DEBUG] neo4j.io: [#0000]  C: <OPEN> 192.168.1.37:7687
+2025-10-29 13:21:36,910 [DEBUG] neo4j.io: [#F3C8]  C: <MAGIC> 0x6060B017
+2025-10-29 13:21:36,919 [DEBUG] neo4j.io: [#F3C8]  C: <HANDSHAKE> 0x000001FF 0x00080805 0x00020404 0x00000003
+2025-10-29 13:21:37,023 [DEBUG] neo4j.io: [#F3C8]  S: <HANDSHAKE> 0x00000305
+2025-10-29 13:21:37,030 [DEBUG] neo4j.io: [#F3C8]  C: HELLO {'user_agent': 'neo4j-python/6.0.2 Python/3.14.0-final-0 (win32)', 'bolt_agent': {'product': 'neo4j-python/6.0.2', 'platform': 'Windows 10; AMD64', 'language': 'Python/3.14.0-final-0', 'language_details': 'CPython; 3.14.0-final-0 (tags/v3.14.0:ebf955d, Oct  7 2025 10:15:03) [MSC v.1944 64 bit (AMD64)]'}}
+2025-10-29 13:21:37,033 [DEBUG] neo4j.io: [#F3C8]  _: <CONNECTION> client state: CONNECTED > AUTHENTICATION
+2025-10-29 13:21:37,034 [DEBUG] neo4j.io: [#F3C8]  C: LOGON {'scheme': 'basic', 'principal': 'neo4j', 'credentials': '*******'}
+2025-10-29 13:21:37,035 [DEBUG] neo4j.io: [#F3C8]  _: <CONNECTION> client state: AUTHENTICATION > READY
+2025-10-29 13:21:37,060 [DEBUG] neo4j.io: [#F3C8]  S: SUCCESS {'server': 'Neo4j/5.12.0', 'connection_id': 'bolt-65', 'hints': {'connection.recv_timeout_seconds': 120}}
+2025-10-29 13:21:37,063 [DEBUG] neo4j.io: [#F3C8]  _: <CONNECTION> server state: CONNECTED > AUTHENTICATION
+2025-10-29 13:21:37,168 [DEBUG] neo4j.io: [#F3C8]  S: SUCCESS {}
+2025-10-29 13:21:37,173 [DEBUG] neo4j.io: [#F3C8]  _: <CONNECTION> server state: AUTHENTICATION > READY
+2025-10-29 13:21:37,200 [DEBUG] neo4j.io: [#F3C8]  C: RUN 'RETURN 1 AS num' {} {'db': 'yo_estructural'}
+2025-10-29 13:21:37,203 [DEBUG] neo4j.io: [#F3C8]  _: <CONNECTION> client state: READY > STREAMING
+2025-10-29 13:21:37,205 [DEBUG] neo4j.io: [#F3C8]  C: PULL {'n': 1000}
+2025-10-29 13:21:37,279 [DEBUG] neo4j.io: [#F3C8]  S: FAILURE {'code': 'Neo.ClientError.Database.DatabaseNotFound', 'message': "Database does not exist. Database name: 'yo_estructural'."}
+2025-10-29 13:21:37,279 [DEBUG] neo4j.io: [#F3C8]  C: RESET
+2025-10-29 13:21:37,283 [DEBUG] neo4j.io: [#F3C8]  _: <CONNECTION> client state: STREAMING > READY
+2025-10-29 13:21:37,286 [DEBUG] neo4j.io: [#F3C8]  S: IGNORED
+2025-10-29 13:21:37,502 [DEBUG] neo4j.io: [#F3C8]  S: SUCCESS {}
+2025-10-29 13:21:37,503 [DEBUG] neo4j.io: [#F3C8]  _: <CONNECTION> server state: FAILED > READY
+2025-10-29 13:21:37,506 [DEBUG] neo4j.pool: [#F3C8]  _: <POOL> released bolt-65
+2025-10-29 13:21:37,510 [ERROR] Neo4jConnection: Error al verificar conexión a Neo4j: {neo4j_code: Neo.ClientError.Database.DatabaseNotFound} {message: Database does not exist. Database name: 'yo_estructural'.} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. Database does not exist. Database name: 'yo_estructural'.}
+2025-10-29 13:21:37,512 [INFO] Neo4jConnection: Conexión a Neo4j establecida exitosamente: bolt://192.168.1.37:7687
+2025-10-29 13:21:37,582 [INFO] SistemaFenomenologico: Sistema inicializado con configuración cargada
+2025-10-29 13:21:37,583 [INFO] DiagnosticadorSistema: Sistema inicializado correctamente
+2025-10-29 13:21:37,589 [INFO] SistemaFenomenologico: Iniciando flujo completo del sistema
+2025-10-29 13:21:37,670 [INFO] SistemaFenomenologico: Generadas 10 preinstancias desde análisis
+2025-10-29 13:21:37,673 [INFO] SistemaFenomenologico: Generadas 10 preinstancias
+2025-10-29 13:21:37,677 [INFO] SistemaFenomenologico: Creadas 10 instancias de existencia
+2025-10-29 13:21:37,688 [INFO] SistemaFenomenologico: Creadas 10 instancias de existencia
+2025-10-29 13:21:37,691 [INFO] SistemaFenomenologico: Evaluando necesidad de activación MDCE
+2025-10-29 13:21:37,702 [INFO] SistemaFenomenologico: Analizando contradicciones de 4º orden
+2025-10-29 13:21:37,705 [INFO] SistemaFenomenologico: No se detectaron contradicciones de 4º orden
+2025-10-29 13:21:37,708 [INFO] SistemaFenomenologico: Calculando gradientes para 10 instancias
+2025-10-29 13:21:37,773 [INFO] SistemaFenomenologico: Gradientes relacionales calculados exitosamente
+2025-10-29 13:21:37,777 [INFO] SistemaFenomenologico: Iniciando detección de vohexistencias para 10 instancias
+2025-10-29 13:21:37,926 [INFO] SistemaFenomenologico: Detectadas 0 vohexistencias
+2025-10-29 13:21:37,930 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> routing towards fixed database: None
+2025-10-29 13:21:37,931 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> pinning database: None
+2025-10-29 13:21:37,932 [DEBUG] neo4j.pool: [#0000]  _: <POOL> acquire direct connection, access_mode='WRITE', database=AcquisitionDatabase(name=None, guessed=False)
+2025-10-29 13:21:37,939 [DEBUG] neo4j.pool: [#F3C8]  _: <POOL> picked existing connection bolt-65
+2025-10-29 13:21:37,941 [DEBUG] neo4j.pool: [#F3C8]  _: <POOL> checked re_auth auth=None updated=False force=False
+2025-10-29 13:21:37,942 [DEBUG] neo4j.pool: [#F3C8]  _: <POOL> handing out existing connection
+2025-10-29 13:21:37,954 [DEBUG] neo4j.io: [#F3C8]  C: RUN '\n                        MERGE (y:YO {id: $id})\n                        SET y.tipo = $tipo,\n                            y.activacion = $activacion,\n                            y.timestamp = $timestamp,\n                            y.version = $version,\n                            y.coherencia_narrativa = $coherencia_narrativa,\n                            y.estabilidad_contextual = $estabilidad_contextual,\n                            y.integracion_afectiva = $integracion_afectiva\n                    ' {'id': 'yo_0', 'tipo': 'YO_NARRATIVO', 'activacion': 1.0, 'timestamp': '2025-10-29T13:21:37.929927', 'version': 0, 'coherencia_narrativa': 0.0, 'estabilidad_contextual': 0.0, 'integracion_afectiva': 0.5, 'coherencia_total': 0.0} {}
+2025-10-29 13:21:37,957 [DEBUG] neo4j.io: [#F3C8]  _: <CONNECTION> client state: READY > STREAMING
+2025-10-29 13:21:37,962 [DEBUG] neo4j.io: [#F3C8]  C: PULL {'n': 1000}
+2025-10-29 13:21:39,046 [DEBUG] neo4j.io: [#F3C8]  S: SUCCESS {'t_first': 841, 'fields': []}
+2025-10-29 13:21:39,047 [DEBUG] neo4j.io: [#F3C8]  _: <CONNECTION> server state: READY > STREAMING
+2025-10-29 13:21:39,050 [INFO] SistemaYoEmergente: Nodo YO v0 sincronizado con Neo4j
+2025-10-29 13:21:39,648 [DEBUG] neo4j.io: [#F3C8]  S: SUCCESS {'bookmark': 'FB:kcwQGCA2GPKzTf+eE1C3VTz2YBiQ', 'stats': {'contains-updates': True, 'properties-set': 7}, 'type': 'w', 't_last': 0, 'db': 'neo4j'}
+2025-10-29 13:21:39,649 [DEBUG] neo4j.io: [#F3C8]  _: <CONNECTION> server state: STREAMING > READY
+2025-10-29 13:21:39,655 [DEBUG] neo4j.pool: [#F3C8]  _: <POOL> released bolt-65
+2025-10-29 13:21:39,656 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> routing towards fixed database: None
+2025-10-29 13:21:39,657 [DEBUG] neo4j.pool: [#0000]  _: <POOL> acquire direct connection, access_mode='WRITE', database=AcquisitionDatabase(name=None, guessed=False)
+2025-10-29 13:21:39,658 [DEBUG] neo4j.pool: [#F3C8]  _: <POOL> picked existing connection bolt-65
+2025-10-29 13:21:39,659 [DEBUG] neo4j.pool: [#F3C8]  _: <POOL> checked re_auth auth=None updated=False force=False
+2025-10-29 13:21:39,660 [DEBUG] neo4j.pool: [#F3C8]  _: <POOL> handing out existing connection
+2025-10-29 13:21:39,661 [DEBUG] neo4j.io: [#F3C8]  C: RUN '\n                            MERGE (c:Contexto {id: $contexto_id})\n                            \n                            WITH c\n                            MATCH (y:YO {id: $yo_id})\n                            MERGE (y)-[:ACTIVA_CONTEXTO {timestamp: $timestamp}]->(c)\n                        ' {'contexto_id': {'id': 'inst_a338df40', 'tipo': 'instancia', 'propiedades': {'nivel_jerarquico': -4, 'contenido': 'dato', 'confianza': 0.8, 'clasificacion': {'niveles_detectados': {-4: ['dato'], -2: ['relación'], 0: ['dolor']}, 'emergencia_yo': {'tipos_detectados': [], 'nivel_maximo': 0, 'coherencia_yo': 0.0}, 'coherencia_narrativa': 0.0}, 'gradiente_temporal': 0.0, 'gradiente_coherencia': 0.0, 'gradiente_estructural': 0.0}, 'gradientes': {}, 'timestamp': '2025-10-29T13:21:37.675161'}, 'yo_id': 'yo_0', 'timestamp': '2025-10-29T13:21:37.929927'} {'bookmarks': ['FB:kcwQGCA2GPKzTf+eE1C3VTz2YBiQ']}
+2025-10-29 13:21:39,662 [DEBUG] neo4j.pool: [#F3C8]  _: <POOL> released bolt-65
+2025-10-29 13:21:39,664 [WARNING] SistemaYoEmergente: Error al sincronizar con Neo4j (intento 1/3): Map keys must be strings, not <class 'int'>
+2025-10-29 13:21:39,667 [INFO] SistemaYoEmergente: Reintentando en 2.86 segundos...
+2025-10-29 13:21:42,533 [DEBUG] neo4j.pool: [#0000]  _: <POOL> created, direct address IPv4Address(('localhost', 7687))
+2025-10-29 13:21:42,536 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> routing towards fixed database: yo_estructural
+2025-10-29 13:21:42,539 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> pinning database: 'yo_estructural'
+2025-10-29 13:21:42,541 [DEBUG] neo4j.pool: [#0000]  _: <POOL> acquire direct connection, access_mode='WRITE', database=AcquisitionDatabase(name='yo_estructural', guessed=False)
+2025-10-29 13:21:42,548 [DEBUG] neo4j.pool: [#0000]  _: <POOL> trying to hand out new connection
+2025-10-29 13:21:42,550 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> in: localhost:7687
+2025-10-29 13:21:42,564 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> dns resolver out: [::1]:7687
+2025-10-29 13:21:42,565 [DEBUG] neo4j.io: [#0000]  C: <OPEN> [::1]:7687
+2025-10-29 13:21:44,605 [DEBUG] neo4j.io: [#0000]  S: <ERROR> ConnectionRefusedError 10061 'No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión' None 10061 None
+2025-10-29 13:21:44,606 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> [::1]:7687
+2025-10-29 13:21:44,610 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> [::1]:7687
+2025-10-29 13:21:44,611 [DEBUG] neo4j.io: [#0000]  S: <CONNECTION FAILED> [::1]:7687 ServiceUnavailable: Failed to establish connection to ResolvedIPv6Address(('::1', 7687, 0, 0)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 13:21:44,612 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> dns resolver out: 127.0.0.1:7687
+2025-10-29 13:21:44,613 [DEBUG] neo4j.io: [#0000]  C: <OPEN> 127.0.0.1:7687
+2025-10-29 13:21:46,894 [DEBUG] neo4j.io: [#0000]  S: <ERROR> ConnectionRefusedError 10061 'No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión' None 10061 None
+2025-10-29 13:21:46,895 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> 127.0.0.1:7687
+2025-10-29 13:21:46,900 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> 127.0.0.1:7687
+2025-10-29 13:21:46,901 [DEBUG] neo4j.io: [#0000]  S: <CONNECTION FAILED> 127.0.0.1:7687 ServiceUnavailable: Failed to establish connection to ResolvedIPv4Address(('127.0.0.1', 7687)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 13:21:46,903 [ERROR] Neo4jConnection: Error al verificar conexión a Neo4j: Couldn't connect to localhost:7687 (resolved to ('[::1]:7687', '127.0.0.1:7687')):
+Failed to establish connection to ResolvedIPv6Address(('::1', 7687, 0, 0)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+Failed to establish connection to ResolvedIPv4Address(('127.0.0.1', 7687)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 13:21:46,904 [INFO] Neo4jConnection: Conexión a Neo4j establecida exitosamente: bolt://localhost:7687
+2025-10-29 13:21:46,905 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> routing towards fixed database: None
+2025-10-29 13:21:46,906 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> pinning database: None
+2025-10-29 13:21:46,907 [DEBUG] neo4j.pool: [#0000]  _: <POOL> acquire direct connection, access_mode='WRITE', database=AcquisitionDatabase(name=None, guessed=False)
+2025-10-29 13:21:46,909 [DEBUG] neo4j.pool: [#0000]  _: <POOL> trying to hand out new connection
+2025-10-29 13:21:46,914 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> in: localhost:7687
+2025-10-29 13:21:46,920 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> dns resolver out: [::1]:7687
+2025-10-29 13:21:46,923 [DEBUG] neo4j.io: [#0000]  C: <OPEN> [::1]:7687
+2025-10-29 13:21:48,970 [DEBUG] neo4j.io: [#0000]  S: <ERROR> ConnectionRefusedError 10061 'No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión' None 10061 None
+2025-10-29 13:21:48,971 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> [::1]:7687
+2025-10-29 13:21:48,976 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> [::1]:7687
+2025-10-29 13:21:48,981 [DEBUG] neo4j.io: [#0000]  S: <CONNECTION FAILED> [::1]:7687 ServiceUnavailable: Failed to establish connection to ResolvedIPv6Address(('::1', 7687, 0, 0)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 13:21:48,982 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> dns resolver out: 127.0.0.1:7687
+2025-10-29 13:21:48,983 [DEBUG] neo4j.io: [#0000]  C: <OPEN> 127.0.0.1:7687
+2025-10-29 13:21:51,023 [DEBUG] neo4j.io: [#0000]  S: <ERROR> ConnectionRefusedError 10061 'No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión' None 10061 None
+2025-10-29 13:21:51,024 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> 127.0.0.1:7687
+2025-10-29 13:21:51,029 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> 127.0.0.1:7687
+2025-10-29 13:21:51,030 [DEBUG] neo4j.io: [#0000]  S: <CONNECTION FAILED> 127.0.0.1:7687 ServiceUnavailable: Failed to establish connection to ResolvedIPv4Address(('127.0.0.1', 7687)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 13:21:51,031 [WARNING] SistemaYoEmergente: Error al sincronizar con Neo4j (intento 2/3): Couldn't connect to localhost:7687 (resolved to ('[::1]:7687', '127.0.0.1:7687')):
+Failed to establish connection to ResolvedIPv6Address(('::1', 7687, 0, 0)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+Failed to establish connection to ResolvedIPv4Address(('127.0.0.1', 7687)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 13:21:51,033 [INFO] SistemaYoEmergente: Reintentando en 4.49 segundos...
+2025-10-29 13:21:55,524 [DEBUG] neo4j.pool: [#0000]  _: <POOL> created, direct address IPv4Address(('localhost', 7687))
+2025-10-29 13:21:55,525 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> routing towards fixed database: yo_estructural
+2025-10-29 13:21:55,528 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> pinning database: 'yo_estructural'
+2025-10-29 13:21:55,532 [DEBUG] neo4j.pool: [#0000]  _: <POOL> acquire direct connection, access_mode='WRITE', database=AcquisitionDatabase(name='yo_estructural', guessed=False)
+2025-10-29 13:21:55,533 [DEBUG] neo4j.pool: [#0000]  _: <POOL> trying to hand out new connection
+2025-10-29 13:21:55,534 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> in: localhost:7687
+2025-10-29 13:21:55,536 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> dns resolver out: [::1]:7687
+2025-10-29 13:21:55,537 [DEBUG] neo4j.io: [#0000]  C: <OPEN> [::1]:7687
+2025-10-29 13:21:57,576 [DEBUG] neo4j.io: [#0000]  S: <ERROR> ConnectionRefusedError 10061 'No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión' None 10061 None
+2025-10-29 13:21:57,577 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> [::1]:7687
+2025-10-29 13:21:57,582 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> [::1]:7687
+2025-10-29 13:21:57,583 [DEBUG] neo4j.io: [#0000]  S: <CONNECTION FAILED> [::1]:7687 ServiceUnavailable: Failed to establish connection to ResolvedIPv6Address(('::1', 7687, 0, 0)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 13:21:57,584 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> dns resolver out: 127.0.0.1:7687
+2025-10-29 13:21:57,585 [DEBUG] neo4j.io: [#0000]  C: <OPEN> 127.0.0.1:7687
+2025-10-29 13:21:59,616 [DEBUG] neo4j.io: [#0000]  S: <ERROR> ConnectionRefusedError 10061 'No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión' None 10061 None
+2025-10-29 13:21:59,620 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> 127.0.0.1:7687
+2025-10-29 13:21:59,625 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> 127.0.0.1:7687
+2025-10-29 13:21:59,627 [DEBUG] neo4j.io: [#0000]  S: <CONNECTION FAILED> 127.0.0.1:7687 ServiceUnavailable: Failed to establish connection to ResolvedIPv4Address(('127.0.0.1', 7687)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 13:21:59,628 [ERROR] Neo4jConnection: Error al verificar conexión a Neo4j: Couldn't connect to localhost:7687 (resolved to ('[::1]:7687', '127.0.0.1:7687')):
+Failed to establish connection to ResolvedIPv6Address(('::1', 7687, 0, 0)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+Failed to establish connection to ResolvedIPv4Address(('127.0.0.1', 7687)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 13:21:59,630 [INFO] Neo4jConnection: Conexión a Neo4j establecida exitosamente: bolt://localhost:7687
+2025-10-29 13:21:59,639 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> routing towards fixed database: None
+2025-10-29 13:21:59,643 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> pinning database: None
+2025-10-29 13:21:59,645 [DEBUG] neo4j.pool: [#0000]  _: <POOL> acquire direct connection, access_mode='WRITE', database=AcquisitionDatabase(name=None, guessed=False)
+2025-10-29 13:21:59,695 [DEBUG] neo4j.pool: [#0000]  _: <POOL> trying to hand out new connection
+2025-10-29 13:21:59,696 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> in: localhost:7687
+2025-10-29 13:21:59,700 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> dns resolver out: [::1]:7687
+2025-10-29 13:21:59,702 [DEBUG] neo4j.io: [#0000]  C: <OPEN> [::1]:7687
+2025-10-29 13:22:01,740 [DEBUG] neo4j.io: [#0000]  S: <ERROR> ConnectionRefusedError 10061 'No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión' None 10061 None
+2025-10-29 13:22:01,745 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> [::1]:7687
+2025-10-29 13:22:01,748 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> [::1]:7687
+2025-10-29 13:22:01,749 [DEBUG] neo4j.io: [#0000]  S: <CONNECTION FAILED> [::1]:7687 ServiceUnavailable: Failed to establish connection to ResolvedIPv6Address(('::1', 7687, 0, 0)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 13:22:01,750 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> dns resolver out: 127.0.0.1:7687
+2025-10-29 13:22:01,754 [DEBUG] neo4j.io: [#0000]  C: <OPEN> 127.0.0.1:7687
+2025-10-29 13:22:03,793 [DEBUG] neo4j.io: [#0000]  S: <ERROR> ConnectionRefusedError 10061 'No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión' None 10061 None
+2025-10-29 13:22:03,794 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> 127.0.0.1:7687
+2025-10-29 13:22:03,799 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> 127.0.0.1:7687
+2025-10-29 13:22:03,800 [DEBUG] neo4j.io: [#0000]  S: <CONNECTION FAILED> 127.0.0.1:7687 ServiceUnavailable: Failed to establish connection to ResolvedIPv4Address(('127.0.0.1', 7687)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 13:22:03,802 [WARNING] SistemaYoEmergente: Error al sincronizar con Neo4j (intento 3/3): Couldn't connect to localhost:7687 (resolved to ('[::1]:7687', '127.0.0.1:7687')):
+Failed to establish connection to ResolvedIPv6Address(('::1', 7687, 0, 0)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+Failed to establish connection to ResolvedIPv4Address(('127.0.0.1', 7687)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 13:22:03,803 [INFO] SistemaYoEmergente: Reintentando en 8.37 segundos...
+2025-10-29 13:22:12,178 [DEBUG] neo4j.pool: [#0000]  _: <POOL> created, direct address IPv4Address(('localhost', 7687))
+2025-10-29 13:22:12,179 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> routing towards fixed database: yo_estructural
+2025-10-29 13:22:12,182 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> pinning database: 'yo_estructural'
+2025-10-29 13:22:12,185 [DEBUG] neo4j.pool: [#0000]  _: <POOL> acquire direct connection, access_mode='WRITE', database=AcquisitionDatabase(name='yo_estructural', guessed=False)
+2025-10-29 13:22:12,187 [DEBUG] neo4j.pool: [#0000]  _: <POOL> trying to hand out new connection
+2025-10-29 13:22:12,187 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> in: localhost:7687
+2025-10-29 13:22:12,189 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> dns resolver out: [::1]:7687
+2025-10-29 13:22:12,190 [DEBUG] neo4j.io: [#0000]  C: <OPEN> [::1]:7687
+2025-10-29 13:22:14,236 [DEBUG] neo4j.io: [#0000]  S: <ERROR> ConnectionRefusedError 10061 'No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión' None 10061 None
+2025-10-29 13:22:14,237 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> [::1]:7687
+2025-10-29 13:22:14,241 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> [::1]:7687
+2025-10-29 13:22:14,242 [DEBUG] neo4j.io: [#0000]  S: <CONNECTION FAILED> [::1]:7687 ServiceUnavailable: Failed to establish connection to ResolvedIPv6Address(('::1', 7687, 0, 0)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 13:22:14,245 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> dns resolver out: 127.0.0.1:7687
+2025-10-29 13:22:14,245 [DEBUG] neo4j.io: [#0000]  C: <OPEN> 127.0.0.1:7687
+2025-10-29 13:22:16,277 [DEBUG] neo4j.io: [#0000]  S: <ERROR> ConnectionRefusedError 10061 'No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión' None 10061 None
+2025-10-29 13:22:16,278 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> 127.0.0.1:7687
+2025-10-29 13:22:16,283 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> 127.0.0.1:7687
+2025-10-29 13:22:16,284 [DEBUG] neo4j.io: [#0000]  S: <CONNECTION FAILED> 127.0.0.1:7687 ServiceUnavailable: Failed to establish connection to ResolvedIPv4Address(('127.0.0.1', 7687)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 13:22:16,286 [ERROR] Neo4jConnection: Error al verificar conexión a Neo4j: Couldn't connect to localhost:7687 (resolved to ('[::1]:7687', '127.0.0.1:7687')):
+Failed to establish connection to ResolvedIPv6Address(('::1', 7687, 0, 0)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+Failed to establish connection to ResolvedIPv4Address(('127.0.0.1', 7687)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 13:22:16,291 [INFO] Neo4jConnection: Conexión a Neo4j establecida exitosamente: bolt://localhost:7687
+2025-10-29 13:22:16,292 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> routing towards fixed database: None
+2025-10-29 13:22:16,297 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> pinning database: None
+2025-10-29 13:22:16,306 [DEBUG] neo4j.pool: [#0000]  _: <POOL> acquire direct connection, access_mode='WRITE', database=AcquisitionDatabase(name=None, guessed=False)
+2025-10-29 13:22:16,318 [DEBUG] neo4j.pool: [#0000]  _: <POOL> trying to hand out new connection
+2025-10-29 13:22:16,319 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> in: localhost:7687
+2025-10-29 13:22:16,327 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> dns resolver out: [::1]:7687
+2025-10-29 13:22:16,332 [DEBUG] neo4j.io: [#0000]  C: <OPEN> [::1]:7687
+2025-10-29 13:22:18,388 [DEBUG] neo4j.io: [#0000]  S: <ERROR> ConnectionRefusedError 10061 'No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión' None 10061 None
+2025-10-29 13:22:18,389 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> [::1]:7687
+2025-10-29 13:22:18,395 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> [::1]:7687
+2025-10-29 13:22:18,396 [DEBUG] neo4j.io: [#0000]  S: <CONNECTION FAILED> [::1]:7687 ServiceUnavailable: Failed to establish connection to ResolvedIPv6Address(('::1', 7687, 0, 0)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 13:22:18,397 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> dns resolver out: 127.0.0.1:7687
+2025-10-29 13:22:18,399 [DEBUG] neo4j.io: [#0000]  C: <OPEN> 127.0.0.1:7687
+2025-10-29 13:22:20,447 [DEBUG] neo4j.io: [#0000]  S: <ERROR> ConnectionRefusedError 10061 'No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión' None 10061 None
+2025-10-29 13:22:20,448 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> 127.0.0.1:7687
+2025-10-29 13:22:20,454 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> 127.0.0.1:7687
+2025-10-29 13:22:20,454 [DEBUG] neo4j.io: [#0000]  S: <CONNECTION FAILED> 127.0.0.1:7687 ServiceUnavailable: Failed to establish connection to ResolvedIPv4Address(('127.0.0.1', 7687)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 13:22:20,456 [WARNING] SistemaYoEmergente: Error al sincronizar con Neo4j (intento 4/3): Couldn't connect to localhost:7687 (resolved to ('[::1]:7687', '127.0.0.1:7687')):
+Failed to establish connection to ResolvedIPv6Address(('::1', 7687, 0, 0)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+Failed to establish connection to ResolvedIPv4Address(('127.0.0.1', 7687)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 13:22:20,457 [ERROR] SistemaYoEmergente: Máximo de reintentos alcanzado. No se pudo sincronizar con Neo4j: Couldn't connect to localhost:7687 (resolved to ('[::1]:7687', '127.0.0.1:7687')):
+Failed to establish connection to ResolvedIPv6Address(('::1', 7687, 0, 0)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+Failed to establish connection to ResolvedIPv4Address(('127.0.0.1', 7687)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 13:22:20,458 [ERROR] DiagnosticadorSistema: ✗ Error en ejecución del sistema: 'str' object is not callable
+2025-10-29 13:22:20,469 [ERROR] DiagnosticadorSistema: Traceback (most recent call last):
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\verificar.py", line 126, in ejecutar_sistema_principal
+    resultado = sistema.procesar_flujo_completo('entrada_bruta')
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\sistema_principal_v2.py", line 185, in procesar_flujo_completo
+    emergencia_detectada = self.motor_yo.evaluar_emergencia(contextos_activos, fenomenos_activos)
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\motor_yo\sistema_yo_emergente.py", line 561, in evaluar_emergencia
+    self._notificar_evento("evaluacion_emergencia", {
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        "emergencia_detectada": emergencia_detectada,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        "fenomenos_activos": len(fenomenos_activos)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    })
+    ^^
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\motor_yo\sistema_yo_emergente.py", line 127, in _notificar_evento
+    callback({
+    ~~~~~~~~^^
+        "tipo": tipo_evento,
+        ^^^^^^^^^^^^^^^^^^^^
+        "datos": datos,
+        ^^^^^^^^^^^^^^^
+        "timestamp": datetime.datetime.now().isoformat()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    })
+    ^^
+TypeError: 'str' object is not callable
+
+2025-10-29 13:22:20,561 [DEBUG] neo4j.pool: [#0000]  _: <POOL> close
+2025-10-29 13:22:20,562 [DEBUG] neo4j.io: [#F3C8]  C: GOODBYE
+2025-10-29 13:22:20,565 [DEBUG] neo4j.io: [#F3C8]  C: <CLOSE>
+2025-10-29 13:22:20,567 [INFO] Neo4jConnection: Conexión a Neo4j cerrada correctamente

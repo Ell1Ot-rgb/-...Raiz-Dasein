@@ -1,0 +1,46 @@
+2025-10-29 07:34:56,403 [INFO] DiagnosticadorSistema: Iniciando diagnóstico completo del sistema - 20251029_073456
+2025-10-29 07:34:56,410 [INFO] DiagnosticadorSistema: === VERIFICACIÓN DE PREREQUISITOS ===
+2025-10-29 07:34:56,412 [INFO] DiagnosticadorSistema: ✓ Directorio entrada_bruta existe
+2025-10-29 07:34:56,418 [INFO] DiagnosticadorSistema: ✓ Directorio procesado existe
+2025-10-29 07:34:56,420 [INFO] DiagnosticadorSistema: ✓ Directorio logs_sistema existe
+2025-10-29 07:34:56,425 [INFO] DiagnosticadorSistema: ✓ Directorio configuracion existe
+2025-10-29 07:34:56,435 [INFO] DiagnosticadorSistema: ✓ Archivo de configuración encontrado
+2025-10-29 07:34:56,438 [INFO] DiagnosticadorSistema: ✓ Encontrados 24 archivos de texto en entrada_bruta
+2025-10-29 07:34:56,446 [INFO] DiagnosticadorSistema: === VERIFICACIÓN COMPLETA DEL SISTEMA ===
+2025-10-29 07:34:56,455 [INFO] DiagnosticadorSistema: ✓ Verificación del sistema completada exitosamente
+2025-10-29 07:34:56,484 [INFO] DiagnosticadorSistema: === EJECUCIÓN DEL SISTEMA PRINCIPAL ===
+2025-10-29 07:34:56,650 [DEBUG] neo4j.pool: [#0000]  _: <POOL> created, direct address IPv4Address(('172.23.111.142', 7687))
+2025-10-29 07:34:56,715 [INFO] SistemaFenomenologico: Sistema inicializado con configuración cargada
+2025-10-29 07:34:56,716 [INFO] DiagnosticadorSistema: Sistema inicializado correctamente
+2025-10-29 07:34:56,722 [INFO] SistemaFenomenologico: Iniciando flujo completo del sistema
+2025-10-29 07:34:56,825 [INFO] SistemaFenomenologico: Generadas 10 preinstancias desde análisis
+2025-10-29 07:34:56,829 [INFO] SistemaFenomenologico: Generadas 10 preinstancias
+2025-10-29 07:34:56,834 [INFO] SistemaFenomenologico: Creadas 10 instancias de existencia
+2025-10-29 07:34:56,871 [INFO] SistemaFenomenologico: Creadas 10 instancias de existencia
+2025-10-29 07:34:56,902 [INFO] SistemaFenomenologico: Evaluando necesidad de activación MDCE
+2025-10-29 07:34:56,915 [INFO] SistemaFenomenologico: Analizando contradicciones de 4º orden
+2025-10-29 07:34:56,919 [INFO] SistemaFenomenologico: No se detectaron contradicciones de 4º orden
+2025-10-29 07:34:56,927 [INFO] SistemaFenomenologico: Calculando gradientes para 10 instancias
+2025-10-29 07:34:56,958 [INFO] SistemaFenomenologico: Gradientes relacionales calculados exitosamente
+2025-10-29 07:34:56,977 [INFO] SistemaFenomenologico: Iniciando detección de vohexistencias para 10 instancias
+2025-10-29 07:34:56,998 [INFO] SistemaFenomenologico: Detectadas 0 vohexistencias
+2025-10-29 07:34:57,022 [ERROR] DiagnosticadorSistema: ✗ Error en ejecución del sistema: 'SistemaYoEmergente' object has no attribute 'neo4j_driver'
+2025-10-29 07:34:57,045 [ERROR] DiagnosticadorSistema: Traceback (most recent call last):
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\verificar.py", line 126, in ejecutar_sistema_principal
+    resultado = sistema.procesar_flujo_completo('entrada_bruta')
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\sistema_principal_v2.py", line 187, in procesar_flujo_completo
+    emergencia_detectada = self.motor_yo.evaluar_emergencia(contextos_activos, fenomenos_activos)
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\motor_yo\sistema_yo_emergente.py", line 499, in evaluar_emergencia
+    contradicciones = self.detectar_contradicciones()
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\motor_yo\sistema_yo_emergente.py", line 254, in detectar_contradicciones
+    return self.evaluar_contradicciones(self.estado_actual.__dict__)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\motor_yo\sistema_yo_emergente.py", line 477, in evaluar_contradicciones
+    self.sincronizar_con_neo4j()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\motor_yo\sistema_yo_emergente.py", line 375, in sincronizar_con_neo4j
+    with self.neo4j_driver.session() as session:
+         ^^^^^^^^^^^^^^^^^
+AttributeError: 'SistemaYoEmergente' object has no attribute 'neo4j_driver'
+
+2025-10-29 07:34:57,146 [DEBUG] neo4j.pool: [#0000]  _: <POOL> close

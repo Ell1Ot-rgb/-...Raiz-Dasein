@@ -1,0 +1,18 @@
+2025-10-27 11:05:25,017 [INFO]: [*] Iniciando verificación del Sistema YO Estructural
+2025-10-27 11:05:25,018 [INFO]: 
+[*] Verificando estructura de directorios...
+2025-10-27 11:05:25,022 [INFO]: [+] Directorio configuracion existe
+2025-10-27 11:05:25,023 [INFO]: [+] Directorio entrada_bruta existe
+2025-10-27 11:05:25,025 [INFO]: [+] Directorio logs_sistema existe
+2025-10-27 11:05:25,026 [INFO]: [+] Directorio procesado existe
+2025-10-27 11:05:25,028 [INFO]: [+] Directorio backups_automaticos existe
+2025-10-27 11:05:25,029 [INFO]: [+] Directorio features_extraidas existe
+2025-10-27 11:05:25,029 [INFO]: 
+[*] Verificando archivos de configuración...
+2025-10-27 11:05:25,031 [INFO]: [+] Archivo configuracion/config.yaml existe
+2025-10-27 11:05:25,033 [INFO]: [+] Archivo .env existe
+2025-10-27 11:05:25,034 [INFO]: 
+[*] Verificando dependencias...
+2025-10-27 11:05:25,819 [INFO]: [+] Dependencia fastapi instalada
+2025-10-27 11:05:25,820 [ERROR]: [X] Dependencia uvicorn no instalada
+2025-10-27 11:05:25,823 [ERROR]: [X] Verificación de dependencias fallida

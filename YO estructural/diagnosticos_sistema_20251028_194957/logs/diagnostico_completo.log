@@ -1,0 +1,43 @@
+2025-10-28 19:49:57,364 [INFO] DiagnosticadorSistema: Iniciando diagnóstico completo del sistema - 20251028_194957
+2025-10-28 19:49:57,365 [INFO] DiagnosticadorSistema: === VERIFICACIÓN DE PREREQUISITOS ===
+2025-10-28 19:49:57,365 [INFO] DiagnosticadorSistema: ✓ Directorio entrada_bruta existe
+2025-10-28 19:49:57,366 [INFO] DiagnosticadorSistema: ✓ Directorio procesado existe
+2025-10-28 19:49:57,366 [INFO] DiagnosticadorSistema: ✓ Directorio logs_sistema existe
+2025-10-28 19:49:57,366 [INFO] DiagnosticadorSistema: ✓ Directorio configuracion existe
+2025-10-28 19:49:57,367 [INFO] DiagnosticadorSistema: ✓ Archivo de configuración encontrado
+2025-10-28 19:49:57,369 [INFO] DiagnosticadorSistema: ✓ Encontrados 24 archivos de texto en entrada_bruta
+2025-10-28 19:49:57,373 [INFO] DiagnosticadorSistema: === VERIFICACIÓN COMPLETA DEL SISTEMA ===
+2025-10-28 19:49:57,374 [INFO] DiagnosticadorSistema: ✓ Verificación del sistema completada exitosamente
+2025-10-28 19:49:57,374 [INFO] DiagnosticadorSistema: === EJECUCIÓN DEL SISTEMA PRINCIPAL ===
+2025-10-28 19:49:57,549 [DEBUG] neo4j.pool: [#0000]  _: <POOL> created, direct address IPv4Address(('172.23.111.142', 7687))
+2025-10-28 19:49:57,657 [INFO] SistemaFenomenologico: Sistema inicializado con configuración cargada
+2025-10-28 19:49:57,659 [INFO] DiagnosticadorSistema: Sistema inicializado correctamente
+2025-10-28 19:49:57,660 [INFO] SistemaFenomenologico: Iniciando flujo completo del sistema
+2025-10-28 19:49:57,802 [INFO] SistemaFenomenologico: Generadas 10 preinstancias desde análisis
+2025-10-28 19:49:57,802 [INFO] SistemaFenomenologico: Generadas 10 preinstancias
+2025-10-28 19:49:57,803 [INFO] SistemaFenomenologico: Creadas 10 instancias de existencia
+2025-10-28 19:49:57,804 [INFO] SistemaFenomenologico: Creadas 10 instancias de existencia
+2025-10-28 19:49:57,804 [INFO] SistemaFenomenologico: Evaluando necesidad de activación MDCE
+2025-10-28 19:49:57,804 [INFO] SistemaFenomenologico: Analizando contradicciones de 4º orden
+2025-10-28 19:49:57,805 [INFO] SistemaFenomenologico: No se detectaron contradicciones de 4º orden
+2025-10-28 19:49:57,806 [INFO] SistemaFenomenologico: Calculando gradientes para 10 instancias
+2025-10-28 19:49:57,807 [ERROR] DiagnosticadorSistema: ✗ Error en ejecución del sistema: name 'datetime' is not defined
+2025-10-28 19:49:57,811 [ERROR] DiagnosticadorSistema: Traceback (most recent call last):
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\verificar.py", line 126, in ejecutar_sistema_principal
+    resultado = sistema.procesar_flujo_completo('entrada_bruta')
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\sistema_principal_v2.py", line 172, in procesar_flujo_completo
+    self._calcular_gradientes_instancias(instancias)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\sistema_principal_v2.py", line 413, in _calcular_gradientes_instancias
+    gradientes = self.sistema_gradientes.calcular_gradientes(
+        instancia.propiedades,
+        instancia.timestamp
+    )
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\gradient_system_enhanced.py", line 188, in calcular_gradientes
+    info_gradientes = self.get_all_gradients_for_node(concept_id)
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\gradient_system_enhanced.py", line 69, in get_all_gradients_for_node
+    "timestamp_consulta": datetime.now().isoformat()
+                          ^^^^^^^^
+NameError: name 'datetime' is not defined. Did you forget to import 'datetime'?
+
+2025-10-28 19:49:57,901 [DEBUG] neo4j.pool: [#0000]  _: <POOL> close

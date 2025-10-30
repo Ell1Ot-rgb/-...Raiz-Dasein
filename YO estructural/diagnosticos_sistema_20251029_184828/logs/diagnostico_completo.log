@@ -1,0 +1,125 @@
+2025-10-29 18:48:28,787 [INFO] DiagnosticadorSistema: Iniciando diagnóstico completo del sistema - 20251029_184828
+2025-10-29 18:48:28,788 [INFO] DiagnosticadorSistema: === VERIFICACIÓN DE PREREQUISITOS ===
+2025-10-29 18:48:28,789 [INFO] DiagnosticadorSistema: ✓ Directorio entrada_bruta existe
+2025-10-29 18:48:28,790 [INFO] DiagnosticadorSistema: ✓ Directorio procesado existe
+2025-10-29 18:48:28,790 [INFO] DiagnosticadorSistema: ✓ Directorio logs_sistema existe
+2025-10-29 18:48:28,791 [INFO] DiagnosticadorSistema: ✓ Directorio configuracion existe
+2025-10-29 18:48:28,792 [INFO] DiagnosticadorSistema: ✓ Archivo de configuración encontrado
+2025-10-29 18:48:28,795 [INFO] DiagnosticadorSistema: ✓ Encontrados 24 archivos de texto en entrada_bruta
+2025-10-29 18:48:28,796 [INFO] DiagnosticadorSistema: === VERIFICACIÓN COMPLETA DEL SISTEMA ===
+2025-10-29 18:48:28,796 [INFO] DiagnosticadorSistema: ✓ Verificación del sistema completada exitosamente
+2025-10-29 18:48:28,800 [INFO] DiagnosticadorSistema: === EJECUCIÓN DEL SISTEMA PRINCIPAL ===
+2025-10-29 18:48:28,902 [DEBUG] neo4j.pool: [#0000]  _: <POOL> created, direct address IPv4Address(('192.168.1.37', 7687))
+2025-10-29 18:48:28,904 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> routing towards fixed database: yo_estructural
+2025-10-29 18:48:28,907 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> pinning database: 'yo_estructural'
+2025-10-29 18:48:28,907 [DEBUG] neo4j.pool: [#0000]  _: <POOL> acquire direct connection, access_mode='WRITE', database=AcquisitionDatabase(name='yo_estructural', guessed=False)
+2025-10-29 18:48:28,908 [DEBUG] neo4j.pool: [#0000]  _: <POOL> trying to hand out new connection
+2025-10-29 18:48:28,908 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> in: 192.168.1.37:7687
+2025-10-29 18:48:28,919 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> dns resolver out: 192.168.1.37:7687
+2025-10-29 18:48:28,920 [DEBUG] neo4j.io: [#0000]  C: <OPEN> 192.168.1.37:7687
+2025-10-29 18:48:28,926 [DEBUG] neo4j.io: [#FA3D]  C: <MAGIC> 0x6060B017
+2025-10-29 18:48:28,935 [DEBUG] neo4j.io: [#FA3D]  C: <HANDSHAKE> 0x000001FF 0x00080805 0x00020404 0x00000003
+2025-10-29 18:48:29,456 [DEBUG] neo4j.io: [#FA3D]  S: <HANDSHAKE> 0x00000305
+2025-10-29 18:48:29,461 [DEBUG] neo4j.io: [#FA3D]  C: HELLO {'user_agent': 'neo4j-python/6.0.2 Python/3.14.0-final-0 (win32)', 'bolt_agent': {'product': 'neo4j-python/6.0.2', 'platform': 'Windows 10; AMD64', 'language': 'Python/3.14.0-final-0', 'language_details': 'CPython; 3.14.0-final-0 (tags/v3.14.0:ebf955d, Oct  7 2025 10:15:03) [MSC v.1944 64 bit (AMD64)]'}}
+2025-10-29 18:48:29,466 [DEBUG] neo4j.io: [#FA3D]  _: <CONNECTION> client state: CONNECTED > AUTHENTICATION
+2025-10-29 18:48:29,467 [DEBUG] neo4j.io: [#FA3D]  C: LOGON {'scheme': 'basic', 'principal': 'neo4j', 'credentials': '*******'}
+2025-10-29 18:48:29,470 [DEBUG] neo4j.io: [#FA3D]  _: <CONNECTION> client state: AUTHENTICATION > READY
+2025-10-29 18:48:29,562 [DEBUG] neo4j.io: [#FA3D]  S: SUCCESS {'server': 'Neo4j/5.12.0', 'connection_id': 'bolt-66', 'hints': {'connection.recv_timeout_seconds': 120}}
+2025-10-29 18:48:29,580 [DEBUG] neo4j.io: [#FA3D]  _: <CONNECTION> server state: CONNECTED > AUTHENTICATION
+2025-10-29 18:48:29,853 [DEBUG] neo4j.io: [#FA3D]  S: SUCCESS {}
+2025-10-29 18:48:29,860 [DEBUG] neo4j.io: [#FA3D]  _: <CONNECTION> server state: AUTHENTICATION > READY
+2025-10-29 18:48:29,861 [DEBUG] neo4j.io: [#FA3D]  C: RUN 'RETURN 1 AS num' {} {'db': 'yo_estructural'}
+2025-10-29 18:48:29,920 [DEBUG] neo4j.io: [#FA3D]  _: <CONNECTION> client state: READY > STREAMING
+2025-10-29 18:48:29,949 [DEBUG] neo4j.io: [#FA3D]  C: PULL {'n': 1000}
+2025-10-29 18:48:30,176 [DEBUG] neo4j.io: [#FA3D]  S: FAILURE {'code': 'Neo.ClientError.Database.DatabaseNotFound', 'message': "Database does not exist. Database name: 'yo_estructural'."}
+2025-10-29 18:48:30,177 [DEBUG] neo4j.io: [#FA3D]  C: RESET
+2025-10-29 18:48:30,178 [DEBUG] neo4j.io: [#FA3D]  _: <CONNECTION> client state: STREAMING > READY
+2025-10-29 18:48:30,179 [DEBUG] neo4j.io: [#FA3D]  S: IGNORED
+2025-10-29 18:48:30,230 [DEBUG] neo4j.io: [#FA3D]  S: SUCCESS {}
+2025-10-29 18:48:30,230 [DEBUG] neo4j.io: [#FA3D]  _: <CONNECTION> server state: FAILED > READY
+2025-10-29 18:48:30,235 [DEBUG] neo4j.pool: [#FA3D]  _: <POOL> released bolt-66
+2025-10-29 18:48:30,236 [ERROR] Neo4jConnection: Error al verificar conexión a Neo4j: {neo4j_code: Neo.ClientError.Database.DatabaseNotFound} {message: Database does not exist. Database name: 'yo_estructural'.} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. Database does not exist. Database name: 'yo_estructural'.}
+2025-10-29 18:48:30,236 [INFO] Neo4jConnection: Conexión a Neo4j establecida exitosamente: bolt://192.168.1.37:7687
+2025-10-29 18:48:30,311 [INFO] SistemaFenomenologico: Sistema inicializado con configuración cargada
+2025-10-29 18:48:30,312 [INFO] DiagnosticadorSistema: Sistema inicializado correctamente
+2025-10-29 18:48:30,314 [INFO] SistemaFenomenologico: Iniciando flujo completo del sistema
+2025-10-29 18:48:30,418 [INFO] SistemaFenomenologico: Generadas 10 preinstancias desde análisis
+2025-10-29 18:48:30,418 [INFO] SistemaFenomenologico: Generadas 10 preinstancias
+2025-10-29 18:48:30,422 [INFO] SistemaFenomenologico: Creadas 10 instancias de existencia
+2025-10-29 18:48:30,424 [INFO] SistemaFenomenologico: Creadas 10 instancias de existencia
+2025-10-29 18:48:30,424 [INFO] SistemaFenomenologico: Evaluando necesidad de activación MDCE
+2025-10-29 18:48:30,427 [INFO] SistemaFenomenologico: Analizando contradicciones de 4º orden
+2025-10-29 18:48:30,428 [INFO] SistemaFenomenologico: No se detectaron contradicciones de 4º orden
+2025-10-29 18:48:30,429 [INFO] SistemaFenomenologico: Calculando gradientes para 10 instancias
+2025-10-29 18:48:30,448 [INFO] SistemaFenomenologico: Gradientes relacionales calculados exitosamente
+2025-10-29 18:48:30,454 [INFO] SistemaFenomenologico: Iniciando detección de vohexistencias para 10 instancias
+2025-10-29 18:48:30,465 [INFO] SistemaFenomenologico: Detectadas 0 vohexistencias
+2025-10-29 18:48:30,466 [DEBUG] SistemaFenomenologico: Extraídos 10 contextos activos con claves convertidas a strings
+2025-10-29 18:48:30,466 [DEBUG] SistemaFenomenologico: Extraídos 10 fenómenos activos con claves convertidas a strings
+2025-10-29 18:48:30,485 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> routing towards fixed database: None
+2025-10-29 18:48:30,485 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> pinning database: None
+2025-10-29 18:48:30,487 [DEBUG] neo4j.pool: [#0000]  _: <POOL> acquire direct connection, access_mode='WRITE', database=AcquisitionDatabase(name=None, guessed=False)
+2025-10-29 18:48:30,489 [DEBUG] neo4j.pool: [#FA3D]  _: <POOL> picked existing connection bolt-66
+2025-10-29 18:48:30,489 [DEBUG] neo4j.pool: [#FA3D]  _: <POOL> checked re_auth auth=None updated=False force=False
+2025-10-29 18:48:30,495 [DEBUG] neo4j.pool: [#FA3D]  _: <POOL> handing out existing connection
+2025-10-29 18:48:30,495 [DEBUG] neo4j.io: [#FA3D]  C: RUN '\n                        MERGE (y:YO {id: $id})\n                        SET y.tipo = $tipo,\n                            y.activacion = $activacion,\n                            y.timestamp = $timestamp,\n                            y.version = $version,\n                            y.coherencia_narrativa = $coherencia_narrativa,\n                            y.estabilidad_contextual = $estabilidad_contextual,\n                            y.integracion_afectiva = $integracion_afectiva\n                    ' {'id': 'yo_0', 'tipo': 'YO_NARRATIVO', 'activacion': 1.0, 'timestamp': '2025-10-29T18:48:30.467078', 'version': 0, 'coherencia_narrativa': 0.0, 'estabilidad_contextual': 0.0, 'integracion_afectiva': 0.5, 'coherencia_total': 0.0} {}
+2025-10-29 18:48:30,497 [DEBUG] neo4j.io: [#FA3D]  _: <CONNECTION> client state: READY > STREAMING
+2025-10-29 18:48:30,498 [DEBUG] neo4j.io: [#FA3D]  C: PULL {'n': 1000}
+2025-10-29 18:48:30,978 [DEBUG] neo4j.io: [#FA3D]  S: SUCCESS {'t_first': 416, 'fields': []}
+2025-10-29 18:48:30,983 [DEBUG] neo4j.io: [#FA3D]  _: <CONNECTION> server state: READY > STREAMING
+2025-10-29 18:48:30,983 [INFO] SistemaYoEmergente: Nodo YO v0 sincronizado con Neo4j
+2025-10-29 18:48:31,232 [DEBUG] neo4j.io: [#FA3D]  S: SUCCESS {'bookmark': 'FB:kcwQGCA2GPKzTf+eE1C3VTz2YBmQ', 'stats': {'contains-updates': True, 'properties-set': 7}, 'type': 'w', 't_last': 0, 'db': 'neo4j'}
+2025-10-29 18:48:31,233 [DEBUG] neo4j.io: [#FA3D]  _: <CONNECTION> server state: STREAMING > READY
+2025-10-29 18:48:31,236 [DEBUG] neo4j.pool: [#FA3D]  _: <POOL> released bolt-66
+2025-10-29 18:48:31,237 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> routing towards fixed database: None
+2025-10-29 18:48:31,237 [DEBUG] neo4j.pool: [#0000]  _: <POOL> acquire direct connection, access_mode='WRITE', database=AcquisitionDatabase(name=None, guessed=False)
+2025-10-29 18:48:31,238 [DEBUG] neo4j.pool: [#FA3D]  _: <POOL> picked existing connection bolt-66
+2025-10-29 18:48:31,238 [DEBUG] neo4j.pool: [#FA3D]  _: <POOL> checked re_auth auth=None updated=False force=False
+2025-10-29 18:48:31,239 [DEBUG] neo4j.pool: [#FA3D]  _: <POOL> handing out existing connection
+2025-10-29 18:48:31,239 [DEBUG] neo4j.io: [#FA3D]  C: RUN '\n                            MERGE (c:Contexto {id: $contexto_id})\n                            \n                            WITH c\n                            MATCH (y:YO {id: $yo_id})\n                            MERGE (y)-[:ACTIVA_CONTEXTO {timestamp: $timestamp}]->(c)\n                        ' {'contexto_id': {'id': 'inst_514e4ea7', 'tipo': 'instancia', 'propiedades': {'nivel_jerarquico': -4, 'contenido': 'dato', 'confianza': 0.8, 'clasificacion': {'niveles_detectados': {'-4': ['dato'], '-2': ['relación'], '0': ['dolor']}, 'emergencia_yo': {'tipos_detectados': [], 'nivel_maximo': 0, 'coherencia_yo': 0.0}, 'coherencia_narrativa': 0.0}, 'gradiente_temporal': 0.0, 'gradiente_coherencia': 0.0, 'gradiente_estructural': 0.0}, 'gradientes': {}, 'timestamp': '2025-10-29T18:48:30.421660'}, 'yo_id': 'yo_0', 'timestamp': '2025-10-29T18:48:30.467078'} {'bookmarks': ['FB:kcwQGCA2GPKzTf+eE1C3VTz2YBmQ']}
+2025-10-29 18:48:31,240 [DEBUG] neo4j.io: [#FA3D]  C: PULL {'n': 1000}
+2025-10-29 18:48:37,602 [DEBUG] neo4j.io: [#FA3D]  S: FAILURE {'code': 'Neo.ClientError.Statement.TypeError', 'message': 'Property values can only be of primitive types or arrays thereof. Encountered: Map{gradientes -> Map{}, tipo -> String("instancia"), id -> String("inst_514e4ea7"), propiedades -> Map{gradiente_estructural -> Double(0.000000e+00), contenido -> String("dato"), confianza -> Double(8.000000e-01), gradiente_coherencia -> Double(0.000000e+00), gradiente_temporal -> Double(0.000000e+00), clasificacion -> Map{emergencia_yo -> Map{tipos_detectados -> List{}, coherencia_yo -> Double(0.000000e+00), nivel_maximo -> Long(0)}, niveles_detectados -> Map{0 -> List{String("dolor")}, -2 -> List{String("relación")}, -4 -> List{String("dato")}}, coherencia_narrativa -> Double(0.000000e+00)}, nivel_jerarquico -> Long(-4)}, timestamp -> String("2025-10-29T18:48:30.421660")}.'}
+2025-10-29 18:54:32,723 [DEBUG] neo4j.io: [#FA3D]  C: RESET
+2025-10-29 18:54:32,724 [DEBUG] neo4j.io: [#FA3D]  _: <CONNECTION> client state: STREAMING > READY
+2025-10-29 18:54:32,725 [ERROR] neo4j.io: [#FA3D]  _: <CONNECTION> error: Failed to write data to connection IPv4Address(('192.168.1.37', 7687)) (ResolvedIPv4Address(('192.168.1.37', 7687))): ConnectionAbortedError(10053, 'Se ha anulado una conexión establecida por el software en su equipo host', None, 10053, None)
+2025-10-29 18:54:32,727 [DEBUG] neo4j.io: [#FA3D]  C: <CLOSE>
+2025-10-29 18:54:32,728 [DEBUG] neo4j.pool: [#FA3D]  _: <POOL> released bolt-66
+2025-10-29 18:54:32,729 [WARNING] SistemaYoEmergente: Error al sincronizar con Neo4j (intento 1/3): {neo4j_code: Neo.ClientError.Statement.TypeError} {message: Property values can only be of primitive types or arrays thereof. Encountered: Map{gradientes -> Map{}, tipo -> String("instancia"), id -> String("inst_514e4ea7"), propiedades -> Map{gradiente_estructural -> Double(0.000000e+00), contenido -> String("dato"), confianza -> Double(8.000000e-01), gradiente_coherencia -> Double(0.000000e+00), gradiente_temporal -> Double(0.000000e+00), clasificacion -> Map{emergencia_yo -> Map{tipos_detectados -> List{}, coherencia_yo -> Double(0.000000e+00), nivel_maximo -> Long(0)}, niveles_detectados -> Map{0 -> List{String("dolor")}, -2 -> List{String("relación")}, -4 -> List{String("dato")}}, coherencia_narrativa -> Double(0.000000e+00)}, nivel_jerarquico -> Long(-4)}, timestamp -> String("2025-10-29T18:48:30.421660")}.} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. Property values can only be of primitive types or arrays thereof. Encountered: Map{gradientes -> Map{}, tipo -> String("instancia"), id -> String("inst_514e4ea7"), propiedades -> Map{gradiente_estructural -> Double(0.000000e+00), contenido -> String("dato"), confianza -> Double(8.000000e-01), gradiente_coherencia -> Double(0.000000e+00), gradiente_temporal -> Double(0.000000e+00), clasificacion -> Map{emergencia_yo -> Map{tipos_detectados -> List{}, coherencia_yo -> Double(0.000000e+00), nivel_maximo -> Long(0)}, niveles_detectados -> Map{0 -> List{String("dolor")}, -2 -> List{String("relación")}, -4 -> List{String("dato")}}, coherencia_narrativa -> Double(0.000000e+00)}, nivel_jerarquico -> Long(-4)}, timestamp -> String("2025-10-29T18:48:30.421660")}.}
+2025-10-29 18:54:32,730 [INFO] SistemaYoEmergente: Reintentando en 2.90 segundos...
+2025-10-29 18:54:35,629 [DEBUG] neo4j.pool: [#0000]  _: <POOL> created, direct address IPv4Address(('localhost', 7687))
+2025-10-29 18:54:38,746 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> routing towards fixed database: yo_estructural
+2025-10-29 18:54:38,746 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> pinning database: 'yo_estructural'
+2025-10-29 18:54:38,746 [DEBUG] neo4j.pool: [#0000]  _: <POOL> acquire direct connection, access_mode='WRITE', database=AcquisitionDatabase(name='yo_estructural', guessed=False)
+2025-10-29 18:54:38,747 [DEBUG] neo4j.pool: [#0000]  _: <POOL> trying to hand out new connection
+2025-10-29 18:54:38,747 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> in: localhost:7687
+2025-10-29 18:54:38,751 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> dns resolver out: [::1]:7687
+2025-10-29 18:54:38,752 [DEBUG] neo4j.io: [#0000]  C: <OPEN> [::1]:7687
+2025-10-29 18:54:40,786 [DEBUG] neo4j.io: [#0000]  S: <ERROR> ConnectionRefusedError 10061 'No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión' None 10061 None
+2025-10-29 18:54:40,787 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> [::1]:7687
+2025-10-29 18:54:40,790 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> [::1]:7687
+2025-10-29 18:54:40,790 [DEBUG] neo4j.io: [#0000]  S: <CONNECTION FAILED> [::1]:7687 ServiceUnavailable: Failed to establish connection to ResolvedIPv6Address(('::1', 7687, 0, 0)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 18:54:40,791 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> dns resolver out: 127.0.0.1:7687
+2025-10-29 18:54:40,791 [DEBUG] neo4j.io: [#0000]  C: <OPEN> 127.0.0.1:7687
+2025-10-29 18:54:42,825 [DEBUG] neo4j.io: [#0000]  S: <ERROR> ConnectionRefusedError 10061 'No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión' None 10061 None
+2025-10-29 18:54:42,826 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> 127.0.0.1:7687
+2025-10-29 18:54:42,828 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> 127.0.0.1:7687
+2025-10-29 18:54:42,828 [DEBUG] neo4j.io: [#0000]  S: <CONNECTION FAILED> 127.0.0.1:7687 ServiceUnavailable: Failed to establish connection to ResolvedIPv4Address(('127.0.0.1', 7687)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 18:54:42,829 [ERROR] Neo4jConnection: Error al verificar conexión a Neo4j: Couldn't connect to localhost:7687 (resolved to ('[::1]:7687', '127.0.0.1:7687')):
+Failed to establish connection to ResolvedIPv6Address(('::1', 7687, 0, 0)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+Failed to establish connection to ResolvedIPv4Address(('127.0.0.1', 7687)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 18:54:42,830 [INFO] Neo4jConnection: Conexión a Neo4j establecida exitosamente: bolt://localhost:7687
+2025-10-29 18:54:42,830 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> routing towards fixed database: None
+2025-10-29 18:54:42,831 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> pinning database: None
+2025-10-29 18:54:42,831 [DEBUG] neo4j.pool: [#0000]  _: <POOL> acquire direct connection, access_mode='WRITE', database=AcquisitionDatabase(name=None, guessed=False)
+2025-10-29 18:54:42,832 [DEBUG] neo4j.pool: [#0000]  _: <POOL> trying to hand out new connection
+2025-10-29 18:54:42,832 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> in: localhost:7687
+2025-10-29 18:54:42,833 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> dns resolver out: [::1]:7687
+2025-10-29 18:54:42,834 [DEBUG] neo4j.io: [#0000]  C: <OPEN> [::1]:7687
+2025-10-29 18:54:44,865 [DEBUG] neo4j.io: [#0000]  S: <ERROR> ConnectionRefusedError 10061 'No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión' None 10061 None
+2025-10-29 18:54:44,868 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> [::1]:7687
+2025-10-29 18:54:44,870 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> [::1]:7687
+2025-10-29 18:54:44,870 [DEBUG] neo4j.io: [#0000]  S: <CONNECTION FAILED> [::1]:7687 ServiceUnavailable: Failed to establish connection to ResolvedIPv6Address(('::1', 7687, 0, 0)) (reason [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión)
+2025-10-29 18:54:44,871 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> dns resolver out: 127.0.0.1:7687
+2025-10-29 18:54:44,871 [DEBUG] neo4j.io: [#0000]  C: <OPEN> 127.0.0.1:7687
+2025-10-29 18:54:46,984 [DEBUG] neo4j.pool: [#0000]  _: <POOL> close
+2025-10-29 18:54:46,984 [INFO] Neo4jConnection: Conexión a Neo4j cerrada correctamente

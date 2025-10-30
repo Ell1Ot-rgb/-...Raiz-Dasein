@@ -1,0 +1,19 @@
+2025-10-27 11:06:51,136 [INFO]: [*] Iniciando verificación del Sistema YO Estructural
+2025-10-27 11:06:51,139 [INFO]: 
+[*] Verificando estructura de directorios...
+2025-10-27 11:06:51,140 [INFO]: [+] Directorio configuracion existe
+2025-10-27 11:06:51,141 [INFO]: [+] Directorio entrada_bruta existe
+2025-10-27 11:06:51,143 [INFO]: [+] Directorio logs_sistema existe
+2025-10-27 11:06:51,144 [INFO]: [+] Directorio procesado existe
+2025-10-27 11:06:51,146 [INFO]: [+] Directorio backups_automaticos existe
+2025-10-27 11:06:51,148 [INFO]: [+] Directorio features_extraidas existe
+2025-10-27 11:06:51,149 [INFO]: 
+[*] Verificando archivos de configuración...
+2025-10-27 11:06:51,152 [INFO]: [+] Archivo configuracion/config.yaml existe
+2025-10-27 11:06:51,156 [INFO]: [+] Archivo .env existe
+2025-10-27 11:06:51,157 [INFO]: 
+[*] Verificando dependencias...
+2025-10-27 11:06:52,480 [INFO]: [+] Dependencia fastapi instalada
+2025-10-27 11:06:53,395 [INFO]: [+] Dependencia uvicorn instalada
+2025-10-27 11:06:53,398 [ERROR]: [X] Dependencia neo4j no instalada
+2025-10-27 11:06:53,400 [ERROR]: [X] Verificación de dependencias fallida

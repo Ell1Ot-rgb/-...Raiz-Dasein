@@ -1,0 +1,39 @@
+{
+  "preinstancias": [
+    {
+      "id": "ø_001",
+      "tipo": "texto",
+      "contenido_bruto": "la sombra cubrió la piedra mientras el viento susurraba secretos antiguos",
+      "latencia": "activa",
+      "origen_ontico": "sensorial",
+      "timestamp": "2024-01-15T10:30:00Z"
+    },
+    {
+      "id": "ø_002",
+      "tipo": "afectivo",
+      "contenido_bruto": "una sensación de nostalgia invade el espacio temporal",
+      "latencia": "latente",
+      "origen_ontico": "emocional",
+      "timestamp": "2024-01-15T10:31:00Z"
+    },
+    {
+      "id": "ø_003",
+      "tipo": "reflexivo",
+      "contenido_bruto": "¿qué significa existir en este momento específico?",
+      "latencia": "emergente",
+      "origen_ontico": "cognitivo",
+      "timestamp": "2024-01-15T10:32:00Z"
+    }
+  ],
+  "configuracion_procesamiento": {
+    "umbral_coherencia": 0.7,
+    "activar_modo_diagnostico": true,
+    "generar_visualizaciones": true,
+    "exportar_neo4j": true
+  },
+  "metadatos": {
+    "sesion_id": "sesion_2024_001",
+    "usuario": "sistema_fenomenologico",
+    "version_esquema": "1.0"
+  }
+}

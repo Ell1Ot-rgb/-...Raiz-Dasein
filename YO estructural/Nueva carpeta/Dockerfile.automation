@@ -1,0 +1,62 @@
+# Dockerfile para Automatización YO Estructural
+# =============================================
+
+FROM python:3.11-slim
+
+# Metadatos
+LABEL maintainer="Sistema YO Estructural"
+LABEL version="3.0"
+LABEL description="Servicio de automatización para procesamiento fenomenológico"
+
+# Variables de entorno
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Instalar dependencias del sistema
+RUN apt-get update && apt-get install -y \
+    curl \
+    wget \
+    git \
+    build-essential \
+    libssl-dev \
+    libffi-dev \
+    python3-dev \
+    pkg-config \
+    cron \
+    && rm -rf /var/lib/apt/lists/*
+
+# Crear directorio de trabajo
+WORKDIR /app
+
+# Crear usuario no-root
+RUN groupadd -r automation && useradd -r -g automation automation
+
+# Copiar archivos de requisitos
+COPY requirements.txt .
+
+# Instalar dependencias de Python
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copiar código fuente
+COPY . .
+
+# Crear directorios necesarios
+RUN mkdir -p logs_sistema procesado entrada_bruta && \
+    chown -R automation:automation /app
+
+# Configurar cron para tareas programadas (opcional)
+COPY crontab /etc/cron.d/yo-estructural-cron
+RUN chmod 0644 /etc/cron.d/yo-estructural-cron && \
+    crontab /etc/cron.d/yo-estructural-cron
+
+# Cambiar a usuario no-root
+USER automation
+
+# Script de inicio
+COPY --chown=automation:automation start_automation.sh /app/
+RUN chmod +x /app/start_automation.sh
+
+# Comando por defecto
+CMD ["/app/start_automation.sh"]

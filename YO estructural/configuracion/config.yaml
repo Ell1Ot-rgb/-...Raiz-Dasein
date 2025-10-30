@@ -1,0 +1,393 @@
+# ===================================================================
+# CONFIGURACIÓN SISTEMA YO ESTRUCTURAL v3.0 - FENOMENOLOGÍA COMPUTACIONAL
+# Archivo de configuración central para procesamiento automático
+# ===================================================================
+
+# CONFIGURACIÓN DE PROCESAMIENTO BASE
+processamiento:
+  idioma: "spanish"
+  min_longitud_texto: 15
+  max_features_tfidf: 3000
+  ngram_range: [1, 3]
+  eliminar_stopwords: true
+  min_df: 2
+  max_df: 0.85
+  encoding: "utf-8"
+  timeout_procesamiento: 300  # segundos
+
+# CONFIGURACIÓN NEO4J
+neo4j:
+  host: "192.168.1.37"
+  port: 7687
+  username: "neo4j"
+  password: "fenomenologia2024"
+  database: "yo_estructural"
+  timeout: 30
+  max_retry: 3
+  pool_size: 50
+
+# PLANTILLA YAML PARA GENERACIÓN AUTOMÁTICA DE DATOS
+plantilla_yaml_automatica:
+  estructura_base:
+    id_unico: "${uuid_v4}"  # Generado automáticamente
+    timestamp_sistema: "${timestamp_iso}"
+    
+    # FASE FENOMENOLÓGICA (0-8)
+    fase:
+      numero: "${fase_numero}"  # 0-8
+      nombre: "${fase_nombre}"  # preinstancia, instancia, gradiente, vohexistencia, fenomeno, contexto, metacontexto, yo, voluntad
+      descripcion: "${fase_descripcion}"
+      nivel_jerarquico: "${nivel}"  # -4 a +5
+    
+    # ORIGEN DEL DATO
+    origen:
+      tipo_archivo: "${tipo_detectado}"  # texto|imagen|audio|video|binario|markdown|json|yaml|otro
+      ruta_archivo: "${ruta_completa}"
+      nombre_archivo: "${nombre_original}"
+      extension: "${extension}"
+      fuente: "${fuente_origen}"  # Google Drive|n8n|API|usuario|obsidian|manual
+      timestamp_creacion: "${timestamp_archivo}"
+      hash_archivo: "${sha256_hash}"  # Para integridad
+      tamaño_bytes: "${tamaño}"
+    
+    # PROPIEDADES FENOMENOLÓGICAS
+    propiedades:
+      # Básicas
+      descripcion: "${descripcion_generada}"
+      resumen: "${resumen_automatico}"
+      etiquetas: "${etiquetas_extraidas}"  # Array dinámico
+      
+      # Vectoriales y semánticas
+      embeddings: "${vector_embeddings}"  # Vector numérico si aplica
+      features_tfidf: "${features_tfidf}"  # Para textos
+      similitud_coseno: "${similitud_promedio}"
+      
+      # Fenomenológicas específicas
+      emociones_detectadas: "${emociones_array}"  # alegría, tristeza, miedo, etc.
+      peso_existencial: "${peso_calculado}"  # 0.0-1.0
+      intensidad_fenomenologica: "${intensidad}"  # 0.0-1.0
+      coherencia_narrativa: "${coherencia}"  # 0.0-1.0
+      
+      # Específicas por tipo de archivo
+      metadatos_especificos:
+        # Para imágenes
+        exif:
+          camara: "${exif_camara}"
+          fecha_foto: "${exif_fecha}"
+          gps: "${exif_gps}"
+          dimensiones: "${exif_dimensiones}"
+        
+        # Para audio/video
+        multimedia:
+          duracion: "${duracion_segundos}"
+          transcript: "${texto_transcrito}"
+          idioma_detectado: "${idioma_audio}"
+          calidad: "${calidad_audio}"
+        
+        # Para textos
+        texto:
+          longitud_caracteres: "${longitud}"
+          longitud_palabras: "${palabras_count}"
+          idioma: "${idioma_detectado}"
+          legibilidad: "${score_legibilidad}"
+        
+        # Otros metadatos
+        otros: "${metadatos_adicionales}"
+    
+    # RELACIONES FENOMENOLÓGICAS
+    relaciones:
+      - id_relacion: "${uuid_relacion}"
+        tipo: "${tipo_relacion}"  # SE_PARECE_A|RELACION|AGRUPA|INCLUYE|SURGE_DE|OBSERVA|CONTRADICE|ACTUA_EN|TRANSFORMA_EN|EMERGE_COMO|GENERA|DECIDE
+        destino: "${id_destino}"
+        peso: "${peso_relacion}"  # 0.0-1.0
+        contexto: "${contexto_relacional}"
+        direccion: "${direccion}"  # bidireccional|unidireccional
+        validado: "${validacion_automatica}"
+    
+    # METADATOS DEL SISTEMA
+    metadatos:
+      version_sistema: "3.0"
+      version_yaml: "1.0"
+      autor: "${autor_proceso}"  # usuario|sistema|n8n|script
+      fecha_procesado: "${timestamp_procesamiento}"
+      tiempo_procesamiento_ms: "${tiempo_ms}"
+      notas: "${notas_automaticas}"
+      validado: "${validacion_exitosa}"
+      origen_yaml: "${origen_generacion}"  # n8n|script|manual|api
+      
+      # Control de calidad
+      calidad:
+        score_confianza: "${confianza_score}"  # 0.0-1.0
+        errores_detectados: "${errores_array}"
+        advertencias: "${advertencias_array}"
+        completitud: "${completitud_score}"  # 0.0-1.0
+      
+      # Trazabilidad
+      trazabilidad:
+        pipeline_usado: "${pipeline_name}"
+        version_algoritmo: "${version_algo}"
+        parametros_usados: "${parametros_dict}"
+        dependencias: "${dependencias_array}"
+
+# CONFIGURACIÓN DE FASES FENOMENOLÓGICAS
+fases_fenomenologicas:
+  "0_preinstancia":
+    nombre: "preinstancia"
+    descripcion: "Registro de existencia sin concepto"
+    nivel_jerarquico: -4
+    etiqueta_neo4j: "PreInstancia"
+    propiedades_requeridas: ["dato_crudo", "origen", "timestamp"]
+    propiedades_opcionales: ["hash_archivo", "metadatos_raw"]
+    
+  "1_instancia":
+    nombre: "instancia"
+    descripcion: "Instancia con propiedades fenomenológicas"
+    nivel_jerarquico: -3
+    etiqueta_neo4j: "Instancia"
+    propiedades_requeridas: ["activacion", "tipo", "peso_existencial"]
+    propiedades_opcionales: ["emociones", "embeddings"]
+    
+  "2_gradiente":
+    nombre: "gradiente"
+    descripcion: "Gradientes relacionales acumulativos"
+    nivel_jerarquico: -2
+    etiqueta_neo4j: "Gradiente"
+    propiedades_requeridas: ["valor_gradiente", "direccion"]
+    propiedades_opcionales: ["operadores_fenomenologicos"]
+    
+  "3_vohexistencia":
+    nombre: "vohexistencia"
+    descripcion: "Agrupaciones por propiedades compartidas"
+    nivel_jerarquico: -1
+    etiqueta_neo4j: "Vohexistencia"
+    propiedades_requeridas: ["peso_coexistencial", "constante_emergente"]
+    propiedades_opcionales: ["instancias_agrupadas"]
+    
+  "4_fenomeno":
+    nombre: "fenomeno"
+    descripcion: "Núcleos conceptuales por frecuencia"
+    nivel_jerarquico: 0
+    etiqueta_neo4j: "Fenomeno"
+    propiedades_requeridas: ["contenido", "tipo", "intensidad", "es_nucleo"]
+    propiedades_opcionales: ["frecuencia", "validacion_fenomenologica"]
+    
+  "5_contexto":
+    nombre: "contexto"
+    descripcion: "Estructuras narrativas y temporales"
+    nivel_jerarquico: 1
+    etiqueta_neo4j: "Contexto"
+    propiedades_requeridas: ["estructura", "nivel", "yo_emergente"]
+    propiedades_opcionales: ["temporalidad", "simbolismo"]
+    
+  "6_metacontexto":
+    nombre: "metacontexto"
+    descripcion: "Agrupaciones de contextos por fenómenos compartidos"
+    nivel_jerarquico: 2
+    etiqueta_neo4j: "Metacontexto"
+    propiedades_requeridas: ["patron_emergente", "contextos_incluidos"]
+    propiedades_opcionales: ["reflexion_meta"]
+    
+  "7_yo":
+    nombre: "yo"
+    descripcion: "Emergencia del YO observador"
+    nivel_jerarquico: 3
+    etiqueta_neo4j: "YO"
+    propiedades_requeridas: ["tipo", "coherencia_narrativa", "version"]
+    propiedades_opcionales: ["contradicciones", "auto_reflexion"]
+    
+  "8_voluntad":
+    nombre: "voluntad"
+    descripcion: "Predicción de efectos y sugerencia de acciones"
+    nivel_jerarquico: 4
+    etiqueta_neo4j: "Voluntad"
+    propiedades_requeridas: ["direccion", "intensidad", "prediccion"]
+    propiedades_opcionales: ["acciones_sugeridas"]
+
+# TIPOS DE RELACIONES FENOMENOLÓGICAS
+relaciones_fenomenologicas:
+  "SE_PARECE_A":
+    descripcion: "Similitud semántica entre instancias"
+    peso_minimo: 0.3
+    direccion: "bidireccional"
+    
+  "RELACION":
+    descripcion: "Relación gradiente general"
+    peso_minimo: 0.1
+    direccion: "unidireccional"
+    
+  "AGRUPA":
+    descripcion: "Agrupación en vohexistencias"
+    peso_minimo: 0.5
+    direccion: "unidireccional"
+    
+  "INCLUYE":
+    descripcion: "Inclusión en contextos"
+    peso_minimo: 0.4
+    direccion: "unidireccional"
+    
+  "SURGE_DE":
+    descripcion: "Emergencia desde contextos"
+    peso_minimo: 0.6
+    direccion: "unidireccional"
+    
+  "OBSERVA":
+    descripcion: "Observación del YO"
+    peso_minimo: 0.7
+    direccion: "unidireccional"
+    
+  "CONTRADICE":
+    descripcion: "Contradicción consciente"
+    peso_minimo: 0.5
+    direccion: "bidireccional"
+    
+  "ACTUA_EN":
+    descripcion: "Acción de la voluntad"
+    peso_minimo: 0.6
+    direccion: "unidireccional"
+
+# CONFIGURACIÓN DE CLASIFICACIÓN
+clasificacion:
+  algoritmo: "RandomForest"
+  n_estimators: 200
+  max_depth: 10
+  min_samples_split: 5
+  test_size: 0.3
+  random_state: 42
+  class_weight: "balanced"
+
+# CATEGORÍAS FENOMENOLÓGICAS
+fenomenologia:
+  categorias_base:
+    - experiencia_vivida
+    - conciencia_temporal
+    - intersubjetividad
+    - corporalidad
+    - espacialidad
+    - mundaneidad
+    - afectividad
+    - intencionalidad
+    - experiencia_temporal
+    - vivencia_corporal
+  umbral_relevancia: 0.6
+  generar_nodos_obsidian: true
+
+# CONFIGURACIÓN DEL SISTEMA
+sistema:
+  backup_automatico: true
+  intervalo_backup_horas: 24
+  max_backups: 7
+  generar_reportes: true
+  modo_diagnostico: false
+  timeout_global: 600
+
+# RUTAS DEL MODELO SEMÁNTICO
+modelo_semantico:
+  rutas:
+    fenomenos: "procesado/nodos_fenomenologicos/v1/fenomenos"
+    contextos: "procesado/nodos_fenomenologicos/v1/contextos"
+    macrocontextos: "procesado/nodos_fenomenologicos/v1/macrocontextos"
+    redes: "procesado/nodos_fenomenologicos/v1/redes"
+    conceptos_emergentes: "procesado/nodos_fenomenologicos/v1/conceptos"
+    metacampos: "procesado/nodos_fenomenologicos/v1/metacampos"
+    yaml_generados: "procesado/yaml_automaticos"
+    
+  umbrales:
+    agrupacion_contextos: 0.7
+    emergencia_yo: 0.6
+    creacion_concepto: 0.5
+    similitud_minima: 0.3
+    confianza_minima: 0.4
+
+# CONFIGURACIÓN DE AUTOMATIZACIÓN
+automatizacion:
+  modo_automatico: true
+  archivo_entrada: "entrada_bruta.json"
+  intervalo_sincronizacion: 30
+  backup_neo4j: true
+  generar_yaml_automatico: true
+  validacion_automatica: true
+  
+  # Configuración de generación YAML
+  yaml_automatico:
+    directorio_salida: "procesado/yaml_automaticos"
+    patron_nombre: "${fase}_${timestamp}_${id_corto}.yaml"
+    validar_esquema: true
+    backup_antes_sobrescribir: true
+    
+  # Triggers de generación
+  triggers:
+    nuevo_archivo_entrada: true
+    cambio_en_obsidian: true
+    webhook_n8n: true
+    api_externa: true
+
+# CONFIGURACIÓN DE SEGURIDAD
+seguridad:
+  usar_variables_entorno: true
+  archivo_env: ".env"
+  encriptar_logs: false
+  validar_integridad_archivos: true
+  backup_configuracion: true
+
+# CONFIGURACIÓN N8N
+n8n:
+  webhook_url: "http://localhost:5678/webhook/fenomenologia"
+  api_key: "${N8N_API_KEY}"
+  timeout: 30
+  retry_attempts: 3
+  
+  workflows:
+    - nombre: "Procesamiento_Textos"
+      trigger: "webhook"
+      acciones: ["validar_texto", "extraer_features", "generar_yaml", "enviar_neo4j"]
+      
+    - nombre: "Sync_Obsidian"
+      trigger: "file_change"
+      acciones: ["leer_markdown", "procesar_fenomenologia", "generar_yaml", "actualizar_grafo"]
+      
+    - nombre: "Procesamiento_Multimedia"
+      trigger: "new_file"
+      acciones: ["detectar_tipo", "extraer_metadatos", "transcribir_si_audio", "generar_yaml"]
+
+# CONFIGURACIÓN DE LOGGING
+logging:
+  nivel: "INFO"
+  archivo: "logs_sistema/sistema_principal_{timestamp}.log"
+  formato: "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+  rotacion: true
+  max_size_mb: 100
+  backup_count: 5
+
+# CONFIGURACIÓN DE VALIDACIÓN
+validacion:
+  esquemas_yaml:
+    validar_estructura: true
+    validar_tipos: true
+    validar_relaciones: true
+    validar_metadatos: true
+    
+  reglas_negocio:
+    peso_existencial_rango: [0.0, 1.0]
+    id_unico_formato: "uuid"
+    timestamp_formato: "iso8601"
+    relaciones_peso_rango: [0.0, 1.0]
+
+# CONFIGURACIÓN DE PERFORMANCE
+performance:
+  cache_embeddings: true
+  cache_tfidf: true
+  paralelismo_maximo: 4
+  batch_size: 100
+  timeout_operacion: 300
+  
+# CONFIGURACIÓN DE MONITOREO
+monitoreo:
+  metricas_activas: true
+  alertas_activas: true
+  dashboard_url: "http://localhost:3000/dashboard"
+  intervalo_metricas: 60  # segundos
+rutas:
+  logs: "logs_sistema"
+  entrada: "entrada_bruta"
+  procesado: "procesado"
+  configuracion: "configuracion"

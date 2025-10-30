@@ -1,0 +1,129 @@
+2025-10-29 10:36:11,755 [INFO] DiagnosticadorSistema: Iniciando diagnóstico completo del sistema - 20251029_103611
+2025-10-29 10:36:11,758 [INFO] DiagnosticadorSistema: === VERIFICACIÓN DE PREREQUISITOS ===
+2025-10-29 10:36:11,764 [INFO] DiagnosticadorSistema: ✓ Directorio entrada_bruta existe
+2025-10-29 10:36:11,767 [INFO] DiagnosticadorSistema: ✓ Directorio procesado existe
+2025-10-29 10:36:11,769 [INFO] DiagnosticadorSistema: ✓ Directorio logs_sistema existe
+2025-10-29 10:36:11,771 [INFO] DiagnosticadorSistema: ✓ Directorio configuracion existe
+2025-10-29 10:36:11,775 [INFO] DiagnosticadorSistema: ✓ Archivo de configuración encontrado
+2025-10-29 10:36:11,789 [INFO] DiagnosticadorSistema: ✓ Encontrados 24 archivos de texto en entrada_bruta
+2025-10-29 10:36:11,800 [INFO] DiagnosticadorSistema: === VERIFICACIÓN COMPLETA DEL SISTEMA ===
+2025-10-29 10:36:11,807 [INFO] DiagnosticadorSistema: ✓ Verificación del sistema completada exitosamente
+2025-10-29 10:36:11,820 [INFO] DiagnosticadorSistema: === EJECUCIÓN DEL SISTEMA PRINCIPAL ===
+2025-10-29 10:36:11,908 [DEBUG] neo4j.pool: [#0000]  _: <POOL> created, direct address IPv4Address(('172.23.111.142', 7687))
+2025-10-29 10:36:11,982 [INFO] SistemaFenomenologico: Sistema inicializado con configuración cargada
+2025-10-29 10:36:11,983 [INFO] DiagnosticadorSistema: Sistema inicializado correctamente
+2025-10-29 10:36:11,988 [INFO] SistemaFenomenologico: Iniciando flujo completo del sistema
+2025-10-29 10:36:12,112 [INFO] SistemaFenomenologico: Generadas 10 preinstancias desde análisis
+2025-10-29 10:36:12,116 [INFO] SistemaFenomenologico: Generadas 10 preinstancias
+2025-10-29 10:36:12,122 [INFO] SistemaFenomenologico: Creadas 10 instancias de existencia
+2025-10-29 10:36:12,125 [INFO] SistemaFenomenologico: Creadas 10 instancias de existencia
+2025-10-29 10:36:12,131 [INFO] SistemaFenomenologico: Evaluando necesidad de activación MDCE
+2025-10-29 10:36:12,133 [INFO] SistemaFenomenologico: Analizando contradicciones de 4º orden
+2025-10-29 10:36:12,142 [INFO] SistemaFenomenologico: No se detectaron contradicciones de 4º orden
+2025-10-29 10:36:12,156 [INFO] SistemaFenomenologico: Calculando gradientes para 10 instancias
+2025-10-29 10:36:12,182 [INFO] SistemaFenomenologico: Gradientes relacionales calculados exitosamente
+2025-10-29 10:36:12,185 [INFO] SistemaFenomenologico: Iniciando detección de vohexistencias para 10 instancias
+2025-10-29 10:36:12,207 [INFO] SistemaFenomenologico: Detectadas 0 vohexistencias
+2025-10-29 10:36:12,228 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> routing towards fixed database: None
+2025-10-29 10:36:12,231 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> pinning database: None
+2025-10-29 10:36:12,233 [DEBUG] neo4j.pool: [#0000]  _: <POOL> acquire direct connection, access_mode='WRITE', database=AcquisitionDatabase(name=None, guessed=False)
+2025-10-29 10:36:12,236 [DEBUG] neo4j.pool: [#0000]  _: <POOL> trying to hand out new connection
+2025-10-29 10:36:12,250 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> in: 172.23.111.142:7687
+2025-10-29 10:36:12,267 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> dns resolver out: 172.23.111.142:7687
+2025-10-29 10:36:12,269 [DEBUG] neo4j.io: [#0000]  C: <OPEN> 172.23.111.142:7687
+2025-10-29 10:36:33,301 [DEBUG] neo4j.io: [#0000]  S: <TIMEOUT> 172.23.111.142:7687
+2025-10-29 10:36:33,302 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> 172.23.111.142:7687
+2025-10-29 10:36:33,305 [DEBUG] neo4j.io: [#0000]  C: <CLOSE> 172.23.111.142:7687
+2025-10-29 10:36:33,306 [DEBUG] neo4j.io: [#0000]  S: <CONNECTION FAILED> 172.23.111.142:7687 ServiceUnavailable: Timed out trying to establish connection to ResolvedIPv4Address(('172.23.111.142', 7687))
+2025-10-29 10:36:33,309 [ERROR] DiagnosticadorSistema: ✗ Error en ejecución del sistema: Couldn't connect to 172.23.111.142:7687 (resolved to ('172.23.111.142:7687',)):
+Timed out trying to establish connection to ResolvedIPv4Address(('172.23.111.142', 7687))
+2025-10-29 10:36:33,333 [ERROR] DiagnosticadorSistema: Traceback (most recent call last):
+  File "C:\Python314\Lib\site-packages\neo4j\_sync\io\_bolt_socket.py", line 329, in connect
+    s = cls._connect_secure(
+        resolved_address, tcp_timeout, keep_alive, ssl_context
+    )
+  File "C:\Python314\Lib\site-packages\neo4j\_async_compat\network\_bolt_socket.py", line 507, in _connect_secure
+    raise ServiceUnavailable(
+    ...<2 lines>...
+    ) from None
+neo4j.exceptions.ServiceUnavailable: Timed out trying to establish connection to ResolvedIPv4Address(('172.23.111.142', 7687))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\verificar.py", line 126, in ejecutar_sistema_principal
+    resultado = sistema.procesar_flujo_completo('entrada_bruta')
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\sistema_principal_v2.py", line 181, in procesar_flujo_completo
+    emergencia_detectada = self.motor_yo.evaluar_emergencia(contextos_activos, fenomenos_activos)
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\motor_yo\sistema_yo_emergente.py", line 504, in evaluar_emergencia
+    contradicciones = self.detectar_contradicciones()
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\motor_yo\sistema_yo_emergente.py", line 255, in detectar_contradicciones
+    return self.evaluar_contradicciones(self.estado_actual.__dict__)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\motor_yo\sistema_yo_emergente.py", line 482, in evaluar_contradicciones
+    self.sincronizar_con_neo4j()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\motor_yo\sistema_yo_emergente.py", line 382, in sincronizar_con_neo4j
+    session.run("""
+    ~~~~~~~~~~~^^^^
+        MERGE (y:YO {id: $id})
+        ^^^^^^^^^^^^^^^^^^^^^^
+    ...<13 lines>...
+        **self._analizar_coherencia_narrativa()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Python314\Lib\site-packages\neo4j\_sync\work\session.py", line 305, in run
+    self._connect(self._config.default_access_mode)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\site-packages\neo4j\_sync\work\session.py", line 126, in _connect
+    super()._connect(
+    ~~~~~~~~~~~~~~~~^
+        access_mode, auth=self._config.auth, **acquire_kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Python314\Lib\site-packages\neo4j\_sync\work\workspace.py", line 181, in _connect
+    self._connection = self._pool.acquire(**acquire_kwargs_)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\site-packages\neo4j\_sync\io\_pool.py", line 678, in acquire
+    return self._acquire(
+           ~~~~~~~~~~~~~^
+        self.address, auth, deadline, liveness_check_timeout, unprepared
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Python314\Lib\site-packages\neo4j\_sync\io\_pool.py", line 418, in _acquire
+    return connection_creator()
+  File "C:\Python314\Lib\site-packages\neo4j\_sync\io\_pool.py", line 231, in connection_creator
+    connection = self.opener(
+        address, auth or self.pool_config.auth, deadline
+    )
+  File "C:\Python314\Lib\site-packages\neo4j\_sync\io\_pool.py", line 638, in opener
+    return Bolt.open(
+           ~~~~~~~~~^
+        addr,
+        ^^^^^
+    ...<3 lines>...
+        pool_config=pool_config,
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Python314\Lib\site-packages\neo4j\_sync\io\_bolt.py", line 367, in open
+    s, protocol_version = BoltSocket.connect(
+                          ~~~~~~~~~~~~~~~~~~^
+        address,
+        ^^^^^^^^
+    ...<4 lines>...
+        keep_alive=pool_config.keep_alive,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Python314\Lib\site-packages\neo4j\_sync\io\_bolt_socket.py", line 376, in connect
+    raise ServiceUnavailable(
+    ...<2 lines>...
+    ) from errors[0]
+neo4j.exceptions.ServiceUnavailable: Couldn't connect to 172.23.111.142:7687 (resolved to ('172.23.111.142:7687',)):
+Timed out trying to establish connection to ResolvedIPv4Address(('172.23.111.142', 7687))
+
+2025-10-29 10:36:33,432 [DEBUG] neo4j.pool: [#0000]  _: <POOL> close

@@ -1,0 +1,38 @@
+2025-10-28 22:05:02,052 [INFO] DiagnosticadorSistema: Iniciando diagnóstico completo del sistema - 20251028_220502
+2025-10-28 22:05:02,066 [INFO] DiagnosticadorSistema: === VERIFICACIÓN DE PREREQUISITOS ===
+2025-10-28 22:05:02,067 [INFO] DiagnosticadorSistema: ✓ Directorio entrada_bruta existe
+2025-10-28 22:05:02,068 [INFO] DiagnosticadorSistema: ✓ Directorio procesado existe
+2025-10-28 22:05:02,071 [INFO] DiagnosticadorSistema: ✓ Directorio logs_sistema existe
+2025-10-28 22:05:02,073 [INFO] DiagnosticadorSistema: ✓ Directorio configuracion existe
+2025-10-28 22:05:02,074 [INFO] DiagnosticadorSistema: ✓ Archivo de configuración encontrado
+2025-10-28 22:05:02,079 [INFO] DiagnosticadorSistema: ✓ Encontrados 24 archivos de texto en entrada_bruta
+2025-10-28 22:05:02,102 [INFO] DiagnosticadorSistema: === VERIFICACIÓN COMPLETA DEL SISTEMA ===
+2025-10-28 22:05:02,104 [INFO] DiagnosticadorSistema: ✓ Verificación del sistema completada exitosamente
+2025-10-28 22:05:02,122 [INFO] DiagnosticadorSistema: === EJECUCIÓN DEL SISTEMA PRINCIPAL ===
+2025-10-28 22:05:02,240 [DEBUG] neo4j.pool: [#0000]  _: <POOL> created, direct address IPv4Address(('172.23.111.142', 7687))
+2025-10-28 22:05:02,298 [INFO] SistemaFenomenologico: Sistema inicializado con configuración cargada
+2025-10-28 22:05:02,299 [INFO] DiagnosticadorSistema: Sistema inicializado correctamente
+2025-10-28 22:05:02,303 [INFO] SistemaFenomenologico: Iniciando flujo completo del sistema
+2025-10-28 22:05:02,397 [INFO] SistemaFenomenologico: Generadas 10 preinstancias desde análisis
+2025-10-28 22:05:02,427 [INFO] SistemaFenomenologico: Generadas 10 preinstancias
+2025-10-28 22:05:02,440 [INFO] SistemaFenomenologico: Creadas 10 instancias de existencia
+2025-10-28 22:05:02,444 [INFO] SistemaFenomenologico: Creadas 10 instancias de existencia
+2025-10-28 22:05:02,473 [INFO] SistemaFenomenologico: Evaluando necesidad de activación MDCE
+2025-10-28 22:05:02,482 [INFO] SistemaFenomenologico: Analizando contradicciones de 4º orden
+2025-10-28 22:05:02,489 [INFO] SistemaFenomenologico: No se detectaron contradicciones de 4º orden
+2025-10-28 22:05:02,494 [INFO] SistemaFenomenologico: Calculando gradientes para 10 instancias
+2025-10-28 22:05:02,521 [INFO] SistemaFenomenologico: Gradientes relacionales calculados exitosamente
+2025-10-28 22:05:02,531 [INFO] SistemaFenomenologico: Iniciando detección de vohexistencias para 10 instancias
+2025-10-28 22:05:02,548 [INFO] SistemaFenomenologico: Detectadas 0 vohexistencias
+2025-10-28 22:05:02,562 [ERROR] DiagnosticadorSistema: ✗ Error en ejecución del sistema: 'SistemaFenomenologicoV2' object has no attribute 'vohexistencias'
+2025-10-28 22:05:02,570 [ERROR] DiagnosticadorSistema: Traceback (most recent call last):
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\verificar.py", line 126, in ejecutar_sistema_principal
+    resultado = sistema.procesar_flujo_completo('entrada_bruta')
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\sistema_principal_v2.py", line 183, in procesar_flujo_completo
+    contextos_activos = self._extraer_contextos_activos()
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\sistema_principal_v2.py", line 524, in _extraer_contextos_activos
+    for vohex in self.vohexistencias:
+                 ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SistemaFenomenologicoV2' object has no attribute 'vohexistencias'
+
+2025-10-28 22:05:02,666 [DEBUG] neo4j.pool: [#0000]  _: <POOL> close

@@ -1,0 +1,109 @@
+2025-10-29 11:15:30,036 [INFO] DiagnosticadorSistema: Iniciando diagnóstico completo del sistema - 20251029_111530
+2025-10-29 11:15:30,044 [INFO] DiagnosticadorSistema: === VERIFICACIÓN DE PREREQUISITOS ===
+2025-10-29 11:15:30,046 [INFO] DiagnosticadorSistema: ✓ Directorio entrada_bruta existe
+2025-10-29 11:15:30,048 [INFO] DiagnosticadorSistema: ✓ Directorio procesado existe
+2025-10-29 11:15:30,052 [INFO] DiagnosticadorSistema: ✓ Directorio logs_sistema existe
+2025-10-29 11:15:30,053 [INFO] DiagnosticadorSistema: ✓ Directorio configuracion existe
+2025-10-29 11:15:30,065 [INFO] DiagnosticadorSistema: ✓ Archivo de configuración encontrado
+2025-10-29 11:15:30,109 [INFO] DiagnosticadorSistema: ✓ Encontrados 24 archivos de texto en entrada_bruta
+2025-10-29 11:15:30,128 [INFO] DiagnosticadorSistema: === VERIFICACIÓN COMPLETA DEL SISTEMA ===
+2025-10-29 11:15:30,129 [INFO] DiagnosticadorSistema: ✓ Verificación del sistema completada exitosamente
+2025-10-29 11:15:30,157 [INFO] DiagnosticadorSistema: === EJECUCIÓN DEL SISTEMA PRINCIPAL ===
+2025-10-29 11:15:30,241 [DEBUG] neo4j.pool: [#0000]  _: <POOL> created, direct address IPv4Address(('192.168.1.37', 7687))
+2025-10-29 11:15:30,307 [INFO] SistemaFenomenologico: Sistema inicializado con configuración cargada
+2025-10-29 11:15:30,318 [INFO] DiagnosticadorSistema: Sistema inicializado correctamente
+2025-10-29 11:15:30,329 [INFO] SistemaFenomenologico: Iniciando flujo completo del sistema
+2025-10-29 11:15:30,498 [INFO] SistemaFenomenologico: Generadas 10 preinstancias desde análisis
+2025-10-29 11:15:30,504 [INFO] SistemaFenomenologico: Generadas 10 preinstancias
+2025-10-29 11:15:30,511 [INFO] SistemaFenomenologico: Creadas 10 instancias de existencia
+2025-10-29 11:15:30,529 [INFO] SistemaFenomenologico: Creadas 10 instancias de existencia
+2025-10-29 11:15:30,533 [INFO] SistemaFenomenologico: Evaluando necesidad de activación MDCE
+2025-10-29 11:15:30,540 [INFO] SistemaFenomenologico: Analizando contradicciones de 4º orden
+2025-10-29 11:15:30,543 [INFO] SistemaFenomenologico: No se detectaron contradicciones de 4º orden
+2025-10-29 11:15:30,566 [INFO] SistemaFenomenologico: Calculando gradientes para 10 instancias
+2025-10-29 11:15:30,605 [INFO] SistemaFenomenologico: Gradientes relacionales calculados exitosamente
+2025-10-29 11:15:30,613 [INFO] SistemaFenomenologico: Iniciando detección de vohexistencias para 10 instancias
+2025-10-29 11:15:30,635 [INFO] SistemaFenomenologico: Detectadas 0 vohexistencias
+2025-10-29 11:15:30,638 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> routing towards fixed database: None
+2025-10-29 11:15:30,640 [DEBUG] neo4j: [#0000]  _: <WORKSPACE> pinning database: None
+2025-10-29 11:15:30,641 [DEBUG] neo4j.pool: [#0000]  _: <POOL> acquire direct connection, access_mode='WRITE', database=AcquisitionDatabase(name=None, guessed=False)
+2025-10-29 11:15:30,659 [DEBUG] neo4j.pool: [#0000]  _: <POOL> trying to hand out new connection
+2025-10-29 11:15:30,661 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> in: 192.168.1.37:7687
+2025-10-29 11:15:30,709 [DEBUG] neo4j.io: [#0000]  _: <RESOLVE> dns resolver out: 192.168.1.37:7687
+2025-10-29 11:15:30,710 [DEBUG] neo4j.io: [#0000]  C: <OPEN> 192.168.1.37:7687
+2025-10-29 11:15:30,746 [DEBUG] neo4j.io: [#D7B3]  C: <MAGIC> 0x6060B017
+2025-10-29 11:15:30,748 [DEBUG] neo4j.io: [#D7B3]  C: <HANDSHAKE> 0x000001FF 0x00080805 0x00020404 0x00000003
+2025-10-29 11:15:30,755 [DEBUG] neo4j.io: [#D7B3]  S: <HANDSHAKE> 0x00000305
+2025-10-29 11:15:30,757 [DEBUG] neo4j.io: [#D7B3]  C: HELLO {'user_agent': 'neo4j-python/6.0.2 Python/3.14.0-final-0 (win32)', 'bolt_agent': {'product': 'neo4j-python/6.0.2', 'platform': 'Windows 10; AMD64', 'language': 'Python/3.14.0-final-0', 'language_details': 'CPython; 3.14.0-final-0 (tags/v3.14.0:ebf955d, Oct  7 2025 10:15:03) [MSC v.1944 64 bit (AMD64)]'}}
+2025-10-29 11:15:30,762 [DEBUG] neo4j.io: [#D7B3]  _: <CONNECTION> client state: CONNECTED > AUTHENTICATION
+2025-10-29 11:15:30,764 [DEBUG] neo4j.io: [#D7B3]  C: LOGON {'scheme': 'basic', 'principal': 'neo4j', 'credentials': '*******'}
+2025-10-29 11:15:30,766 [DEBUG] neo4j.io: [#D7B3]  _: <CONNECTION> client state: AUTHENTICATION > READY
+2025-10-29 11:15:30,775 [DEBUG] neo4j.io: [#D7B3]  S: SUCCESS {'server': 'Neo4j/5.12.0', 'connection_id': 'bolt-53', 'hints': {'connection.recv_timeout_seconds': 120}}
+2025-10-29 11:15:30,777 [DEBUG] neo4j.io: [#D7B3]  _: <CONNECTION> server state: CONNECTED > AUTHENTICATION
+2025-10-29 11:15:30,826 [DEBUG] neo4j.io: [#D7B3]  S: SUCCESS {}
+2025-10-29 11:15:30,828 [DEBUG] neo4j.io: [#D7B3]  _: <CONNECTION> server state: AUTHENTICATION > READY
+2025-10-29 11:15:30,835 [DEBUG] neo4j.io: [#D7B3]  C: RUN '\n                MERGE (y:YO {id: $id})\n                SET y.tipo = $tipo,\n                    y.activacion = $activacion,\n                    y.timestamp = $timestamp,\n                    y.version = $version,\n                    y.coherencia_narrativa = $coherencia_narrativa,\n                    y.estabilidad_contextual = $estabilidad_contextual,\n                    y.integracion_afectiva = $integracion_afectiva\n            ' {'id': 'yo_0', 'tipo': 'YO_NARRATIVO', 'activacion': 1.0, 'timestamp': '2025-10-29T11:15:30.636960', 'version': 0, 'continuidad': 0.0, 'consistencia': 0.0, 'coherencia_afectiva': 0.5, 'coherencia_total': 0.0} {}
+2025-10-29 11:15:30,840 [DEBUG] neo4j.io: [#D7B3]  _: <CONNECTION> client state: READY > STREAMING
+2025-10-29 11:15:30,845 [DEBUG] neo4j.io: [#D7B3]  C: PULL {'n': 1000}
+2025-10-29 11:15:30,999 [DEBUG] neo4j.io: [#D7B3]  S: FAILURE {'code': 'Neo.ClientError.Statement.ParameterMissing', 'message': 'Expected parameter(s): coherencia_narrativa, estabilidad_contextual, integracion_afectiva'}
+2025-10-29 11:15:31,000 [DEBUG] neo4j.io: [#D7B3]  C: RESET
+2025-10-29 11:15:31,003 [DEBUG] neo4j.io: [#D7B3]  _: <CONNECTION> client state: STREAMING > READY
+2025-10-29 11:15:31,009 [DEBUG] neo4j.io: [#D7B3]  S: IGNORED
+2025-10-29 11:15:31,067 [DEBUG] neo4j.io: [#D7B3]  S: SUCCESS {}
+2025-10-29 11:15:31,068 [DEBUG] neo4j.io: [#D7B3]  _: <CONNECTION> server state: FAILED > READY
+2025-10-29 11:15:31,074 [DEBUG] neo4j.pool: [#D7B3]  _: <POOL> released bolt-53
+2025-10-29 11:15:31,076 [ERROR] DiagnosticadorSistema: ✗ Error en ejecución del sistema: {neo4j_code: Neo.ClientError.Statement.ParameterMissing} {message: Expected parameter(s): coherencia_narrativa, estabilidad_contextual, integracion_afectiva} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. Expected parameter(s): coherencia_narrativa, estabilidad_contextual, integracion_afectiva}
+2025-10-29 11:15:31,145 [ERROR] DiagnosticadorSistema: Traceback (most recent call last):
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\verificar.py", line 126, in ejecutar_sistema_principal
+    resultado = sistema.procesar_flujo_completo('entrada_bruta')
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\sistema_principal_v2.py", line 181, in procesar_flujo_completo
+    emergencia_detectada = self.motor_yo.evaluar_emergencia(contextos_activos, fenomenos_activos)
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\motor_yo\sistema_yo_emergente.py", line 504, in evaluar_emergencia
+    contradicciones = self.detectar_contradicciones()
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\motor_yo\sistema_yo_emergente.py", line 255, in detectar_contradicciones
+    return self.evaluar_contradicciones(self.estado_actual.__dict__)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\motor_yo\sistema_yo_emergente.py", line 482, in evaluar_contradicciones
+    self.sincronizar_con_neo4j()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\motor_yo\sistema_yo_emergente.py", line 382, in sincronizar_con_neo4j
+    session.run("""
+    ~~~~~~~~~~~^^^^
+        MERGE (y:YO {id: $id})
+        ^^^^^^^^^^^^^^^^^^^^^^
+    ...<13 lines>...
+        **self._analizar_coherencia_narrativa()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Python314\Lib\site-packages\neo4j\_sync\work\session.py", line 320, in run
+    self._auto_result._run(
+    ~~~~~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<6 lines>...
+        self._config.notifications_disabled_classifications,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Python314\Lib\site-packages\neo4j\_sync\work\result.py", line 237, in _run
+    self._attach()
+    ~~~~~~~~~~~~^^
+  File "C:\Python314\Lib\site-packages\neo4j\_sync\work\result.py", line 439, in _attach
+    self._connection.fetch_message()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Python314\Lib\site-packages\neo4j\_sync\io\_common.py", line 192, in inner
+    func(*args, **kwargs)
+    ~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\site-packages\neo4j\_sync\io\_bolt.py", line 866, in fetch_message
+    res = self._process_message(tag, fields)
+  File "C:\Python314\Lib\site-packages\neo4j\_sync\io\_bolt5.py", line 496, in _process_message
+    response.on_failure(summary_metadata or {})
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\site-packages\neo4j\_sync\io\_common.py", line 262, in on_failure
+    raise self._hydrate_error(metadata)
+neo4j.exceptions.ClientError: {neo4j_code: Neo.ClientError.Statement.ParameterMissing} {message: Expected parameter(s): coherencia_narrativa, estabilidad_contextual, integracion_afectiva} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. Expected parameter(s): coherencia_narrativa, estabilidad_contextual, integracion_afectiva}
+
+2025-10-29 11:15:31,261 [DEBUG] neo4j.pool: [#0000]  _: <POOL> close
+2025-10-29 11:15:31,262 [DEBUG] neo4j.io: [#D7B3]  C: GOODBYE
+2025-10-29 11:15:31,267 [DEBUG] neo4j.io: [#D7B3]  C: <CLOSE>

@@ -1,0 +1,36 @@
+2025-10-28 22:27:01,104 [INFO] DiagnosticadorSistema: Iniciando diagnóstico completo del sistema - 20251028_222701
+2025-10-28 22:27:01,109 [INFO] DiagnosticadorSistema: === VERIFICACIÓN DE PREREQUISITOS ===
+2025-10-28 22:27:01,110 [INFO] DiagnosticadorSistema: ✓ Directorio entrada_bruta existe
+2025-10-28 22:27:01,123 [INFO] DiagnosticadorSistema: ✓ Directorio procesado existe
+2025-10-28 22:27:01,125 [INFO] DiagnosticadorSistema: ✓ Directorio logs_sistema existe
+2025-10-28 22:27:01,131 [INFO] DiagnosticadorSistema: ✓ Directorio configuracion existe
+2025-10-28 22:27:01,134 [INFO] DiagnosticadorSistema: ✓ Archivo de configuración encontrado
+2025-10-28 22:27:01,136 [INFO] DiagnosticadorSistema: ✓ Encontrados 24 archivos de texto en entrada_bruta
+2025-10-28 22:27:01,148 [INFO] DiagnosticadorSistema: === VERIFICACIÓN COMPLETA DEL SISTEMA ===
+2025-10-28 22:27:01,150 [INFO] DiagnosticadorSistema: ✓ Verificación del sistema completada exitosamente
+2025-10-28 22:27:01,165 [INFO] DiagnosticadorSistema: === EJECUCIÓN DEL SISTEMA PRINCIPAL ===
+2025-10-28 22:27:01,354 [DEBUG] neo4j.pool: [#0000]  _: <POOL> created, direct address IPv4Address(('172.23.111.142', 7687))
+2025-10-28 22:27:01,413 [INFO] SistemaFenomenologico: Sistema inicializado con configuración cargada
+2025-10-28 22:27:01,414 [INFO] DiagnosticadorSistema: Sistema inicializado correctamente
+2025-10-28 22:27:01,418 [INFO] SistemaFenomenologico: Iniciando flujo completo del sistema
+2025-10-28 22:27:01,506 [INFO] SistemaFenomenologico: Generadas 10 preinstancias desde análisis
+2025-10-28 22:27:01,511 [INFO] SistemaFenomenologico: Generadas 10 preinstancias
+2025-10-28 22:27:01,514 [INFO] SistemaFenomenologico: Creadas 10 instancias de existencia
+2025-10-28 22:27:01,516 [INFO] SistemaFenomenologico: Creadas 10 instancias de existencia
+2025-10-28 22:27:01,520 [INFO] SistemaFenomenologico: Evaluando necesidad de activación MDCE
+2025-10-28 22:27:01,532 [INFO] SistemaFenomenologico: Analizando contradicciones de 4º orden
+2025-10-28 22:27:01,543 [INFO] SistemaFenomenologico: No se detectaron contradicciones de 4º orden
+2025-10-28 22:27:01,550 [INFO] SistemaFenomenologico: Calculando gradientes para 10 instancias
+2025-10-28 22:27:01,571 [INFO] SistemaFenomenologico: Gradientes relacionales calculados exitosamente
+2025-10-28 22:27:01,594 [INFO] SistemaFenomenologico: Iniciando detección de vohexistencias para 10 instancias
+2025-10-28 22:27:01,608 [INFO] SistemaFenomenologico: Detectadas 0 vohexistencias
+2025-10-28 22:27:01,622 [ERROR] DiagnosticadorSistema: ✗ Error en ejecución del sistema: 'SistemaYoEmergente' object has no attribute 'evaluar_emergencia'
+2025-10-28 22:27:01,629 [ERROR] DiagnosticadorSistema: Traceback (most recent call last):
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\verificar.py", line 126, in ejecutar_sistema_principal
+    resultado = sistema.procesar_flujo_completo('entrada_bruta')
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\sistema_principal_v2.py", line 187, in procesar_flujo_completo
+    emergencia_detectada = self.motor_yo.evaluar_emergencia(contextos_activos, fenomenos_activos)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SistemaYoEmergente' object has no attribute 'evaluar_emergencia'
+
+2025-10-28 22:27:01,751 [DEBUG] neo4j.pool: [#0000]  _: <POOL> close

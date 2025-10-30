@@ -1,0 +1,521 @@
+archivos_procesados: 24
+resultados:
+- apariciones_yo:
+  - confianza: 0.7
+    contenido: estructura
+    linea: 1
+    tipo: yo_simbolico
+  archivo_origen: entrada_bruta\texto_fenomenologico_1.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.16666666666666666
+      nivel_maximo: 4
+      tipos_detectados:
+      - yo_simbolico
+    niveles_detectados: {}
+  metricas:
+    densidad_patrones: 0.0
+    diversidad_niveles: 0.0
+    presencia_yo: 0.0
+  patrones_detectados: []
+  timestamp_procesamiento: '2025-10-29T18:48:30.320755'
+- apariciones_yo: []
+  archivo_origen: entrada_bruta\texto_fenomenologico_10.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.0
+      nivel_maximo: 0
+      tipos_detectados: []
+    niveles_detectados:
+      -4:
+      - dato
+      -2:
+      - relación
+      0:
+      - dolor
+  metricas:
+    densidad_patrones: 1.0
+    diversidad_niveles: 0.42857142857142855
+    presencia_yo: 0.0
+  patrones_detectados:
+  - confianza: 0.8
+    contenido: dato
+    nivel_jerarquico: -4
+    posicion: !!python/tuple
+    - 1
+    - 1
+    tipo: nivel_-4
+  - confianza: 0.8
+    contenido: relación
+    nivel_jerarquico: -2
+    posicion: !!python/tuple
+    - 1
+    - 1
+    tipo: nivel_-2
+  - confianza: 0.8
+    contenido: dolor
+    nivel_jerarquico: 0
+    posicion: !!python/tuple
+    - 1
+    - 1
+    tipo: nivel_0
+  timestamp_procesamiento: '2025-10-29T18:48:30.321361'
+- apariciones_yo: []
+  archivo_origen: entrada_bruta\texto_fenomenologico_12.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.0
+      nivel_maximo: 0
+      tipos_detectados: []
+    niveles_detectados: {}
+  metricas:
+    densidad_patrones: 0.0
+    diversidad_niveles: 0.0
+    presencia_yo: 0.0
+  patrones_detectados: []
+  timestamp_procesamiento: '2025-10-29T18:48:30.321830'
+- apariciones_yo: []
+  archivo_origen: entrada_bruta\texto_fenomenologico_13.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.0
+      nivel_maximo: 0
+      tipos_detectados: []
+    niveles_detectados: {}
+  metricas:
+    densidad_patrones: 0.0
+    diversidad_niveles: 0.0
+    presencia_yo: 0.0
+  patrones_detectados: []
+  timestamp_procesamiento: '2025-10-29T18:48:30.322198'
+- apariciones_yo: []
+  archivo_origen: entrada_bruta\texto_fenomenologico_14.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.0
+      nivel_maximo: 0
+      tipos_detectados: []
+    niveles_detectados:
+      -2:
+      - relación
+  metricas:
+    densidad_patrones: 1.0
+    diversidad_niveles: 0.14285714285714285
+    presencia_yo: 0.0
+  patrones_detectados:
+  - confianza: 0.8
+    contenido: relación
+    nivel_jerarquico: -2
+    posicion: !!python/tuple
+    - 1
+    - 1
+    tipo: nivel_-2
+  timestamp_procesamiento: '2025-10-29T18:48:30.322597'
+- apariciones_yo: []
+  archivo_origen: entrada_bruta\texto_fenomenologico_15.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.0
+      nivel_maximo: 0
+      tipos_detectados: []
+    niveles_detectados: {}
+  metricas:
+    densidad_patrones: 0.0
+    diversidad_niveles: 0.0
+    presencia_yo: 0.0
+  patrones_detectados: []
+  timestamp_procesamiento: '2025-10-29T18:48:30.322996'
+- apariciones_yo:
+  - confianza: 0.7
+    contenido: estructura
+    linea: 1
+    tipo: yo_simbolico
+  archivo_origen: entrada_bruta\texto_fenomenologico_16.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.16666666666666666
+      nivel_maximo: 4
+      tipos_detectados:
+      - yo_simbolico
+    niveles_detectados: {}
+  metricas:
+    densidad_patrones: 0.0
+    diversidad_niveles: 0.0
+    presencia_yo: 0.0
+  patrones_detectados: []
+  timestamp_procesamiento: '2025-10-29T18:48:30.323570'
+- apariciones_yo: []
+  archivo_origen: entrada_bruta\texto_fenomenologico_17.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.0
+      nivel_maximo: 0
+      tipos_detectados: []
+    niveles_detectados:
+      -4:
+      - aparición
+  metricas:
+    densidad_patrones: 1.0
+    diversidad_niveles: 0.14285714285714285
+    presencia_yo: 0.0
+  patrones_detectados:
+  - confianza: 0.8
+    contenido: aparición
+    nivel_jerarquico: -4
+    posicion: !!python/tuple
+    - 1
+    - 1
+    tipo: nivel_-4
+  timestamp_procesamiento: '2025-10-29T18:48:30.324116'
+- apariciones_yo:
+  - confianza: 0.7
+    contenido: percibo
+    linea: 1
+    tipo: yo_sensorial
+  archivo_origen: entrada_bruta\texto_fenomenologico_18.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.16666666666666666
+      nivel_maximo: 1
+      tipos_detectados:
+      - yo_sensorial
+    niveles_detectados:
+      -2:
+      - similar
+      1:
+      - yo
+  metricas:
+    densidad_patrones: 1.0
+    diversidad_niveles: 0.2857142857142857
+    presencia_yo: 0.5
+  patrones_detectados:
+  - confianza: 0.8
+    contenido: similar
+    nivel_jerarquico: -2
+    posicion: !!python/tuple
+    - 1
+    - 1
+    tipo: nivel_-2
+  - confianza: 0.8
+    contenido: yo
+    nivel_jerarquico: 1
+    posicion: !!python/tuple
+    - 1
+    - 1
+    tipo: nivel_1
+  timestamp_procesamiento: '2025-10-29T18:48:30.325206'
+- apariciones_yo:
+  - confianza: 0.7
+    contenido: estructura
+    linea: 1
+    tipo: yo_simbolico
+  - confianza: 0.7
+    contenido: estructura
+    linea: 1
+    tipo: yo_simbolico
+  - confianza: 0.7
+    contenido: significado
+    linea: 1
+    tipo: yo_simbolico
+  archivo_origen: entrada_bruta\texto_fenomenologico_19.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.16666666666666666
+      nivel_maximo: 4
+      tipos_detectados:
+      - yo_simbolico
+    niveles_detectados: {}
+  metricas:
+    densidad_patrones: 0.0
+    diversidad_niveles: 0.0
+    presencia_yo: 0.0
+  patrones_detectados: []
+  timestamp_procesamiento: '2025-10-29T18:48:30.330133'
+- apariciones_yo: []
+  archivo_origen: entrada_bruta\texto_fenomenologico_2.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.0
+      nivel_maximo: 0
+      tipos_detectados: []
+    niveles_detectados: {}
+  metricas:
+    densidad_patrones: 0.0
+    diversidad_niveles: 0.0
+    presencia_yo: 0.0
+  patrones_detectados: []
+  timestamp_procesamiento: '2025-10-29T18:48:30.330949'
+- apariciones_yo:
+  - confianza: 0.7
+    contenido: estructura
+    linea: 1
+    tipo: yo_simbolico
+  archivo_origen: entrada_bruta\texto_fenomenologico_20.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.16666666666666666
+      nivel_maximo: 4
+      tipos_detectados:
+      - yo_simbolico
+    niveles_detectados:
+      1:
+      - yo
+  metricas:
+    densidad_patrones: 1.0
+    diversidad_niveles: 0.14285714285714285
+    presencia_yo: 1.0
+  patrones_detectados:
+  - confianza: 0.8
+    contenido: yo
+    nivel_jerarquico: 1
+    posicion: !!python/tuple
+    - 1
+    - 1
+    tipo: nivel_1
+  timestamp_procesamiento: '2025-10-29T18:48:30.331560'
+- apariciones_yo: []
+  archivo_origen: entrada_bruta\texto_fenomenologico_21.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.0
+      nivel_maximo: 0
+      tipos_detectados: []
+    niveles_detectados: {}
+  metricas:
+    densidad_patrones: 0.0
+    diversidad_niveles: 0.0
+    presencia_yo: 0.0
+  patrones_detectados: []
+  timestamp_procesamiento: '2025-10-29T18:48:30.332155'
+- apariciones_yo:
+  - confianza: 0.7
+    contenido: estructura
+    linea: 1
+    tipo: yo_simbolico
+  archivo_origen: entrada_bruta\texto_fenomenologico_22.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.16666666666666666
+      nivel_maximo: 4
+      tipos_detectados:
+      - yo_simbolico
+    niveles_detectados: {}
+  metricas:
+    densidad_patrones: 0.0
+    diversidad_niveles: 0.0
+    presencia_yo: 0.0
+  patrones_detectados: []
+  timestamp_procesamiento: '2025-10-29T18:48:30.332781'
+- apariciones_yo:
+  - confianza: 0.7
+    contenido: estructura
+    linea: 1
+    tipo: yo_simbolico
+  archivo_origen: entrada_bruta\texto_fenomenologico_23.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.16666666666666666
+      nivel_maximo: 4
+      tipos_detectados:
+      - yo_simbolico
+    niveles_detectados: {}
+  metricas:
+    densidad_patrones: 0.0
+    diversidad_niveles: 0.0
+    presencia_yo: 0.0
+  patrones_detectados: []
+  timestamp_procesamiento: '2025-10-29T18:48:30.333359'
+- apariciones_yo:
+  - confianza: 0.7
+    contenido: estructura
+    linea: 1
+    tipo: yo_simbolico
+  archivo_origen: entrada_bruta\texto_fenomenologico_24.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.16666666666666666
+      nivel_maximo: 4
+      tipos_detectados:
+      - yo_simbolico
+    niveles_detectados:
+      -2:
+      - relación
+  metricas:
+    densidad_patrones: 1.0
+    diversidad_niveles: 0.14285714285714285
+    presencia_yo: 1.0
+  patrones_detectados:
+  - confianza: 0.8
+    contenido: relación
+    nivel_jerarquico: -2
+    posicion: !!python/tuple
+    - 1
+    - 1
+    tipo: nivel_-2
+  timestamp_procesamiento: '2025-10-29T18:48:30.333950'
+- apariciones_yo:
+  - confianza: 0.7
+    contenido: estructura
+    linea: 1
+    tipo: yo_simbolico
+  archivo_origen: entrada_bruta\texto_fenomenologico_25.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.16666666666666666
+      nivel_maximo: 4
+      tipos_detectados:
+      - yo_simbolico
+    niveles_detectados: {}
+  metricas:
+    densidad_patrones: 0.0
+    diversidad_niveles: 0.0
+    presencia_yo: 0.0
+  patrones_detectados: []
+  timestamp_procesamiento: '2025-10-29T18:48:30.334520'
+- apariciones_yo:
+  - confianza: 0.7
+    contenido: estructura
+    linea: 1
+    tipo: yo_simbolico
+  archivo_origen: entrada_bruta\texto_fenomenologico_3.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.16666666666666666
+      nivel_maximo: 4
+      tipos_detectados:
+      - yo_simbolico
+    niveles_detectados: {}
+  metricas:
+    densidad_patrones: 0.0
+    diversidad_niveles: 0.0
+    presencia_yo: 0.0
+  patrones_detectados: []
+  timestamp_procesamiento: '2025-10-29T18:48:30.335206'
+- apariciones_yo: []
+  archivo_origen: entrada_bruta\texto_fenomenologico_4.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.0
+      nivel_maximo: 0
+      tipos_detectados: []
+    niveles_detectados: {}
+  metricas:
+    densidad_patrones: 0.0
+    diversidad_niveles: 0.0
+    presencia_yo: 0.0
+  patrones_detectados: []
+  timestamp_procesamiento: '2025-10-29T18:48:30.335690'
+- apariciones_yo: []
+  archivo_origen: entrada_bruta\texto_fenomenologico_5.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.0
+      nivel_maximo: 0
+      tipos_detectados: []
+    niveles_detectados: {}
+  metricas:
+    densidad_patrones: 0.0
+    diversidad_niveles: 0.0
+    presencia_yo: 0.0
+  patrones_detectados: []
+  timestamp_procesamiento: '2025-10-29T18:48:30.336112'
+- apariciones_yo: []
+  archivo_origen: entrada_bruta\texto_fenomenologico_6.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.0
+      nivel_maximo: 0
+      tipos_detectados: []
+    niveles_detectados: {}
+  metricas:
+    densidad_patrones: 0.0
+    diversidad_niveles: 0.0
+    presencia_yo: 0.0
+  patrones_detectados: []
+  timestamp_procesamiento: '2025-10-29T18:48:30.336541'
+- apariciones_yo: []
+  archivo_origen: entrada_bruta\texto_fenomenologico_7.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.0
+      nivel_maximo: 0
+      tipos_detectados: []
+    niveles_detectados: {}
+  metricas:
+    densidad_patrones: 0.0
+    diversidad_niveles: 0.0
+    presencia_yo: 0.0
+  patrones_detectados: []
+  timestamp_procesamiento: '2025-10-29T18:48:30.336970'
+- apariciones_yo:
+  - confianza: 0.7
+    contenido: estructura
+    linea: 1
+    tipo: yo_simbolico
+  archivo_origen: entrada_bruta\texto_fenomenologico_8.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.16666666666666666
+      nivel_maximo: 4
+      tipos_detectados:
+      - yo_simbolico
+    niveles_detectados: {}
+  metricas:
+    densidad_patrones: 0.0
+    diversidad_niveles: 0.0
+    presencia_yo: 0.0
+  patrones_detectados: []
+  timestamp_procesamiento: '2025-10-29T18:48:30.337399'
+- apariciones_yo:
+  - confianza: 0.7
+    contenido: historia
+    linea: 1
+    tipo: yo_narrativo
+  archivo_origen: entrada_bruta\texto_fenomenologico_9.txt
+  clasificacion_estructurada:
+    coherencia_narrativa: 0.0
+    emergencia_yo:
+      coherencia_yo: 0.16666666666666666
+      nivel_maximo: 5
+      tipos_detectados:
+      - yo_narrativo
+    niveles_detectados:
+      1:
+      - contexto
+  metricas:
+    densidad_patrones: 1.0
+    diversidad_niveles: 0.14285714285714285
+    presencia_yo: 1.0
+  patrones_detectados:
+  - confianza: 0.8
+    contenido: contexto
+    nivel_jerarquico: 1
+    posicion: !!python/tuple
+    - 1
+    - 1
+    tipo: nivel_1
+  timestamp_procesamiento: '2025-10-29T18:48:30.337894'
+timestamp: '2025-10-29T18:48:30.338196'

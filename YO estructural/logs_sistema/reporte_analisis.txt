@@ -1,0 +1,63 @@
+=== REPORTE DE ANÁLISIS DEL SISTEMA ===
+
+1. Verificación de directorios:
+   - entrada_bruta: ✓
+   - features_extraidas: ✓
+   - clasificados: ✓
+   - logs_sistema: ✓
+
+2. Verificación de archivos:
+   - features_tfidf.csv: ✓
+   - etiquetas.csv: ✓
+   - config.yaml: ✓
+
+3. Análisis de datos:
+   - Número de textos: 14
+   - Número de features: 353
+   - Número de etiquetas: 14
+   - Categorías únicas: 6
+
+4. Distribución de categorías:
+   - experiencia_temporal: 3 ejemplos
+   - intersubjetividad: 2 ejemplos
+   - experiencia_vivida: 2 ejemplos
+   - vivencia_corporal: 3 ejemplos
+   - mundaneidad: 1 ejemplos
+     ¡ADVERTENCIA! La categoría mundaneidad tiene menos de 2 ejemplos
+   - conciencia_temporal: 3 ejemplos
+
+5. Análisis del modelo semántico:
+   - Directorio fenomenos: ✓
+   - Directorio contextos: ✓
+   - Directorio macrocontextos: ✓
+   - Directorio redes: ✓
+   - Directorio conceptos_emergentes: ✓
+   - Directorio metacampos: ✓
+
+6. Estadísticas del modelo semántico:
+   - Fenómenos: 0
+   - Contextos: 0
+   - Macrocontextos: 0
+   - Redes: 0
+   - Conceptos emergentes: 0
+   - Apariciones del YO: 0
+
+7. Análisis de escalabilidad:
+   - Total de elementos: 0
+
+8. Verificación de integridad:
+   - Integridad de datos: ✓
+
+9. Prueba de clasificación:
+   - Entrenamiento: ✓
+   - Predicción de prueba: experiencia_temporal
+   - Probabilidad máxima: 0.430
+
+10. Recomendaciones:
+   - Ejecutar extractor_features.py si faltan archivos de características
+   - Verificar que config.yaml tenga la configuración del modelo semántico
+   - Asegurar que cada categoría tenga al menos 2 ejemplos
+   - Revisar logs_sistema/ para errores específicos
+   - Ejecutar gestor_modelo_semantico.py para inicializar estructuras
+
+=== FIN DEL REPORTE ===

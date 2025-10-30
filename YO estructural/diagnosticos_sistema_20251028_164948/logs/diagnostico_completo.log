@@ -1,0 +1,55 @@
+2025-10-28 16:49:48,070 [INFO] DiagnosticadorSistema: Iniciando diagnóstico completo del sistema - 20251028_164948
+2025-10-28 16:49:48,079 [INFO] DiagnosticadorSistema: === VERIFICACIÓN DE PREREQUISITOS ===
+2025-10-28 16:49:48,088 [INFO] DiagnosticadorSistema: ✓ Directorio entrada_bruta existe
+2025-10-28 16:49:48,089 [INFO] DiagnosticadorSistema: ✓ Directorio procesado existe
+2025-10-28 16:49:48,090 [INFO] DiagnosticadorSistema: ✓ Directorio logs_sistema existe
+2025-10-28 16:49:48,092 [INFO] DiagnosticadorSistema: ✓ Directorio configuracion existe
+2025-10-28 16:49:48,093 [INFO] DiagnosticadorSistema: ✓ Archivo de configuración encontrado
+2025-10-28 16:49:48,095 [INFO] DiagnosticadorSistema: ✓ Encontrados 24 archivos de texto en entrada_bruta
+2025-10-28 16:49:48,245 [INFO] DiagnosticadorSistema: === VERIFICACIÓN COMPLETA DEL SISTEMA ===
+2025-10-28 16:49:48,254 [INFO] DiagnosticadorSistema: Iniciando diagnóstico completo del sistema - 20251028_164948
+2025-10-28 16:49:48,259 [INFO] DiagnosticadorSistema: === VERIFICACIÓN DE PREREQUISITOS ===
+2025-10-28 16:49:48,262 [INFO] DiagnosticadorSistema: ✓ Directorio entrada_bruta existe
+2025-10-28 16:49:48,299 [INFO] DiagnosticadorSistema: ✓ Directorio procesado existe
+2025-10-28 16:49:48,307 [INFO] DiagnosticadorSistema: ✓ Directorio logs_sistema existe
+2025-10-28 16:49:48,327 [INFO] DiagnosticadorSistema: ✓ Directorio configuracion existe
+2025-10-28 16:49:48,329 [INFO] DiagnosticadorSistema: ✓ Archivo de configuración encontrado
+2025-10-28 16:49:48,336 [INFO] DiagnosticadorSistema: ✓ Encontrados 24 archivos de texto en entrada_bruta
+2025-10-28 16:49:48,352 [INFO] DiagnosticadorSistema: === VERIFICACIÓN COMPLETA DEL SISTEMA ===
+2025-10-28 16:49:48,354 [ERROR] DiagnosticadorSistema: ✗ Error en verificación del sistema: name 'verificar_sistema' is not defined
+2025-10-28 16:49:48,360 [INFO] DiagnosticadorSistema: === EJECUCIÓN DEL SISTEMA PRINCIPAL ===
+2025-10-28 16:49:48,498 [DEBUG] neo4j.pool: [#0000]  _: <POOL> created, direct address IPv4Address(('172.23.111.142', 7687))
+2025-10-28 16:49:48,571 [INFO] SistemaFenomenologico: Sistema inicializado con configuración cargada
+2025-10-28 16:49:48,573 [INFO] DiagnosticadorSistema: Sistema inicializado correctamente
+2025-10-28 16:49:48,574 [ERROR] DiagnosticadorSistema: ✗ Error en ejecución del sistema: type object 'datetime.datetime' has no attribute 'datetime'
+2025-10-28 16:49:48,583 [ERROR] DiagnosticadorSistema: Traceback (most recent call last):
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\verificar.py", line 119, in ejecutar_sistema_principal
+    resultado = sistema.procesar_flujo_completo('entrada_bruta')
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\sistema_principal_v2.py", line 142, in procesar_flujo_completo
+    self._debug_print("Iniciando flujo completo del sistema")
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\sistema_principal_v2.py", line 117, in _debug_print
+    timestamp = datetime.datetime.now().strftime("%H:%M:%S.%f")[:-3]
+                ^^^^^^^^^^^^^^^^^
+AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
+
+2025-10-28 16:49:48,595 [WARNING] DiagnosticadorSistema: ⚠ Verificación del sistema completada con advertencias
+2025-10-28 16:49:48,601 [INFO] DiagnosticadorSistema: === EJECUCIÓN DEL SISTEMA PRINCIPAL ===
+2025-10-28 16:49:48,803 [DEBUG] neo4j.pool: [#0000]  _: <POOL> created, direct address IPv4Address(('172.23.111.142', 7687))
+2025-10-28 16:49:48,870 [INFO] SistemaFenomenologico: Sistema inicializado con configuración cargada
+2025-10-28 16:49:48,874 [INFO] DiagnosticadorSistema: Sistema inicializado correctamente
+2025-10-28 16:49:48,875 [ERROR] DiagnosticadorSistema: ✗ Error en ejecución del sistema: type object 'datetime.datetime' has no attribute 'datetime'
+2025-10-28 16:49:48,878 [ERROR] DiagnosticadorSistema: Traceback (most recent call last):
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\verificar.py", line 118, in ejecutar_sistema_principal
+    inicio = time.time()
+                ~~~~~~^^
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\sistema_principal_v2.py", line 142, in procesar_flujo_completo
+    self._debug_print("Iniciando flujo completo del sistema")
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\sistema_principal_v2.py", line 117, in _debug_print
+    timestamp = datetime.datetime.now().strftime("%H:%M:%S.%f")[:-3]
+                ^^^^^^^^^^^^^^^^^
+AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
+
+2025-10-28 16:49:48,964 [DEBUG] neo4j.pool: [#0000]  _: <POOL> close
+2025-10-28 16:49:48,965 [DEBUG] neo4j.pool: [#0000]  _: <POOL> close

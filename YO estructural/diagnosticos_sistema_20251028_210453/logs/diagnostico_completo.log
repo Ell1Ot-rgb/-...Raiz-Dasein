@@ -1,0 +1,25 @@
+2025-10-28 21:04:53,043 [INFO] DiagnosticadorSistema: Iniciando diagnóstico completo del sistema - 20251028_210453
+2025-10-28 21:04:53,044 [INFO] DiagnosticadorSistema: === VERIFICACIÓN DE PREREQUISITOS ===
+2025-10-28 21:04:53,044 [INFO] DiagnosticadorSistema: ✓ Directorio entrada_bruta existe
+2025-10-28 21:04:53,045 [INFO] DiagnosticadorSistema: ✓ Directorio procesado existe
+2025-10-28 21:04:53,046 [INFO] DiagnosticadorSistema: ✓ Directorio logs_sistema existe
+2025-10-28 21:04:53,050 [INFO] DiagnosticadorSistema: ✓ Directorio configuracion existe
+2025-10-28 21:04:53,076 [INFO] DiagnosticadorSistema: ✓ Archivo de configuración encontrado
+2025-10-28 21:04:53,101 [INFO] DiagnosticadorSistema: ✓ Encontrados 24 archivos de texto en entrada_bruta
+2025-10-28 21:04:53,106 [INFO] DiagnosticadorSistema: === VERIFICACIÓN COMPLETA DEL SISTEMA ===
+2025-10-28 21:04:53,106 [INFO] DiagnosticadorSistema: ✓ Verificación del sistema completada exitosamente
+2025-10-28 21:04:53,107 [INFO] DiagnosticadorSistema: === EJECUCIÓN DEL SISTEMA PRINCIPAL ===
+2025-10-28 21:04:53,246 [DEBUG] neo4j.pool: [#0000]  _: <POOL> created, direct address IPv4Address(('172.23.111.142', 7687))
+2025-10-28 21:04:53,309 [INFO] SistemaFenomenologico: Sistema inicializado con configuración cargada
+2025-10-28 21:04:53,312 [INFO] DiagnosticadorSistema: Sistema inicializado correctamente
+2025-10-28 21:04:53,312 [INFO] SistemaFenomenologico: Iniciando flujo completo del sistema
+2025-10-28 21:04:53,313 [ERROR] DiagnosticadorSistema: ✗ Error en ejecución del sistema: name 'ruta_datos_entrada' is not defined
+2025-10-28 21:04:53,316 [ERROR] DiagnosticadorSistema: Traceback (most recent call last):
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\verificar.py", line 126, in ejecutar_sistema_principal
+    resultado = sistema.procesar_flujo_completo('entrada_bruta')
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\sistema_principal_v2.py", line 149, in procesar_flujo_completo
+    ruta_datos_entrada,
+    ^^^^^^^^^^^^^^^^^^
+NameError: name 'ruta_datos_entrada' is not defined
+
+2025-10-28 21:04:53,414 [DEBUG] neo4j.pool: [#0000]  _: <POOL> close

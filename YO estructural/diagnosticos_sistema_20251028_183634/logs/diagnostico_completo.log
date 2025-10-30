@@ -1,0 +1,30 @@
+2025-10-28 18:36:34,652 [INFO] DiagnosticadorSistema: Iniciando diagnóstico completo del sistema - 20251028_183634
+2025-10-28 18:36:34,652 [INFO] DiagnosticadorSistema: === VERIFICACIÓN DE PREREQUISITOS ===
+2025-10-28 18:36:34,653 [INFO] DiagnosticadorSistema: ✓ Directorio entrada_bruta existe
+2025-10-28 18:36:34,653 [INFO] DiagnosticadorSistema: ✓ Directorio procesado existe
+2025-10-28 18:36:34,653 [INFO] DiagnosticadorSistema: ✓ Directorio logs_sistema existe
+2025-10-28 18:36:34,654 [INFO] DiagnosticadorSistema: ✓ Directorio configuracion existe
+2025-10-28 18:36:34,654 [INFO] DiagnosticadorSistema: ✓ Archivo de configuración encontrado
+2025-10-28 18:36:34,657 [INFO] DiagnosticadorSistema: ✓ Encontrados 24 archivos de texto en entrada_bruta
+2025-10-28 18:36:34,657 [INFO] DiagnosticadorSistema: === VERIFICACIÓN COMPLETA DEL SISTEMA ===
+2025-10-28 18:36:34,658 [INFO] DiagnosticadorSistema: ✓ Verificación del sistema completada exitosamente
+2025-10-28 18:36:34,659 [INFO] DiagnosticadorSistema: === EJECUCIÓN DEL SISTEMA PRINCIPAL ===
+2025-10-28 18:36:34,836 [DEBUG] neo4j.pool: [#0000]  _: <POOL> created, direct address IPv4Address(('172.23.111.142', 7687))
+2025-10-28 18:36:34,902 [INFO] SistemaFenomenologico: Sistema inicializado con configuración cargada
+2025-10-28 18:36:34,904 [INFO] DiagnosticadorSistema: Sistema inicializado correctamente
+2025-10-28 18:36:34,905 [INFO] SistemaFenomenologico: Iniciando flujo completo del sistema
+2025-10-28 18:36:35,017 [INFO] SistemaFenomenologico: Generadas 10 preinstancias desde análisis
+2025-10-28 18:36:35,017 [INFO] SistemaFenomenologico: Generadas 10 preinstancias
+2025-10-28 18:36:35,018 [INFO] SistemaFenomenologico: Creadas 10 instancias de existencia
+2025-10-28 18:36:35,018 [INFO] SistemaFenomenologico: Creadas 10 instancias de existencia
+2025-10-28 18:36:35,018 [INFO] SistemaFenomenologico: Evaluando necesidad de activación MDCE
+2025-10-28 18:36:35,019 [ERROR] DiagnosticadorSistema: ✗ Error en ejecución del sistema: 'SistemaFenomenologicoV2' object has no attribute '_detectar_contradicciones_nivel_4'
+2025-10-28 18:36:35,022 [ERROR] DiagnosticadorSistema: Traceback (most recent call last):
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\verificar.py", line 126, in ejecutar_sistema_principal
+    resultado = sistema.procesar_flujo_completo('entrada_bruta')
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\sistema_principal_v2.py", line 165, in procesar_flujo_completo
+    if self._detectar_contradicciones_nivel_4(instancias):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SistemaFenomenologicoV2' object has no attribute '_detectar_contradicciones_nivel_4'
+
+2025-10-28 18:36:35,125 [DEBUG] neo4j.pool: [#0000]  _: <POOL> close

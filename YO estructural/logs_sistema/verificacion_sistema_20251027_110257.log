@@ -1,0 +1,17 @@
+2025-10-27 11:02:57,941 [INFO]: [*] Iniciando verificación del Sistema YO Estructural
+2025-10-27 11:02:57,943 [INFO]: 
+[*] Verificando estructura de directorios...
+2025-10-27 11:02:57,947 [INFO]: [+] Directorio configuracion existe
+2025-10-27 11:02:57,951 [INFO]: [+] Directorio entrada_bruta existe
+2025-10-27 11:02:57,953 [INFO]: [+] Directorio logs_sistema existe
+2025-10-27 11:02:57,965 [INFO]: [+] Directorio procesado existe
+2025-10-27 11:02:57,968 [INFO]: [+] Directorio backups_automaticos existe
+2025-10-27 11:02:57,970 [INFO]: [+] Directorio features_extraidas existe
+2025-10-27 11:02:57,973 [INFO]: 
+[*] Verificando archivos de configuración...
+2025-10-27 11:02:57,978 [INFO]: [+] Archivo configuracion/config.yaml existe
+2025-10-27 11:02:57,982 [INFO]: [+] Archivo .env existe
+2025-10-27 11:02:57,988 [INFO]: 
+[*] Verificando dependencias...
+2025-10-27 11:02:57,994 [ERROR]: [X] Dependencia fastapi no instalada
+2025-10-27 11:02:57,995 [ERROR]: [X] Verificación de dependencias fallida

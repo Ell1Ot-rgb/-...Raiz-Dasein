@@ -1,0 +1,30 @@
+2025-10-28 17:59:33,775 [INFO] DiagnosticadorSistema: Iniciando diagnóstico completo del sistema - 20251028_175933
+2025-10-28 17:59:33,776 [INFO] DiagnosticadorSistema: === VERIFICACIÓN DE PREREQUISITOS ===
+2025-10-28 17:59:33,777 [INFO] DiagnosticadorSistema: ✓ Directorio entrada_bruta existe
+2025-10-28 17:59:33,778 [INFO] DiagnosticadorSistema: ✓ Directorio procesado existe
+2025-10-28 17:59:33,778 [INFO] DiagnosticadorSistema: ✓ Directorio logs_sistema existe
+2025-10-28 17:59:33,779 [INFO] DiagnosticadorSistema: ✓ Directorio configuracion existe
+2025-10-28 17:59:33,780 [INFO] DiagnosticadorSistema: ✓ Archivo de configuración encontrado
+2025-10-28 17:59:33,783 [INFO] DiagnosticadorSistema: ✓ Encontrados 24 archivos de texto en entrada_bruta
+2025-10-28 17:59:33,790 [INFO] DiagnosticadorSistema: === VERIFICACIÓN COMPLETA DEL SISTEMA ===
+2025-10-28 17:59:33,790 [INFO] DiagnosticadorSistema: ✓ Verificación del sistema completada exitosamente
+2025-10-28 17:59:33,791 [INFO] DiagnosticadorSistema: === EJECUCIÓN DEL SISTEMA PRINCIPAL ===
+2025-10-28 17:59:34,015 [DEBUG] neo4j.pool: [#0000]  _: <POOL> created, direct address IPv4Address(('172.23.111.142', 7687))
+2025-10-28 17:59:34,075 [INFO] SistemaFenomenologico: Sistema inicializado con configuración cargada
+2025-10-28 17:59:34,076 [INFO] DiagnosticadorSistema: Sistema inicializado correctamente
+2025-10-28 17:59:34,079 [INFO] SistemaFenomenologico: Iniciando flujo completo del sistema
+2025-10-28 17:59:34,161 [ERROR] DiagnosticadorSistema: ✗ Error en ejecución del sistema: PreInstancia.__init__() got an unexpected keyword argument 'nivel'
+2025-10-28 17:59:34,164 [ERROR] DiagnosticadorSistema: Traceback (most recent call last):
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\verificar.py", line 126, in ejecutar_sistema_principal
+    resultado = sistema.procesar_flujo_completo('entrada_bruta')
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\sistema_principal_v2.py", line 155, in procesar_flujo_completo
+    preinstancias = self._generar_preinstancias_desde_analisis(analisis_textos)
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\sistema_principal_v2.py", line 298, in _generar_preinstancias_desde_analisis
+    preinstancia = PreInstancia(
+        nivel=nivel,
+    ...<3 lines>...
+        clasificacion=clasificacion
+    )
+TypeError: PreInstancia.__init__() got an unexpected keyword argument 'nivel'
+
+2025-10-28 17:59:34,260 [DEBUG] neo4j.pool: [#0000]  _: <POOL> close

@@ -1,0 +1,34 @@
+2025-10-28 17:11:01,971 [INFO] DiagnosticadorSistema: Iniciando diagnóstico completo del sistema - 20251028_171101
+2025-10-28 17:11:01,980 [INFO] DiagnosticadorSistema: === VERIFICACIÓN DE PREREQUISITOS ===
+2025-10-28 17:11:01,984 [INFO] DiagnosticadorSistema: ✓ Directorio entrada_bruta existe
+2025-10-28 17:11:01,986 [INFO] DiagnosticadorSistema: ✓ Directorio procesado existe
+2025-10-28 17:11:01,988 [INFO] DiagnosticadorSistema: ✓ Directorio logs_sistema existe
+2025-10-28 17:11:01,990 [INFO] DiagnosticadorSistema: ✓ Directorio configuracion existe
+2025-10-28 17:11:02,016 [INFO] DiagnosticadorSistema: ✓ Archivo de configuración encontrado
+2025-10-28 17:11:02,080 [INFO] DiagnosticadorSistema: ✓ Encontrados 24 archivos de texto en entrada_bruta
+2025-10-28 17:11:02,109 [INFO] DiagnosticadorSistema: === VERIFICACIÓN COMPLETA DEL SISTEMA ===
+2025-10-28 17:11:02,112 [ERROR] DiagnosticadorSistema: ✗ Error en verificación del sistema: name 'verificar_sistema' is not defined
+2025-10-28 17:11:02,120 [INFO] DiagnosticadorSistema: === EJECUCIÓN DEL SISTEMA PRINCIPAL ===
+2025-10-28 17:11:02,336 [DEBUG] neo4j.pool: [#0000]  _: <POOL> created, direct address IPv4Address(('172.23.111.142', 7687))
+2025-10-28 17:11:02,393 [INFO] SistemaFenomenologico: Sistema inicializado con configuración cargada
+2025-10-28 17:11:02,394 [INFO] DiagnosticadorSistema: Sistema inicializado correctamente
+2025-10-28 17:11:02,400 [INFO] SistemaFenomenologico: Iniciando flujo completo del sistema
+2025-10-28 17:11:02,409 [ERROR] DiagnosticadorSistema: ✗ Error en ejecución del sistema: 'ProcesadorFenomenologico' object has no attribute '_calcular_coherencia_narrativa'
+2025-10-28 17:11:02,415 [ERROR] DiagnosticadorSistema: Traceback (most recent call last):
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\verificar.py", line 119, in ejecutar_sistema_principal
+    resultado = sistema.procesar_flujo_completo('entrada_bruta')
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\sistema_principal_v2.py", line 148, in procesar_flujo_completo
+    analisis_textos = self.procesador_textos.procesar_directorio(
+        ruta_datos_entrada,
+        self.config['rutas']['logs']
+    )
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\analizador_textos\procesador_fenomenologico.py", line 138, in procesar_directorio
+    resultado = self.procesar_archivo(ruta_completa)
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\analizador_textos\procesador_fenomenologico.py", line 76, in procesar_archivo
+    clasificacion = self._generar_clasificacion(patrones_detectados, apariciones_yo)
+  File "C:\Users\Public\#...Raíz Dasein\YO estructural\analizador_textos\procesador_fenomenologico.py", line 111, in _generar_clasificacion
+    clasificacion["coherencia_narrativa"] = self._calcular_coherencia_narrativa(patrones)
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ProcesadorFenomenologico' object has no attribute '_calcular_coherencia_narrativa'
+
+2025-10-28 17:11:02,528 [DEBUG] neo4j.pool: [#0000]  _: <POOL> close

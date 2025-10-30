@@ -134,9 +134,9 @@ class DiagnosticadorSistema:
                 "resultado": resultado
             }
             
-            # Guardar métricas
+            # Guardar métricas (con conversión de Enum a string)
             with open(f"{self.directorio_diagnosticos}/metricas/metricas_ejecucion.json", 'w', encoding='utf-8') as f:
-                json.dump(metricas_ejecucion, f, indent=2, ensure_ascii=False)
+                json.dump(metricas_ejecucion, f, indent=2, ensure_ascii=False, default=str)
                 
             # Guardar estado del YO
             estado_yo = sistema.motor_yo.estado_actual.__dict__

@@ -570,8 +570,13 @@ class SistemaYoEmergente:
         Returns:
             Dict: Resultado de la evaluación de emergencia con métricas
         """
-        # Actualizar el estado actual con los contextos activos
-        self.estado_actual.contextos_activos = contextos_activos
+        # Actualizar el estado actual con los IDs de contextos activos
+        # Extraer solo IDs si son objetos completos, mantener strings si ya lo son
+        if contextos_activos and isinstance(contextos_activos[0], dict):
+            self.estado_actual.contextos_activos = [ctx.get('id', str(ctx)) for ctx in contextos_activos]
+        else:
+            self.estado_actual.contextos_activos = contextos_activos
+        
         self.estado_actual.timestamp = datetime.datetime.now().isoformat()
         
         # Analizar coherencia narrativa con los nuevos contextos

@@ -123,12 +123,15 @@ class SistemaYoEmergente:
     
     def _notificar_evento(self, tipo_evento: str, datos: Dict):
         """Notifica a todos los callbacks registrados"""
-        for callback in self.callbacks:
-            callback({
-                "tipo": tipo_evento,
-                "datos": datos,
-                "timestamp": datetime.datetime.now().isoformat()
-            })
+        if tipo_evento in self.callbacks and callable(self.callbacks[tipo_evento]):
+            try:
+                self.callbacks[tipo_evento]({
+                    "tipo": tipo_evento,
+                    "datos": datos,
+                    "timestamp": datetime.datetime.now().isoformat()
+                })
+            except Exception as e:
+                self.logger.warning(f"Error en callback {tipo_evento}: {e}")
     
     def _analizar_coherencia_narrativa(self) -> Dict:
         if not self.estado_actual.reflexiones:

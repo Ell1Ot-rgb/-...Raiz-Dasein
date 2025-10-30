@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import os
 import yaml
+from pathlib import Path
 from motor_yo.sistema_yo_emergente import SistemaYoEmergente
 from analizador_textos.procesador_fenomenologico import ProcesadorFenomenologico
 from gradient_system_enhanced import VohexGradientSystem
@@ -239,6 +240,23 @@ class SistemaFenomenologicoV2:
             else:
                 self.logger.error("Falló la reconfiguración estructural")
                 self._registrar_pendientes_reanalisis(resultado_contradicciones)
+    
+    def _contar_archivos_yaml(self, subcarpeta: str) -> int:
+        """Cuenta los archivos YAML en una subcarpeta específica del modelo semántico"""
+        try:
+            ruta_base = self.config.get('modelo_semantico', {}).get('rutas', {}).get(subcarpeta, '')
+            if not ruta_base:
+                return 0
+            
+            ruta_completa = Path(ruta_base)
+            if not ruta_completa.exists():
+                return 0
+            
+            # Contar archivos .yaml y .yml
+            return len(list(ruta_completa.glob('*.yaml'))) + len(list(ruta_completa.glob('*.yml')))
+        except Exception as e:
+            self.logger.warning(f"Error al contar archivos YAML en {subcarpeta}: {e}")
+            return 0
     
     def _cargar_config(self, config_path: str) -> dict:
         """Carga la configuración desde un archivo YAML."""

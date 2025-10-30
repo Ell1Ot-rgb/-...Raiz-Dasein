@@ -209,6 +209,33 @@ Los textos están inspirados en:
 
 ---
 
+## 📝 Textos Adicionales (36-45) - Estructura Multi-Nivel Completa
+
+Estos textos están diseñados para cubrir **TODOS los niveles jerárquicos** en cada experiencia:
+
+| Texto | Experiencia | Niveles Cubiertos | YO Activado |
+|-------|-------------|-------------------|-------------|
+| 36 | Martillar | -4, -2, 0, +1, +2 | Sensorial → Reflexivo |
+| 37 | Silencio del refrigerador | -4, -2, 0, +1, +2 | Sensorial → Afectivo |
+| 38 | Llamada telefónica | -4, -2, 0, +1, +2 | Afectivo → Narrativo |
+| 39 | Ritual del café | -4, -2, 0, +1, +2 | Sensorial → Reflexivo |
+| 40 | Bloqueo creativo | -2, 0, +1, +2 | Afectivo → Reflexivo |
+| 41 | Caminar rutinario | -4, -2, 0, +1, +2 | Sensorial → Narrativo |
+| 42 | Despertar matutino | -4, -2, 0, +1, +2 | Proto-YO → Reflexivo |
+| 43 | Lluvia en ventana | -4, -2, 0, +1, +2 | Sensorial → Reflexivo |
+| 44 | Etiqueta irritante | -4, -2, 0, +1, +2 | Sensorial → Reflexivo |
+| 45 | Palabra olvidada | -2, 0, +1, +2 | Reflexivo → Simbólico |
+
+### Características Diferenciadoras
+
+✅ **Flujo narrativo secuencial**: Cada texto sigue un flujo natural que asciende por los niveles jerárquicos  
+✅ **Experiencias cotidianas**: Situaciones reconocibles que generan identificación  
+✅ **Densidad conceptual**: Múltiples conceptos por párrafo que maximizan nodos generados  
+✅ **Tensiones dialécticas**: Oposiciones que generarán vohexistencias (inmersión/reflexión, yo-que-actúa/yo-que-observa)  
+✅ **Coherencia narrativa alta**: Estructura clara de inicio-desarrollo-cierre  
+
+---
+
 **Última actualización**: 30 de octubre de 2025  
-**Textos fenomenológicos totales**: 35  
-**Estado**: Sistema configurado para generación orgánica de datos
+**Textos fenomenológicos totales**: 45  
+**Estado**: Sistema con corpus denso para generación orgánica robusta

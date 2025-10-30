@@ -165,9 +165,16 @@ def main():
     password = neo4j_config.get('password', 'password')
     database = neo4j_config.get('database', 'neo4j')
     
-    # Paso 1: Crear la base de datos si no existe
-    crear_base_datos(uri, username, password, database)
-    
+    # Paso 1: Intentar crear la base de datos si es posible
+    db_created = crear_base_datos(uri, username, password, database)
+
+    # Si no se pudo crear/verificar la BD, es posible que estemos en Community
+    # (no soporta CREATE DATABASE). En ese caso haremos fallback a 'neo4j'.
+    if not db_created and database != 'neo4j':
+        print(f"\n⚠️  No se pudo crear/verificar la base '{database}'. Intentando usar la base 'neo4j' (Community Edition).")
+        database = 'neo4j'
+
+    # Intentar conectarse (primero con la base elegida, luego con fallback si es necesario)
     try:
         connection = Neo4jConnection(
             uri,
@@ -178,26 +185,55 @@ def main():
             max_retry=neo4j_config.get('max_retry', 3),
             pool_size=neo4j_config.get('pool_size', 50)
         )
-        
+
+    except Exception as e:
+        # Si el error indica que la base no existe, volver a intentar con 'neo4j'
+        err_str = str(e).lower()
+        if ('database does not exist' in err_str or 'database not found' in err_str) and database != 'neo4j':
+            print(f"\n⚠️  La base '{database}' no existe en el servidor. Reintentando con la base 'neo4j'...")
+            try:
+                connection = Neo4jConnection(
+                    uri,
+                    username,
+                    password,
+                    database='neo4j',
+                    timeout=neo4j_config.get('timeout', 30),
+                    max_retry=neo4j_config.get('max_retry', 3),
+                    pool_size=neo4j_config.get('pool_size', 50)
+                )
+                database = 'neo4j'
+            except Exception as e2:
+                print(f"\n❌ Error crítico al conectar con 'neo4j': {str(e2)}")
+                import traceback
+                traceback.print_exc()
+                return False
+        else:
+            print(f"\n❌ Error crítico: {str(e)}")
+            import traceback
+            traceback.print_exc()
+            return False
+
+    # Si llegamos aquí, la conexión fue exitosa
+    try:
         print("✅ Conectado a Neo4j exitosamente\n")
-        
+
         # Verificar índices existentes (antes)
         verificar_indices(connection)
-        
+
         # Crear índices y constraints
         exitos, errores = crear_indices_y_constraints(connection)
-        
+
         # Verificar índices existentes (después)
         verificar_indices(connection)
-        
+
         # Cerrar conexión
         connection.close()
-        
+
         print("\n✅ Optimización completada exitosamente")
         return errores == 0
-        
+
     except Exception as e:
-        print(f"\n❌ Error crítico: {str(e)}")
+        print(f"\n❌ Error durante la optimización: {str(e)}")
         import traceback
         traceback.print_exc()
         return False

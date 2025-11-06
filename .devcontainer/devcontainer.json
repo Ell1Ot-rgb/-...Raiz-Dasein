@@ -1,0 +1,4 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {"ghcr.io/devcontainers-extra/features/n8n:1": {"ghcr.io/devcontainers-extra/features/neo4jmigrations-sdkman:2": {}}}
+}

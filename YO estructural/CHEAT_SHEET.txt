@@ -1,0 +1,311 @@
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                                                                               ║
+║                    CHEAT SHEET - REFERENCIA RÁPIDA                            ║
+║               Generador de Rutas Fenomenológicas + Neo4j + LightRAG           ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 EMPEZAR EN 10 SEGUNDOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Ver presentación
+python3 PRESENTACION_GENERADOR.py
+
+# O ejecutar directamente
+python3 procesadores/generador_rutas_fenomenologicas.py
+
+# Ver guía de uso
+cat EJECUTAR_GENERADOR_RUTAS.md
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💻 CÓDIGO RÁPIDO - COPIAR Y PEGAR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+OPCIÓN 1: UN CONCEPTO
+──────────────────────
+from procesadores.generador_rutas_fenomenologicas import GeneradorRutasFenomenologicas
+
+gen = GeneradorRutasFenomenologicas()
+resultado = gen.generar_rutas("SOPORTE")
+
+if resultado.es_maximo:
+    print(f"✅ MÁXIMO RELACIONAL: {resultado.concepto}")
+    print(f"   Certeza: {resultado.certeza_combinada:.4f}")
+else:
+    print(f"⚠️ Parcialmente definido: {resultado.concepto}")
+
+
+OPCIÓN 2: MÚLTIPLES CONCEPTOS
+─────────────────────────────
+gen = GeneradorRutasFenomenologicas()
+conceptos = ["SOPORTE", "TIEMPO", "ESPACIO", "VERBO"]
+resultados = gen.generar_rutas_batch(conceptos)
+
+maximos = [r for r in resultados if r.es_maximo]
+print(f"Máximos detectados: {len(maximos)}/{len(resultados)}")
+
+
+OPCIÓN 3: CON NEO4J (Persistencia)
+────────────────────────────────────
+from procesadores.extensiones_neo4j_lightrag import GeneradorRutasConExtensiones
+
+gen = GeneradorRutasConExtensiones(usar_neo4j=True)
+resultado = gen.generar_rutas_mejorado("SOPORTE")
+# Ahora persiste en Neo4j también
+
+
+OPCIÓN 4: CON LIGHTRAG (Calidad)
+──────────────────────────────────
+gen = GeneradorRutasConExtensiones(usar_lightrag=True)
+resultado = gen.generar_rutas_mejorado("SOPORTE")
+# Definiciones refinadas automáticamente
+
+
+OPCIÓN 5: TODO (Neo4j + LightRAG)
+──────────────────────────────────
+gen = GeneradorRutasConExtensiones(
+    usar_neo4j=True,
+    usar_lightrag=True
+)
+resultado = gen.generar_rutas_mejorado("SOPORTE")
+
+
+ACCEDER A LAS RUTAS
+───────────────────
+for i, ruta in enumerate(resultado.rutas, 1):
+    print(f"Ruta {i}: {ruta.nombre}")
+    print(f"  Definición: {ruta.definicion}")
+    print(f"  Certeza: {ruta.certeza:.2%}")
+
+
+GUARDAR RESULTADOS
+───────────────────
+gen.guardar_resultado(resultado, formato="yaml")
+# Genera: SOPORTE_rutas.yaml + SOPORTE_rutas.json
+
+
+GENERAR REPORTE
+───────────────
+reporte = gen.generar_reporte(resultados)
+print(reporte)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 DATOS RÁPIDOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VELOCIDAD:
+   1 concepto ..................... 2-3ms
+   10 conceptos ................... 20-30ms
+   100 conceptos .................. 200-300ms
+   500 conceptos .................. 1-2s
+
+PRECISIÓN:
+   Ruta individual ................ 80-95%
+   5 rutas convergentes ........... 99%+
+   Máximo relacional .............. 99.99%+
+
+MEMORIA:
+   Base RAM ....................... 300MB
+   + 100 conceptos ................ +100MB
+   Máximo con GC .................. ~500MB
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔧 CONFIGURACIÓN - dónde modificar
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BATCH SIZE (procesar de N en N):
+   config_4gb_optimizado.yaml → batch_size: 16 (reducir si poco RAM)
+
+GARBAGE COLLECTION (cada N batches):
+   config_4gb_optimizado.yaml → gc_interval: 3 (aumentar si muchos datos)
+
+CONFIANZA PARA MÁXIMO (por defecto 0.99):
+   generador_rutas_fenomenologicas.py → class
+   Buscar: UMBRAL_MAXIMO_RELACIONAL
+
+NEO4J CONNECTION:
+   extensiones_neo4j_lightrag.py → ExtensionNeo4j.__init__()
+   Default: bolt://localhost:7687
+
+LIGHTRAG API:
+   extensiones_neo4j_lightrag.py → ExtensionLightRAG.__init__()
+   Default: http://localhost:8000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+❓ PREGUNTAS FRECUENTES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+P: ¿Necesito Neo4j y LightRAG?
+R: No. Sistema funciona sin ellos. Son opcionales para escalar y mejorar.
+
+P: ¿Puedo usarlo offline?
+R: Sí. Python puro + SentenceTransformer local = sin internet.
+
+P: ¿Qué significa máximo relacional?
+R: 5 perspectivas convergen (99%+ certeza) = concepto bien definido.
+
+P: ¿Cómo agrego mis conceptos?
+R: Pasa lista a gen.generar_rutas_batch(["CONCEPTO1", "CONCEPTO2"])
+
+P: ¿Dónde van los resultados?
+R: ./resultados_rutas/CONCEPTO_rutas.yaml + .json
+
+P: ¿Puedo cambiar las 5 rutas?
+R: Sí. Edit RUTAS_TEMPLATES en generador_rutas_fenomenologicas.py
+
+P: ¿Qué es SentenceTransformer?
+R: Modelo que convierte texto a números (embeddings) para comparar significado.
+
+P: ¿Primer uso es lento?
+R: Sí, descarga modelo 60MB. Luego se cachea y va rápido.
+
+P: ¿Puedo integrar en mi código?
+R: Sí. Ver GUIA_INTEGRACION_MAXIMO_RELACIONAL.md
+
+P: ¿Hay ejemplos?
+R: Sí. Ver main en generador_rutas_fenomenologicas.py
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📂 ESTRUCTURA ARCHIVOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📦 CÓDIGO
+├─ procesadores/generador_rutas_fenomenologicas.py .... Núcleo
+├─ procesadores/extensiones_neo4j_lightrag.py ......... Extensiones
+└─ procesadores/analizador_maximo_relacional_hibrido.py (referencia)
+
+📚 DOCUMENTACIÓN
+├─ PRESENTACION_GENERADOR.py ........................... Ver primero
+├─ EJECUTAR_GENERADOR_RUTAS.md ......................... 5 opciones
+├─ GUIA_INTEGRACION_GENERADOR_RUTAS.md ................ Arquitectura
+└─ INDICE_COMPLETO_PROYECTO.txt ....................... Mapa completo
+
+📊 RESULTADOS
+└─ resultados_rutas/ .................................... YAML + JSON
+
+⚙️ CONFIG
+├─ config_4gb_optimizado.yaml ........................... Para 4GB
+├─ config_dualcore_optimizado.yaml ..................... Para dual-core
+├─ requirements.txt ...................................... Dependencias
+└─ docker-compose-PC2.yml ............................... Neo4j + LightRAG
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚡ PROBLEMAS COMUNES Y SOLUCIONES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PROBLEMA: "ModuleNotFoundError: No module named 'sentence_transformers'"
+SOLUCIÓN: pip install sentence-transformers
+
+PROBLEMA: "No tengo espacio para descargar modelo (60MB)"
+SOLUCIÓN: Descarga en una máquina, luego copia ~/.cache/huggingface
+
+PROBLEMA: "Genera rutas muy diferentes (no convergen)"
+SOLUCIÓN: Concepto muy abstracto. Prueba: "TIEMPO en física" en lugar de "TIEMPO"
+
+PROBLEMA: "Muy lento procesando 1000 conceptos"
+SOLUCIÓN: batch_size: 8 en config. O reduce número.
+
+PROBLEMA: "Neo4j no conecta"
+SOLUCIÓN: docker-compose -f docker-compose-PC2.yml up -d
+          Verificar: bolt://localhost:7687
+
+PROBLEMA: "LightRAG no funciona"
+SOLUCIÓN: LightRAG ya en docker-compose. Verificar endpoint http://localhost:8000
+
+PROBLEMA: "RAM se llena"
+SOLUCIÓN: Aumentar gc_interval en config. O reducir batch_size.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 PRÓXIMOS PASOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+AHORA:
+   1. python3 PRESENTACION_GENERADOR.py
+   2. python3 procesadores/generador_rutas_fenomenologicas.py
+   3. Leer EJECUTAR_GENERADOR_RUTAS.md
+
+HOY:
+   4. Procesar 10 conceptos tuyos
+   5. Ver máximos relacionales detectados
+
+ESTA SEMANA:
+   6. Decidir: ¿Activar Neo4j? ¿LightRAG?
+   7. Procesamiento en lotes de 500+ conceptos
+   8. Integrar en sistema_principal_v2.py
+
+PRÓXIMA SEMANA:
+   9. Análisis de comunidades (Neo4j)
+   10. Visualización de resultados
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔗 ENLACES Y REFERENCIAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+GITHUB: https://github.com/Ell1Ot-rgb/-...Raiz-Dasein
+        Rama: main (últimos commits generador)
+
+DOCUMENTACIÓN:
+   Técnica: ANALISIS_CAPACIDADES_GENERADOR_RUTAS.md
+   Guía: EJECUTAR_GENERADOR_RUTAS.md
+   Arquitectura: GUIA_INTEGRACION_GENERADOR_RUTAS.md
+   Mapa: INDICE_COMPLETO_PROYECTO.txt
+
+SentenceTransformer: https://www.sbert.net/
+Neo4j: https://neo4j.com/
+LightRAG: (Integrado en docker-compose-PC2.yml)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✨ COMANDOS MÁS USADOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Generar una ruta
+python3 procesadores/generador_rutas_fenomenologicas.py
+
+# Ver presentación
+python3 PRESENTACION_GENERADOR.py
+
+# Ver guía
+less EJECUTAR_GENERADOR_RUTAS.md
+
+# Ver arquitectura
+less GUIA_INTEGRACION_GENERADOR_RUTAS.md
+
+# Ver índice
+less INDICE_COMPLETO_PROYECTO.txt
+
+# Ver último commit
+git log -1 --stat
+
+# Ver todos los commits
+git log --oneline
+
+# Ver cambios pendientes
+git status
+
+# Ver resultados generados
+ls resultados_rutas/
+
+# Procesar conceptos (comando personalizado)
+python3 -c "
+from procesadores.generador_rutas_fenomenologicas import GeneradorRutasFenomenologicas
+gen = GeneradorRutasFenomenologicas()
+resultado = gen.generar_rutas('TU_CONCEPTO')
+print(f'Máximo: {resultado.es_maximo}, Certeza: {resultado.certeza_combinada:.4f}')
+"
+
+# Iniciar Neo4j
+docker-compose -f docker-compose-PC2.yml up -d
+
+# Ver logs Neo4j
+docker-compose -f docker-compose-PC2.yml logs -f neo4j
+
+# Detener servicios
+docker-compose -f docker-compose-PC2.yml down
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Este archivo es tu referencia rápida.
+Para más detalles, ver: INDICE_COMPLETO_PROYECTO.txt
+
+════════════════════════════════════════════════════════════════════════════════

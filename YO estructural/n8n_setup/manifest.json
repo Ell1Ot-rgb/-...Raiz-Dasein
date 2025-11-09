@@ -1,0 +1,313 @@
+{
+  "nombre": "Sistema N8N + YO Estructural v3.0",
+  "descripcion": "Setup completamente automatizado de n8n desde PowerShell, con 3 workflows optimizados para procesamiento fenomenológico",
+  "version": "3.0",
+  "fecha_creacion": "2025-10-31",
+  "autor": "Sistema YO Estructural",
+  "licencia": "MIT",
+  
+  "caracteristicas": [
+    "✓ Instalación 100% automatizada desde PowerShell",
+    "✓ Sin interfaz gráfica requerida",
+    "✓ 3 workflows pre-configurados",
+    "✓ Integración con Neo4j",
+    "✓ Monitoreo de archivos locales",
+    "✓ Procesamiento de texto con embeddings",
+    "✓ Gestión segura de credenciales",
+    "✓ Validación post-instalación",
+    "✓ Logs completos",
+    "✓ Documentación extensiva"
+  ],
+  
+  "archivos_creados": {
+    "scripts_powershell": [
+      {
+        "nombre": "deploy-n8n-complete.ps1",
+        "tipo": "Principal/Orquestador",
+        "proposito": "Script maestro que automatiza la instalación completa",
+        "uso": ".\\deploy-n8n-complete.ps1",
+        "tiempo": "10-15 minutos",
+        "critico": true
+      },
+      {
+        "nombre": "install-n8n-complete.ps1",
+        "tipo": "Instalador",
+        "proposito": "Instalador parametrizado con control granular",
+        "uso": ".\\install-n8n-complete.ps1 [-flags]",
+        "tiempo": "5-15 minutos (depende de flags)",
+        "critico": true
+      },
+      {
+        "nombre": "validate-installation.ps1",
+        "tipo": "Validador",
+        "proposito": "Verifica post-instalación",
+        "uso": ".\\validate-installation.ps1 [-QuickTest]",
+        "tiempo": "2-5 minutos",
+        "critico": false
+      }
+    ],
+    
+    "workflows_json": [
+      {
+        "nombre": "workflow_1_monitor_archivos.json",
+        "descripcion": "Monitorea carpeta local, detecta tipos de archivo, routea a procesadores",
+        "entrada": "Carpeta en disco local",
+        "salida": "Webhooks routeados según tipo",
+        "nodos": 8,
+        "ubicacion": "workflows/"
+      },
+      {
+        "nombre": "workflow_2_sync_neo4j.json",
+        "descripcion": "Sincroniza datos con Neo4j (MERGE nodos, crea relaciones)",
+        "entrada": "Webhook JSON",
+        "salida": "Nodos/relaciones en Neo4j + log CSV",
+        "nodos": 6,
+        "ubicacion": "workflows/"
+      },
+      {
+        "nombre": "workflow_3_text_processing.json",
+        "descripcion": "Procesa texto, extrae keywords, genera embeddings",
+        "entrada": "Webhook con contenido de texto",
+        "salida": "YAML enriquecido + sincronización Neo4j",
+        "nodos": 7,
+        "ubicacion": "workflows/"
+      }
+    ],
+    
+    "documentacion": [
+      {
+        "nombre": "INDEX.md",
+        "descripcion": "Índice completo del setup (este archivo como tabla de contenidos)",
+        "lectura": "5-10 min",
+        "nivel": "Orientación"
+      },
+      {
+        "nombre": "QUICK_START.md",
+        "descripcion": "Inicio instantáneo en 5 minutos",
+        "lectura": "5 min",
+        "nivel": "Principiante"
+      },
+      {
+        "nombre": "README.md",
+        "descripcion": "Introducción rápida con primeros pasos",
+        "lectura": "10 min",
+        "nivel": "Principiante"
+      },
+      {
+        "nombre": "SETUP_GUIDE.md",
+        "descripcion": "Guía detallada con ejemplos y troubleshooting",
+        "lectura": "30 min",
+        "nivel": "Intermedio"
+      },
+      {
+        "nombre": "RESUMEN_EJECUTIVO.md",
+        "descripcion": "Visión general ejecutiva del sistema",
+        "lectura": "15 min",
+        "nivel": "Ejecutivo"
+      },
+      {
+        "nombre": "COMMIT_INSTRUCTIONS.md",
+        "descripcion": "Instrucciones para versionar en git",
+        "lectura": "10 min",
+        "nivel": "Desarrollador"
+      }
+    ],
+    
+    "credenciales": [
+      {
+        "nombre": "credentials_template.json",
+        "descripcion": "Template de credenciales (referencia)",
+        "ubicacion": "credentials/",
+        "nota": "Los valores reales se generan en .env durante instalación"
+      }
+    ]
+  },
+  
+  "estructura_final": {
+    "instalacion": "%USERPROFILE%\\.n8n\\",
+    "archivos": [
+      ".env (credenciales - NO versionar)",
+      "n8n.db (base de datos SQLite - NO versionar)",
+      "workflows/ (3 JSON importados)",
+      "credentials.json (cifrado - NO versionar)",
+      "logs/ (ejecución)"
+    ]
+  },
+  
+  "flujo_instalacion": [
+    "1. Ejecutar: deploy-n8n-complete.ps1",
+    "2. Script descarga Node.js 18 LTS",
+    "3. Instala n8n globalmente",
+    "4. Genera .env seguro",
+    "5. Importa 3 workflows",
+    "6. Valida conectividad",
+    "7. (Opcional) Crea servicio Windows",
+    "8. Validación post-instalación"
+  ],
+  
+  "flujo_operacion": [
+    "1. Ejecutar: n8n start --env-file $env:USERPROFILE\\.n8n\\.env",
+    "2. Abrir: http://localhost:5678",
+    "3. Ver 3 workflows en UI (estado: ACTIVE)",
+    "4. Copiar archivos a carpeta monitoreada",
+    "5. Workflow 1 detecta y procesa",
+    "6. Workflow 2 sincroniza con Neo4j",
+    "7. Workflow 3 enriquece datos"
+  ],
+  
+  "requisitos_minimos": {
+    "sistema_operativo": "Windows 10 / Windows 11",
+    "powershell": "5.1 o superior",
+    "permisos": "Administrador",
+    "ram": "2 GB disponible",
+    "conexion": "Internet (descarga)",
+    "neo4j": "Accesible en red (192.168.1.37:7687 por defecto)"
+  },
+  
+  "integraciones": {
+    "neo4j": {
+      "version": "5.12.0",
+      "host": "192.168.1.37",
+      "puerto": 7687,
+      "usuario": "neo4j",
+      "database": "neo4j"
+    },
+    "node": {
+      "version": "18 LTS",
+      "gestor": "npm"
+    },
+    "n8n": {
+      "instalacion": "global",
+      "base_datos": "SQLite (local) o Postgres (opcional)"
+    },
+    "python": {
+      "integracion": "via integraciones/n8n_config.py",
+      "metodo": "N8nIntegrator.enviar_datos_webhook()"
+    }
+  },
+  
+  "no_versionar": [
+    "%USERPROFILE%\\.n8n\\",
+    ".env (variables de entorno)",
+    ".env.local",
+    "n8n.db (base de datos)",
+    "credentials.json (credenciales cifradas)",
+    "logs/ (archivos de log)",
+    "node_modules/ (dependencias)"
+  ],
+  
+  "si_versionar": [
+    "n8n_setup/",
+    "*.ps1 (scripts)",
+    "workflows/*.json (definiciones)",
+    "*.md (documentación)",
+    "credentials_template.json (template únicamente)"
+  ],
+  
+  "comandos_utiles": {
+    "instalacion": [
+      "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser",
+      ".\\deploy-n8n-complete.ps1",
+      ".\\validate-installation.ps1"
+    ],
+    "operacion": [
+      "n8n start",
+      "n8n start --env-file $env:USERPROFILE\\.n8n\\.env",
+      "n8n start --tunnel"
+    ],
+    "monitoreo": [
+      "n8n list:workflows",
+      "n8n list:executions",
+      "Invoke-RestMethod http://localhost:5678/healthz",
+      "tail -f $env:USERPROFILE\\.n8n\\logs\\*"
+    ],
+    "mantenimiento": [
+      "n8n export:workflow --all --output backup.json",
+      "n8n import:workflow --input workflow.json",
+      "n8n export:credentials --output creds_backup.json"
+    ]
+  },
+  
+  "rutas_importantes": {
+    "instalacion": "%USERPROFILE%\\.n8n\\",
+    "configuracion": "%USERPROFILE%\\.n8n\\.env",
+    "base_datos": "%USERPROFILE%\\.n8n\\n8n.db",
+    "workflows": "%USERPROFILE%\\.n8n\\workflows\\",
+    "logs": "%USERPROFILE%\\.n8n\\logs\\",
+    "credenciales": "%USERPROFILE%\\.n8n\\credentials.json"
+  },
+  
+  "orden_lectura_recomendado": [
+    "1. INDEX.md (5 min)",
+    "2. QUICK_START.md (5 min)",
+    "3. README.md (10 min)",
+    "4. SETUP_GUIDE.md (30 min) - OPCIONAL",
+    "5. RESUMEN_EJECUTIVO.md (15 min)"
+  ],
+  
+  "proximos_pasos": [
+    "1. Ejecutar deploy-n8n-complete.ps1",
+    "2. Iniciar n8n (n8n start)",
+    "3. Abrir http://localhost:5678",
+    "4. Verificar 3 workflows ACTIVE",
+    "5. Probar con archivo de prueba",
+    "6. Integrar con motor_yo (Python)",
+    "7. Hacer commit a git (si aplica)"
+  ],
+  
+  "urls_utiles": {
+    "n8n_docs": "https://docs.n8n.io/",
+    "n8n_community": "https://community.n8n.io/",
+    "neo4j_docs": "https://neo4j.com/docs/",
+    "powershell_docs": "https://learn.microsoft.com/en-us/powershell/",
+    "proyecto_github": "https://github.com/Ell1Ot-rgb/-...Raiz-Dasein"
+  },
+  
+  "soporte": {
+    "error_general": "Ver SETUP_GUIDE.md sección Troubleshooting",
+    "error_instalacion": "Ejecutar: validate-installation.ps1",
+    "error_conectividad": "Revisar logs: tail -f $env:USERPROFILE\\.n8n\\logs\\*",
+    "ayuda_rápida": "Leer QUICK_START.md (5 min)",
+    "ayuda_completa": "Leer SETUP_GUIDE.md (30 min)"
+  },
+  
+  "versioning": {
+    "version_sistema": "3.0",
+    "version_node": "18 LTS",
+    "version_npm": "auto (con Node)",
+    "version_n8n": "latest (auto)",
+    "fecha_creacion": "2025-10-31"
+  },
+  
+  "estadisticas": {
+    "archivos_totales": 13,
+    "scripts_powershell": 3,
+    "workflows_json": 3,
+    "archivos_documentacion": 6,
+    "archivos_configuracion": 1,
+    "lineas_codigo_scripts": "~2500",
+    "lineas_documentacion": "~3000",
+    "nodos_workflows_totales": 21,
+    "tiempo_instalacion_estimado": "15 minutos",
+    "tamaño_descarga": "~150 MB (Node + n8n)"
+  },
+  
+  "notas_finales": {
+    "proposito": "Automatizar completamente la instalación de n8n sin interfaz gráfica",
+    "beneficios": [
+      "Instalación reproducible",
+      "Sin pasos manuales",
+      "Versionable en git",
+      "Documentación completa",
+      "Fácil integración con Python"
+    ],
+    "principios": [
+      "Máxima automatización",
+      "Mínima fricción",
+      "Máxima seguridad (credenciales cifradas)",
+      "Máxima documentación"
+    ],
+    "mantenibilidad": "Alta (scripts parametrizados, documentación completa)",
+    "extensibilidad": "Alta (workflows JSON modificables, PowerShell reutilizable)"
+  }
+}

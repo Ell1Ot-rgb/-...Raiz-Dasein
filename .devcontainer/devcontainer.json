@@ -1,4 +1,31 @@
 {
   "image": "mcr.microsoft.com/devcontainers/universal:2",
-  "features": {"ghcr.io/devcontainers-extra/features/n8n:1": {"ghcr.io/devcontainers-extra/features/neo4jmigrations-sdkman:2": {}}}
+  "features": {
+    "ghcr.io/devcontainers-extra/features/n8n:1": {
+      "ghcr.io/devcontainers-extra/features/neo4jmigrations-sdkman:2": {}
+    }
+  },
+  "forwardPorts": [5678, 7474, 7687, 8000],
+  "portsAttributes": {
+    "5678": {
+      "label": "n8n",
+      "onAutoForward": "notify",
+      "visibility": "public"
+    },
+    "7474": {
+      "label": "Neo4j Browser",
+      "onAutoForward": "notify",
+      "visibility": "public"
+    },
+    "7687": {
+      "label": "Neo4j Bolt",
+      "onAutoForward": "notify",
+      "visibility": "public"
+    },
+    "8000": {
+      "label": "API Generator",
+      "onAutoForward": "notify",
+      "visibility": "public"
+    }
+  }
 }

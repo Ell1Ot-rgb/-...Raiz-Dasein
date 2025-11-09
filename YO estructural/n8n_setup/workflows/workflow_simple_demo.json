@@ -1,0 +1,155 @@
+{
+  "name": "Demo Máximo Relacional - Simplificado",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "demo-maximo",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "demo-maximo"
+    },
+    {
+      "parameters": {
+        "jsCode": "const concepto = $input.item.json.concepto || 'SOPORTE';\n\n// Crear datos de ejemplo simulando el generador\nconst rutasEjemplo = [\n  {\n    \"tipo\": \"etimologica\",\n    \"ruta\": [\"SOPORTE\", \"supportare\", \"sub-portare\", \"llevar desde abajo\"],\n    \"certeza\": 0.95,\n    \"similitud\": 0.92\n  },\n  {\n    \"tipo\": \"sinonímica\",\n    \"ruta\": [\"SOPORTE\", \"apoyo\", \"sustento\", \"base\"],\n    \"certeza\": 0.88,\n    \"similitud\": 0.85\n  },\n  {\n    \"tipo\": \"antonímica\",\n    \"ruta\": [\"SOPORTE\", \"abandonar\", \"desamparo\", \"ausencia\"],\n    \"certeza\": 0.82,\n    \"similitud\": 0.78\n  },\n  {\n    \"tipo\": \"metafórica\",\n    \"ruta\": [\"SOPORTE\", \"pilar\", \"fundamento\", \"columna\"],\n    \"certeza\": 0.90,\n    \"similitud\": 0.87\n  },\n  {\n    \"tipo\": \"contextual\",\n    \"ruta\": [\"SOPORTE\", \"ayuda técnica\", \"asistencia\", \"servicio\"],\n    \"certeza\": 0.85,\n    \"similitud\": 0.83\n  }\n];\n\nreturn {\n  concepto: concepto.trim().toUpperCase(),\n  rutas: rutasEjemplo,\n  certeza_combinada: 0.88,\n  similitud_promedio: 0.85,\n  es_maximo_relacional: true,\n  timestamp: new Date().toISOString()\n};"
+      },
+      "name": "Generar Datos Demo",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://neo4j:7474/db/neo4j/tx/commit",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "requestMethod": "POST",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\"statements\": [{\"statement\": \"MERGE (m:MAXIMO_RELACIONAL {concepto: $concepto}) ON CREATE SET m.certeza_combinada = $certeza, m.similitud_promedio = $similitud, m.timestamp_creacion = datetime(), m.rutas_json = $rutas_json, m.es_maximo = $es_maximo ON MATCH SET m.certeza_combinada = $certeza, m.similitud_promedio = $similitud, m.timestamp_actualizacion = datetime(), m.rutas_json = $rutas_json, m.es_maximo = $es_maximo RETURN m\", \"parameters\": {\"concepto\": $json.concepto, \"certeza\": $json.certeza_combinada, \"similitud\": $json.similitud_promedio, \"rutas_json\": JSON.stringify($json.rutas), \"es_maximo\": $json.es_maximo_relacional}}]}) }}",
+        "options": {}
+      },
+      "name": "Neo4j Guardar",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [650, 200],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "bhsKVzTLGPF8CcX2",
+          "name": "Neo4j Basic Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "requestMethod": "POST",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\"contents\": [{\"parts\": [{\"text\": \"Analiza las siguientes 5 rutas fenomenológicas del concepto \\\"\" + $json.concepto + \"\\\" y determina si convergen hacia una definición unificada:\\n\\n\" + JSON.stringify($json.rutas, null, 2) + \"\\n\\nRespuesta en formato JSON:\\n{\\n  \\\"convergen\\\": true/false,\\n  \\\"razon\\\": \\\"explicación breve\\\",\\n  \\\"definicion_unificada\\\": \\\"definición emergente\\\",\\n  \\\"confianza\\\": 0-1,\\n  \\\"recomendaciones\\\": [\\\"lista de sugerencias\\\"]\\n}\"}]}], \"generationConfig\": {\"temperature\": 0.3, \"maxOutputTokens\": 2048}}) }}",
+        "options": {}
+      },
+      "name": "Gemini Analizar",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [650, 400],
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "QXutyEqOTa9HzYuh",
+          "name": "Gemini API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const datosOriginales = $input.first().json;\nconst geminiResult = $input.last().json;\n\n// Extraer análisis de Gemini\nlet analisisGemini = {};\ntry {\n  const textoGemini = geminiResult.candidates[0].content.parts[0].text;\n  let jsonStr = textoGemini.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n  analisisGemini = JSON.parse(jsonStr);\n} catch (e) {\n  analisisGemini = { \n    error: 'No se pudo parsear respuesta de Gemini', \n    raw_text: geminiResult.candidates?.[0]?.content?.parts?.[0]?.text || 'No disponible'\n  };\n}\n\nreturn {\n  concepto: datosOriginales.concepto,\n  es_maximo_relacional: datosOriginales.es_maximo_relacional,\n  certeza_combinada: datosOriginales.certeza_combinada,\n  similitud_promedio: datosOriginales.similitud_promedio,\n  rutas: datosOriginales.rutas,\n  gemini_analisis: analisisGemini,\n  neo4j_guardado: true,\n  sistema: \"YO Estructural v1.0\",\n  timestamp: new Date().toISOString()\n};"
+      },
+      "name": "Combinar Resultados",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json, null, 2) }}"
+      },
+      "name": "Responder",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1050, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Generar Datos Demo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generar Datos Demo": {
+      "main": [
+        [
+          {
+            "node": "Neo4j Guardar",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Gemini Analizar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Neo4j Guardar": {
+      "main": [
+        [
+          {
+            "node": "Combinar Resultados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Analizar": {
+      "main": [
+        [
+          {
+            "node": "Combinar Resultados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Combinar Resultados": {
+      "main": [
+        [
+          {
+            "node": "Responder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

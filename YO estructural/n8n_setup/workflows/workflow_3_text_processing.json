@@ -1,0 +1,155 @@
+{
+  "name": "Workflow 3: Text Processing & Embeddings",
+  "active": true,
+  "nodes": [
+    {
+      "parameters": {
+        "path": "/process-text",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Webhook Text Input",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        100,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Procesar y enriquecer texto\nconst data = $input.first().json;\nconst text = data.contenido || data.texto || '';\nconst palabras = text.split(/\\s+/).length;\nconst caracteres = text.length;\nconst lineas = text.split('\\n').length;\nconst timestamp = new Date().toISOString();\nconst id = data.id || 'text_' + Date.now();\n\nreturn {\n  id,\n  contenido: text,\n  estadisticas: {\n    palabras,\n    caracteres,\n    lineas,\n    promedio_palabra_caracteres: caracteres / (palabras || 1)\n  },\n  metadata: {\n    idioma: data.idioma || 'es',\n    fuente: data.fuente || 'desconocida',\n    timestamp,\n    etiquetas: data.etiquetas || []\n  },\n  listo_para_embedding: caracteres > 50 && palabras > 10\n};"
+      },
+      "name": "Analyze Text",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        400,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Generar resumen simple (TF-IDF básico)\nconst text = $input.first().json.contenido;\nconst words = text.toLowerCase().match(/\\b[a-záéíóúñ]+\\b/g) || [];\nconst frecuencia = {};\n\nwords.forEach(word => {\n  if (word.length > 3) {\n    frecuencia[word] = (frecuencia[word] || 0) + 1;\n  }\n});\n\nconst topPalabras = Object.entries(frecuencia)\n  .sort((a, b) => b[1] - a[1])\n  .slice(0, 10)\n  .map(([palabra, freq]) => ({ palabra, frecuencia: freq }));\n\nreturn {\n  ...($input.first().json),\n  analisis: {\n    palabras_clave: topPalabras,\n    densidad_palabras: topPalabras.length / ($input.first().json.estadisticas.palabras || 1),\n    complejidad: $input.first().json.estadisticas.promedio_palabra_caracteres > 5 ? 'alta' : 'normal'\n  }\n};"
+      },
+      "name": "Extract Keywords",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        700,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Simular embeddings (en producción usar OpenAI, Hugging Face, etc.)\nconst id = $input.first().json.id;\nconst text = $input.first().json.contenido;\n\n// Generar embedding mock (32 dimensiones para demo)\nconst embedding = Array(32).fill(0).map(() => Math.random());\n\nreturn {\n  ...($input.first().json),\n  embedding: {\n    vector: embedding,\n    dimensiones: 32,\n    modelo: 'mock-embeddings-v1',\n    timestamp: new Date().toISOString()\n  },\n  listo_para_neo4j: true\n};"
+      },
+      "name": "Generate Embeddings",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "fileFormat": "json",
+        "fileName": "{{$node[\\\"Generate Embeddings\\\"].json.id}}_processed.json",
+        "filePath": "={{$env.YAML_OUTPUT_PATH}}",
+        "dataToWrite": "{{JSON.stringify($node[\\\"Generate Embeddings\\\"].json, null, 2)}}"
+      },
+      "name": "Save Enriched YAML",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        150
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.N8N_WEBHOOK_URL}}/sync-neo4j",
+        "method": "POST",
+        "bodyParametersUi": "json",
+        "bodyJson": "={{$node[\\\"Generate Embeddings\\\"].json}}"
+      },
+      "name": "Send to Neo4j Sync",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1300,
+        450
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "firstInputNode"
+      },
+      "name": "Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Text Input": {
+      "main": [
+        [
+          {
+            "node": "Analyze Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Text": {
+      "main": [
+        [
+          {
+            "node": "Extract Keywords",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Keywords": {
+      "main": [
+        [
+          {
+            "node": "Generate Embeddings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Embeddings": {
+      "main": [
+        [
+          {
+            "node": "Save Enriched YAML",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send to Neo4j Sync",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

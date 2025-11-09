@@ -1,0 +1,240 @@
+# config_dualcore.yaml
+# ==================================================
+# CONFIGURACIÓN OPTIMIZADA PARA DUAL-CORE AMD 8GB
+# ==================================================
+
+sistema:
+  nombre: "YO Estructural v2.3 - Dual-Core Optimizado"
+  version: "2.3.0"
+  modo: "produccion"
+  descripcion: "Sistema fenomenológico optimizado para procesadores dual-core con 8GB RAM"
+
+# ==================================================
+# NEO4J REMOTO (PC2)
+# ==================================================
+neo4j:
+  # Conectar a Neo4j en PC2 (cambiar IP según tu red)
+  host: "192.168.1.100"          # ⚠️ CAMBIAR según tu red local
+  port: 7687                      # Puerto de conexión Bolt
+  username: "neo4j"
+  password: "${NEO4J_PASSWORD}"   # Desde .env
+  database: "neo4j"
+  
+  # Optimizaciones para conexión remota
+  timeout: 30                     # Seconds
+  max_retry: 3
+  pool_size: 20                   # Reducido para dual-core (default 50)
+  connection_timeout: 10
+  keep_alive_interval: 15
+
+# ==================================================
+# HARDWARE
+# ==================================================
+hardware:
+  cpu_cores: 2                    # Dual-core
+  ram_gb: 8
+  optimization_level: "aggressive"
+  
+  # Paralelización
+  parallelization:
+    n_jobs: 2                     # 2 cores
+    use_threading: true           # ThreadPool, no multiprocessing
+    use_multiprocessing: false    # NO usar (overhead excesivo)
+    thread_pool_size: 2
+
+# ==================================================
+# EMBEDDINGS - CRÍTICO PARA DUAL-CORE
+# ==================================================
+embeddings:
+  # Modelo ultra-ligero: 80MB, 384 dimensiones
+  # NO cambiar a otros modelos sin verificar memoria
+  modelo: "all-MiniLM-L6-v2"
+  
+  dimensiones: 384
+  
+  # Batch size optimizado para 8GB
+  # - 32: recomendado
+  # - 16: si memory < 2GB disponible
+  # - 64: solo si memory > 4GB disponible
+  batch_size: 32
+  
+  # Cache de embeddings (para reutilización)
+  cache_enabled: true
+  cache_mb: 500                   # Max 500MB cache
+  cache_type: "lru"              # Least Recently Used
+  
+  # Loading
+  lazy_loading: true              # Cargar modelo solo cuando se necesite
+  show_progress: false            # No mostrar barras de progreso
+
+# ==================================================
+# CLUSTERING - VOHEXISTENCIA
+# ==================================================
+clustering:
+  algoritmo: "dbscan"             # Algoritmo para agrupar
+  
+  # Parámetros DBSCAN
+  eps: 0.15                       # Distancia máxima
+  min_samples: 2                  # Mínimo para formar cluster
+  metric: "cosine"                # Métrica de distancia
+  
+  # Paralelización
+  n_jobs: 2                       # Usa 2 cores
+  
+  # Performance
+  algorithm: "auto"              # Auto-selecciona "kd_tree" o "ball_tree"
+
+# ==================================================
+# ANÁLISIS - MÁXIMO RELACIONAL DEFINICIONAL
+# ==================================================
+analisis:
+  
+  # 1. Máximo Relacional de Red
+  maximo_relacional:
+    modo: "hibrido"               # Elige automáticamente entre:
+                                  # - networkx: grafos < 10k nodos
+                                  # - neo4j_gds: grafos > 10k nodos
+    
+    # Switch automático a Neo4j GDS si > N nodos
+    umbral_modo_local: 10000      # Si > 10k nodos → Neo4j GDS
+    
+    # Pesos para combinar métricas
+    pesos_metricas:
+      pagerank: 0.30              # Influencia en red
+      betweenness: 0.25           # Puentes conceptuales
+      closeness: 0.20             # Proximidad
+      eigenvector: 0.15           # Conectado a importantes
+      clustering: 0.10            # Cohesión local
+    
+    # PageRank específico
+    pagerank:
+      iterations: 30              # Iteraciones
+      damping: 0.85               # Factor de amortiguamiento
+      tolerance: 1e-6             # Tolerancia convergencia
+  
+  # 2. Convergencia Definicional
+  convergencia:
+    n_rutas: 5                    # Número de rutas independientes
+    
+    # Thresholds
+    umbral_convergencia: 0.85     # Similitud mínima entre definiciones
+    umbral_certeza: 0.99          # Certeza combinada mínima
+    umbral_desviacion: 0.10       # Desv. estándar máxima
+    
+    # LightRAG enriquecimiento (remoto en PC2)
+    usar_lightrag: false          # Desactivar si no hay acceso remoto
+    lightrag_timeout: 30
+  
+  # 3. Axiomatización
+  axiomatizacion:
+    va_minimo: 0.7                # Valor Axiomático mínimo
+    pc_minimo: 0.8                # Puntuación Certeza mínima
+    confianza_combinada_minima: 0.84
+    
+    # Rutas de validación
+    n_rutas_validacion: 3         # Rutas independientes mínimas
+
+# ==================================================
+# PROCESAMIENTO - OPTIMIZACIONES DUAL-CORE
+# ==================================================
+procesamiento:
+  # Memory management
+  memory_check_interval: 100      # Check cada N items
+  max_memory_percent: 70          # Máximo 70% de 8GB
+  
+  # Garbage collection
+  gc_aggressive: true             # Recolección agresiva
+  gc_interval: 50                 # Force GC cada N operaciones
+  
+  # Streaming (vs acumular todo en RAM)
+  streaming_enabled: true         # Procesar streaming
+  chunk_size: 100                 # Tamaño de chunk
+  
+  # Timeout
+  timeout_default: 30             # Segundos por operación
+  timeout_neo4j: 30
+  timeout_embeddings: 60
+
+# ==================================================
+# LOGGING
+# ==================================================
+logging:
+  nivel: "INFO"                   # DEBUG para troubleshooting
+  archivo: "/tmp/yo_estructural.log"
+  
+  # Rotación de logs
+  max_bytes: 10485760             # 10MB
+  backup_count: 5
+  
+  # Formato
+  formato: "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+
+# ==================================================
+# LIGHTRAG (Remoto en PC2)
+# ==================================================
+lightrag:
+  # Desactivar si no tienes acceso a LightRAG remoto
+  habilitado: false
+  
+  # Conexión remota
+  url_remota: "http://192.168.1.100:8000"  # ⚠️ CAMBIAR IP
+  api_key: "${LIGHTRAG_API_KEY}"           # Desde .env
+  timeout: 30
+
+# ==================================================
+# PERSISTENCIA
+# ==================================================
+persistencia:
+  # Neo4j (remoto)
+  neo4j_enabled: true
+  
+  # SQLite local (gradientes, cache)
+  sqlite_local: true
+  sqlite_path: "/tmp/yo_estructural.db"
+  
+  # Backups
+  backup_enabled: true
+  backup_interval_hours: 24
+  backup_directory: "/tmp/backups"
+
+# ==================================================
+# PERFORMANCE TARGETS (Dual-Core 8GB)
+# ==================================================
+performance:
+  embeddings_100_textos: "~7 segundos"
+  clustering_1000_items: "~2 segundos"
+  pagerank_5000_nodos: "~5 segundos"
+  convergencia_5_rutas: "~3 segundos"
+  
+  # Totales
+  flujo_completo_estimado: "~20-30 segundos"
+  memoria_pico: "~6GB / 8GB"
+
+# ==================================================
+# INFORMACIÓN DE IMPLEMENTACIÓN
+# ==================================================
+info:
+  descripcion: |
+    Configuración optimizada para:
+    - CPU: AMD Dual-Core (2 cores)
+    - RAM: 8GB
+    - Conexión remota: Neo4j + LightRAG en PC2
+    
+  cambios_necesarios:
+    - Actualizar IP Neo4j en .env (192.168.1.100 → tu IP)
+    - Actualizar contraseña Neo4j
+    - Desactivar LightRAG si no disponible
+  
+  optimizaciones_implementadas:
+    - Lazy loading de embeddings
+    - Batch processing (batch_size=32)
+    - Memory monitoring (70% threshold)
+    - Garbage collection agresivo
+    - Streaming de resultados
+    - Caching selectivo (embeddings)
+    - Paralelización inteligente (2 threads)
+    - Algoritmos optimizados (DBSCAN, NetworkX)
+  
+  testing:
+    comando: "python test_optimizaciones.py"
+    resultado_esperado: "Todos los tests PASS"

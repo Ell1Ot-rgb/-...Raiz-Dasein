@@ -1,0 +1,414 @@
+{
+  "name": "Google Drive Multimodal Processing",
+  "nodes": [
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "drive",
+        "operation": "trigger",
+        "watchedFolders": "={{ $env.GOOGLE_DRIVE_FOLDER_ID }}",
+        "triggerOn": "fileCreated,fileUpdated",
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        }
+      },
+      "name": "Google Drive Trigger",
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 3,
+      "position": [250, 300],
+      "id": "google-drive-trigger"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "operation": "download",
+        "fileId": "={{ $json.id }}",
+        "options": {
+          "googleFileConversion": {
+            "conversion": {
+              "docsToFormat": "text/plain",
+              "sheetsToFormat": "text/csv"
+            }
+          }
+        }
+      },
+      "name": "Download File",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [450, 300],
+      "id": "download-file"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "string": [
+                  {
+                    "value1": "={{ $json.mimeType }}",
+                    "operation": "contains",
+                    "value2": "image/"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "image"
+            },
+            {
+              "conditions": {
+                "string": [
+                  {
+                    "value1": "={{ $json.mimeType }}",
+                    "operation": "equals",
+                    "value2": "application/pdf"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "pdf"
+            },
+            {
+              "conditions": {
+                "string": [
+                  {
+                    "value1": "={{ $json.mimeType }}",
+                    "operation": "contains",
+                    "value2": "audio/"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "audio"
+            },
+            {
+              "conditions": {
+                "string": [
+                  {
+                    "value1": "={{ $json.mimeType }}",
+                    "operation": "contains",
+                    "value2": "text/"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "text"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "name": "Detect File Type",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 2,
+      "position": [650, 300],
+      "id": "detect-type"
+    },
+    {
+      "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "={{ $env.GEMINI_API_KEY }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"contents\": [{\n    \"parts\": [\n      {\n        \"inline_data\": {\n          \"mime_type\": \"{{ $json.mimeType }}\",\n          \"data\": \"{{ $binary.data.data }}\"\n        }\n      },\n      {\n        \"text\": \"Extrae TODO el texto, gráficos, tablas y contenido visual de este archivo. Genera un análisis fenomenológico detallado del contenido, incluyendo: 1) Descripción del contenido, 2) Conceptos principales, 3) Emociones evocadas, 4) Contexto temporal y espacial, 5) Relaciones y tensiones detectadas. Formato: texto plano estructurado en markdown.\"\n      }\n    ]\n  }]\n}",
+        "options": {}
+      },
+      "name": "Gemini Vision (Images/PDF)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [850, 200],
+      "id": "gemini-vision"
+    },
+    {
+      "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "={{ $env.GEMINI_API_KEY }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"contents\": [{\n    \"parts\": [\n      {\n        \"inline_data\": {\n          \"mime_type\": \"{{ $json.mimeType }}\",\n          \"data\": \"{{ $binary.data.data }}\"\n        }\n      },\n      {\n        \"text\": \"Transcribe este audio completamente. Luego genera un análisis fenomenológico: 1) Transcripción completa, 2) Tono emocional, 3) Conceptos mencionados, 4) Contexto temporal, 5) Intencionalidad percibida. Formato markdown.\"\n      }\n    ]\n  }]\n}",
+        "options": {}
+      },
+      "name": "Gemini Audio",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [850, 400],
+      "id": "gemini-audio"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extraer texto de respuesta Gemini\nconst response = $input.item.json;\nconst extractedText = response.candidates[0].content.parts[0].text;\n\nreturn {\n  json: {\n    texto_fenomenologico: extractedText,\n    id_documento: $input.item.json.name || 'gemini_' + Date.now(),\n    fuente: 'google_drive_gemini',\n    tipo_original: $input.item.json.mimeType,\n    timestamp: new Date().toISOString(),\n    metadatos: {\n      archivo_original: $input.item.json.name,\n      mime_type: $input.item.json.mimeType,\n      tamaño_bytes: $input.item.json.size\n    }\n  }\n};"
+      },
+      "name": "Normalize Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1050, 300],
+      "id": "normalize"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "texto_extraido",
+              "name": "texto_fenomenologico",
+              "value": "={{ $json.data }}",
+              "type": "string"
+            },
+            {
+              "id": "id_doc",
+              "name": "id_documento",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "fuente",
+              "name": "fuente",
+              "value": "google_drive_text",
+              "type": "string"
+            },
+            {
+              "id": "timestamp",
+              "name": "timestamp",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Process Text File",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [850, 500],
+      "id": "process-text"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:5678/webhook/process-text",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id_documento\": \"{{ $json.id_documento }}\",\n  \"contenido\": \"{{ $json.texto_fenomenologico }}\",\n  \"fuente\": \"{{ $json.fuente }}\",\n  \"metadatos\": {{ $json.metadatos }}\n}",
+        "options": {}
+      },
+      "name": "Send to Workflow 3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1250, 300],
+      "id": "send-to-wf3"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.error }}",
+              "operation": "isEmpty"
+            }
+          ]
+        }
+      },
+      "name": "Check Success",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1450, 300],
+      "id": "check-success"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "fileName": "={{ $json.id_documento }}.log",
+        "fileContent": "=Procesado exitosamente: {{ $json.id_documento }}\nTimestamp: {{ $now.toISO() }}\nFuente: {{ $json.fuente }}\nWorkflow: Google Drive Multimodal",
+        "options": {
+          "append": true
+        }
+      },
+      "name": "Log Success",
+      "type": "n8n-nodes-base.writeFile",
+      "typeVersion": 1,
+      "position": [1650, 200],
+      "id": "log-success"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "fileName": "error_log.txt",
+        "fileContent": "=ERROR: {{ $json.id_documento }}\nTimestamp: {{ $now.toISO() }}\nError: {{ $json.error }}\n",
+        "options": {
+          "append": true
+        }
+      },
+      "name": "Log Error",
+      "type": "n8n-nodes-base.writeFile",
+      "typeVersion": 1,
+      "position": [1650, 400],
+      "id": "log-error"
+    }
+  ],
+  "connections": {
+    "Google Drive Trigger": {
+      "main": [
+        [
+          {
+            "node": "Download File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download File": {
+      "main": [
+        [
+          {
+            "node": "Detect File Type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Detect File Type": {
+      "main": [
+        [
+          {
+            "node": "Gemini Vision (Images/PDF)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Gemini Vision (Images/PDF)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Gemini Audio",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Process Text File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Vision (Images/PDF)": {
+      "main": [
+        [
+          {
+            "node": "Normalize Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Audio": {
+      "main": [
+        [
+          {
+            "node": "Normalize Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Output": {
+      "main": [
+        [
+          {
+            "node": "Send to Workflow 3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Text File": {
+      "main": [
+        [
+          {
+            "node": "Send to Workflow 3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send to Workflow 3": {
+      "main": [
+        [
+          {
+            "node": "Check Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Success": {
+      "main": [
+        [
+          {
+            "node": "Log Success",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-10-31T00:00:00.000Z",
+  "versionId": "1"
+}

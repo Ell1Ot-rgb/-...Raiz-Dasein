@@ -1,0 +1,189 @@
+{
+  "name": "Generador Máximo Relacional (Compatible)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generar-maximo",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Webhook: Recibir Concepto",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "generador-maximo-relacional"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Validar entrada\nconst concepto = $input.item.json.concepto;\n\nif (!concepto || concepto.trim() === '') {\n  throw new Error('Concepto vacío o no proporcionado');\n}\n\n// Preparar para procesar\nreturn {\n  concepto: concepto.trim().toUpperCase(),\n  timestamp: new Date().toISOString(),\n  origen: $input.item.json.origen || 'api',\n  session_id: $input.item.json.session_id || `session_${Date.now()}`\n};"
+      },
+      "name": "Validar y Preparar",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://yo_estructural_api:8000/api/generador/rutas",
+        "authentication": "none",
+        "requestMethod": "POST",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"concepto\": \"{{ $json.concepto }}\",\n  \"usar_neo4j\": true,\n  \"usar_gemini\": true,\n  \"enviar_a_n8n\": false\n}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "name": "API: Generar Rutas con Gemini",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.es_maximo_relacional }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "name": "¿Es Máximo Relacional?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "MERGE (m:MAXIMO_RELACIONAL {concepto: $concepto})\nON CREATE SET \n  m.certeza_combinada = $certeza,\n  m.similitud_promedio = $similitud,\n  m.timestamp_creacion = datetime(),\n  m.rutas_json = $rutas_json,\n  m.gemini_analisis = $gemini_analisis,\n  m.origen = 'n8n-workflow'\nON MATCH SET\n  m.certeza_combinada = $certeza,\n  m.similitud_promedio = $similitud,\n  m.timestamp_actualizacion = datetime(),\n  m.rutas_json = $rutas_json,\n  m.gemini_analisis = $gemini_analisis\nRETURN m",
+        "parameters": {
+          "concepto": "={{ $json.concepto }}",
+          "certeza": "={{ $json.certeza_combinada }}",
+          "similitud": "={{ $json.similitud_promedio }}",
+          "rutas_json": "={{ JSON.stringify($json.rutas) }}",
+          "gemini_analisis": "={{ JSON.stringify($json.gemini_analisis) }}"
+        }
+      },
+      "name": "Neo4j: Guardar Máximo",
+      "type": "n8n-nodes-base.neo4j",
+      "typeVersion": 1,
+      "position": [1050, 200],
+      "credentials": {
+        "neo4j": {
+          "name": "Neo4j YO Estructural"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Agregar metadata de procesamiento\nconst input = $input.item.json;\n\nreturn {\n  ...input,\n  procesado_en_n8n: true,\n  timestamp_n8n: new Date().toISOString(),\n  workflow_id: '{{ $workflow.id }}',\n  execution_id: '{{ $execution.id }}'\n};"
+      },
+      "name": "Agregar Metadata",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1250, 200]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json, null, 2) }}"
+      },
+      "name": "Responder: Máximo Detectado",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1450, 200]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({\n  concepto: $json.concepto,\n  es_maximo_relacional: false,\n  certeza_combinada: $json.certeza_combinada,\n  similitud_promedio: $json.similitud_promedio,\n  rutas: $json.rutas,\n  razon: 'No alcanza el umbral de convergencia (99%)',\n  gemini_analisis: $json.gemini_analisis || null,\n  timestamp: new Date().toISOString()\n}, null, 2) }}"
+      },
+      "name": "Responder: No es Máximo",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1050, 400]
+    }
+  ],
+  "connections": {
+    "Webhook: Recibir Concepto": {
+      "main": [
+        [
+          {
+            "node": "Validar y Preparar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar y Preparar": {
+      "main": [
+        [
+          {
+            "node": "API: Generar Rutas con Gemini",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "API: Generar Rutas con Gemini": {
+      "main": [
+        [
+          {
+            "node": "¿Es Máximo Relacional?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Es Máximo Relacional?": {
+      "main": [
+        [
+          {
+            "node": "Neo4j: Guardar Máximo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Responder: No es Máximo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Neo4j: Guardar Máximo": {
+      "main": [
+        [
+          {
+            "node": "Agregar Metadata",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agregar Metadata": {
+      "main": [
+        [
+          {
+            "node": "Responder: Máximo Detectado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

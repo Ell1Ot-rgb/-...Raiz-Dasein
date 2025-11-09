@@ -1,0 +1,148 @@
+{
+  "name": "Workflow 2: Sync Neo4j",
+  "active": true,
+  "nodes": [
+    {
+      "parameters": {
+        "path": "/sync-neo4j",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Webhook Sync",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        100,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Validar y preparar datos para Neo4j\nconst data = $input.first().json;\nconst id = data.id || data.filePath || 'unknown_' + Date.now();\nconst timestamp = new Date().toISOString();\n\nreturn {\n  id,\n  data,\n  timestamp,\n  operacion: data.operacion || 'MERGE',\n  etiqueta: data.tipo_archivo === 'markdown' ? 'DocumentoObsidian' : data.tipo_archivo === 'json' ? 'ArchivoJSON' : 'ArchivoProcesado'\n};"
+      },
+      "name": "Prepare Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        400,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.NEO4J_HOST}}:{{$env.NEO4J_PORT}}",
+        "authentication": "basicAuth",
+        "userFieldName": "{{$env.NEO4J_USER}}",
+        "passwordFieldName": "{{$env.NEO4J_PASSWORD}}",
+        "method": "POST",
+        "bodyParametersUi": "json",
+        "bodyJson": "{\n  \"statements\": [\n    {\n      \"statement\": \"MERGE (n:{{$node[\\\"Prepare Data\\\"].json.etiqueta}} {id: $id}) SET n += $props, n.timestamp = $timestamp, n.procesado = true RETURN n\",\n      \"parameters\": {\n        \"id\": \"{{$node[\\\"Prepare Data\\\"].json.id}}\",\n        \"props\": \"{{$node[\\\"Prepare Data\\\"].json.data}}\",\n        \"timestamp\": \"{{$node[\\\"Prepare Data\\\"].json.timestamp}}\"\n      }\n    }\n  ]\n}"
+      },
+      "name": "Create Node Neo4j",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        700,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Crear relaciones si hay referencias\nconst data = $input.first().json;\nconst relaciones = data.relaciones || [];\n\nreturn {\n  success: true,\n  nodeId: data.id,\n  relacionesCreadas: relaciones.length,\n  timestamp: new Date().toISOString()\n};"
+      },
+      "name": "Create Relations",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "fileFormat": "csv",
+        "fileName": "neo4j_sync_log.csv",
+        "filePath": "={{$env.LOCAL_DATA_PATH}}",
+        "appendEmptyLineToFile": true,
+        "dataToWrite": "{{JSON.stringify([\n  {\n    timestamp: $node[\"Create Relations\"].json.timestamp,\n    nodeId: $node[\"Create Relations\"].json.nodeId,\n    relacionesCreadas: $node[\"Create Relations\"].json.relacionesCreadas,\n    estado: \"exitoso\"\n  }\n], null, 2)}}"
+      },
+      "name": "Log Sync",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "lastNode"
+      },
+      "name": "Response Node",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Sync": {
+      "main": [
+        [
+          {
+            "node": "Prepare Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Data": {
+      "main": [
+        [
+          {
+            "node": "Create Node Neo4j",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Node Neo4j": {
+      "main": [
+        [
+          {
+            "node": "Create Relations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Relations": {
+      "main": [
+        [
+          {
+            "node": "Log Sync",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Sync": {
+      "main": [
+        [
+          {
+            "node": "Response Node",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

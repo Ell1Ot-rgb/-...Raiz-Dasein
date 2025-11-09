@@ -1,0 +1,305 @@
+# 📊 ARBOL COMPLETO DEL SETUP N8N
+
+```
+YO estructural/
+│
+└── n8n_setup/                         ← 🎯 CARPETA PRINCIPAL
+    │
+    ├── 🚀 EJECUCIÓN (3 scripts PowerShell)
+    │   ├── deploy-n8n-complete.ps1    ⭐ ¡EMPIEZA AQUÍ! (maestro)
+    │   ├── install-n8n-complete.ps1   (instalador detallado)
+    │   └── validate-installation.ps1  (validador)
+    │
+    ├── 📖 DOCUMENTACIÓN (7 archivos Markdown)
+    │   ├── INDEX.md                   ← Tabla de contenidos
+    │   ├── QUICK_START.md             ← Inicio rápido (5 min)
+    │   ├── README.md                  ← Introducción
+    │   ├── SETUP_GUIDE.md             ← Guía completa (30 min)
+    │   ├── RESUMEN_EJECUTIVO.md       ← Visión general
+    │   ├── COMMIT_INSTRUCTIONS.md     ← Git/versioning
+    │   └── manifest.json              ← Este árbol (metadata)
+    │
+    ├── 🔄 WORKFLOWS (3 workflows JSON)
+    │   └── workflows/
+    │       ├── workflow_1_monitor_archivos.json
+    │       ├── workflow_2_sync_neo4j.json
+    │       └── workflow_3_text_processing.json
+    │
+    └── 🔐 CREDENCIALES (template)
+        └── credentials/
+            └── credentials_template.json
+
+═══════════════════════════════════════════════════════════════
+
+DESPUÉS DE LA INSTALACIÓN, se crea en tu máquina:
+
+%USERPROFILE%\.n8n\                   ← Ubicación de n8n
+├── .env                              ← Credenciales (¡SECRETO!)
+├── n8n.db                            ← Base de datos SQLite
+├── workflows/                        ← 3 workflows ejecutándose
+├── credentials.json                  ← Credenciales cifradas
+├── logs/                             ← Logs de ejecución
+└── ... otros archivos
+
+═══════════════════════════════════════════════════════════════
+
+FLUJO VISUAL DE INSTALACIÓN:
+
+                    START
+                     ↓
+        [ deploy-n8n-complete.ps1 ]
+                     ↓
+        ┌─────────────┴─────────────┐
+        ↓                           ↓
+   [Verifica]                  [Descarga]
+   PowerShell                   Node 18
+        ↓                           ↓
+   [Instala]  ◄────────────────────┘
+   n8n global
+        ↓
+   [Genera]
+   .env seguro
+        ↓
+   [Importa]
+   3 workflows
+        ↓
+   [Valida]
+   Conectividad
+        ↓
+   [Crea]
+   (opcional)
+   Servicio Windows
+        ↓
+     SUCCESS ✓
+
+═══════════════════════════════════════════════════════════════
+
+FLUJO VISUAL DE EJECUCIÓN:
+
+Carpeta local          Workflow 1         Workflow 3        Workflow 2      Neo4j
+(monitoreada)       (Monitor)         (Procesamiento)    (Sync)          (Grafo)
+     │                   │                   │               │               │
+     │ archivo.md        │                   │               │               │
+     ├──────────────────→│                   │               │               │
+     │                   │                   │               │               │
+     │                 [Detecta]            │               │               │
+     │                 tipo, ruta           │               │               │
+     │                   │                   │               │               │
+     │                   ├──────────────────→│               │               │
+     │                   │                   │               │               │
+     │                   │               [Analiza]          │               │
+     │                   │               [Extrae]          │               │
+     │                   │               [Keywords]        │               │
+     │                   │               [Embeddings]      │               │
+     │                   │               [Enriquece]       │               │
+     │                   │                   │               │               │
+     │                   │                   ├──────────────→│               │
+     │                   │                   │              [Crea]          │
+     │                   │                   │              [Nodos]        │
+     │                   │                   │              [Relaciones]   │
+     │                   │                   │              [Sincroniza]   │
+     │                   │                   │               ├──────────────→│
+     │                   │                   │               │          [Almacena]
+     │                   │                   │               │          [Persiste]
+     │                   │                   │               │          [Grafo]
+     │                   │                   │               │               │
+     └───────────────────┴───────────────────┴───────────────┴───────────────→│
+                         (Logs y registros)                                  │
+                                                                              ↓
+                                                                         ✓ Listo
+
+═══════════════════════════════════════════════════════════════
+
+LO QUE SE INSTALA:
+
+┌─────────────────────────────────────────────────────────────┐
+│ Sistema Operativo: Windows 10/11                            │
+│                                                             │
+│ Downloads:                                                 │
+│ ├─ Node.js 18 LTS (~180 MB)                               │
+│ └─ npm packages (~50 MB)                                  │
+│                                                             │
+│ Instalaciones globales:                                   │
+│ └─ n8n command line (~100 MB)                             │
+│                                                             │
+│ Se crea en usuario:                                       │
+│ └─ %USERPROFILE%\.n8n\ (~1-50 MB según uso)              │
+│                                                             │
+│ Total: ~150-250 MB                                        │
+│ NO requiere: Docker, Postgres, Visual Studio              │
+└─────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════
+
+ARCHIVOS CRÍTICOS:
+
+VERSIONAR (git add):          NO VERSIONAR (git ignore):
+✓ *.ps1 (scripts)             ✗ .env (credenciales)
+✓ workflows/*.json            ✗ n8n.db (base de datos)
+✓ *.md (documentación)        ✗ credentials.json (cifrado)
+✓ credentials_template.json   ✗ logs/ (ejecución)
+✓ manifest.json               ✗ node_modules/ (deps)
+
+═══════════════════════════════════════════════════════════════
+
+COMANDOS CLAVE (Copiar y Pegar):
+
+INSTALACIÓN:
+  Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+  cd "C:\ruta\a\YO estructural"
+  .\n8n_setup\deploy-n8n-complete.ps1
+
+INICIAR N8N:
+  n8n start --env-file $env:USERPROFILE\.n8n\.env
+
+INTERFAZ WEB:
+  http://localhost:5678
+
+VALIDAR:
+  .\n8n_setup\validate-installation.ps1
+
+MONITOREO:
+  n8n list:workflows
+  tail -f $env:USERPROFILE\.n8n\logs\*
+
+BACKUP:
+  n8n export:workflow --all --output backup_$(Get-Date -f yyyyMMdd).json
+
+═══════════════════════════════════════════════════════════════
+
+INTEGRACIÓN CON PYTHON:
+
+motor_yo/sistema_yo_emergente.py:
+  from integraciones.n8n_config import N8nIntegrator
+  
+  n8n = N8nIntegrator()
+  resultado = n8n.enviar_datos_webhook({
+    "contenido": "texto",
+    "id": "doc_001"
+  })
+
+Flujo completo:
+  Python code
+    → N8nIntegrator.enviar_datos_webhook()
+    → Webhook a n8n
+    → Workflow 1 (monitor)
+    → Workflow 3 (procesamiento)
+    → Workflow 2 (sync Neo4j)
+    → Neo4j (persistencia)
+    → motor_yo (consulta grafo)
+
+═══════════════════════════════════════════════════════════════
+
+CHECKLIST DE ÉXITO:
+
+INSTALACIÓN:
+  ✓ PowerShell abierto como Admin
+  ✓ Ejecuté deploy-n8n-complete.ps1
+  ✓ No hay errores en consola
+  ✓ Node.js se instaló
+  ✓ n8n se instaló
+  ✓ .env se creó
+
+VALIDACIÓN:
+  ✓ validate-installation.ps1 pasó
+  ✓ Node.js -v funciona
+  ✓ n8n --version funciona
+  ✓ %USERPROFILE%\.n8n\ existe
+  ✓ n8n.db existe
+
+OPERACIÓN:
+  ✓ n8n start sin errores
+  ✓ http://localhost:5678 abre
+  ✓ 3 workflows ACTIVE en UI
+  ✓ Logs sin errores críticos
+  ✓ Crear archivo en carpeta monitoreada
+  ✓ Workflow 1 lo detecta
+  ✓ Aparece en logs
+  ✓ Sincroniza con Neo4j
+
+═══════════════════════════════════════════════════════════════
+
+DOCUMENTACIÓN POR NIVEL:
+
+👶 PRINCIPIANTE (30 min total):
+  1. QUICK_START.md (5 min)
+  2. README.md (10 min)
+  3. Ejecutar script (10 min)
+  4. Abrir UI (5 min)
+
+👨‍💼 INTERMEDIO (90 min total):
+  1. INDEX.md (5 min)
+  2. SETUP_GUIDE.md (40 min)
+  3. RESUMEN_EJECUTIVO.md (15 min)
+  4. Workflow JSON (15 min)
+  5. Integración Python (15 min)
+
+👨‍🔬 AVANZADO (90+ min):
+  1. Todo lo anterior
+  2. Fuente de scripts PS (20 min)
+  3. Modificar workflows (30 min)
+  4. Extender con nodos custom (40 min)
+
+═══════════════════════════════════════════════════════════════
+
+PRÓXIMOS 30 MINUTOS:
+
+MINUTO 1-2:   Abre PowerShell como Admin
+MINUTO 3-5:   Navega a carpeta del proyecto
+MINUTO 6-7:   Copia el comando deploy-n8n
+MINUTO 8-22:  Espera a que instale (mientras lee QUICK_START.md)
+MINUTO 23-25: Ejecuta: n8n start
+MINUTO 26-28: Abre http://localhost:5678
+MINUTO 29-30: Verifica que todo funciona ✓
+
+═══════════════════════════════════════════════════════════════
+
+🎯 OBJETIVO ALCANZADO:
+
+✓ Sistema n8n completamente automatizado
+✓ 3 workflows optimizados para YO Estructural
+✓ Integración con Neo4j
+✓ Monitoreo de archivos locales
+✓ Procesamiento de texto con embeddings
+✓ Sincronización automática
+✓ Documentación completa
+✓ Listo para producción
+
+═══════════════════════════════════════════════════════════════
+
+¿POR DÓNDE EMPIEZO?
+
+  Lee este archivo (2 min)
+       ↓
+  Lee QUICK_START.md (3 min)
+       ↓
+  Ejecuta: deploy-n8n-complete.ps1
+       ↓
+  Espera (10-15 min)
+       ↓
+  Ejecuta: n8n start
+       ↓
+  Abre: http://localhost:5678
+       ↓
+  ¡LISTO! ✓
+
+═══════════════════════════════════════════════════════════════
+
+Versión: 3.0
+Fecha: 2025-10-31
+Estado: ✅ Listo para producción
+
+```
+
+---
+
+## 🎓 Ahora lee:
+
+1. **QUICK_START.md** (5 min) - Copia y pega para empezar
+2. **README.md** (10 min) - Introducción
+3. **SETUP_GUIDE.md** (30 min) - Guía completa
+4. **INDEX.md** (5 min) - Tabla de contenidos
+
+---
+
+¡**Comienza con:** `.\deploy-n8n-complete.ps1`

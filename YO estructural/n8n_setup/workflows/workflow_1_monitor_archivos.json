@@ -1,0 +1,197 @@
+{
+  "name": "Workflow 1: Monitor Archivos Locales",
+  "active": true,
+  "nodes": [
+    {
+      "parameters": {
+        "path": "={{$env.LOCAL_DATA_PATH}}",
+        "trigger": "files",
+        "recursive": true
+      },
+      "name": "Watch Folder",
+      "type": "n8n-nodes-base.localFileTrigger",
+      "typeVersion": 1,
+      "position": [
+        100,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "filePath": "={{$node[\"Watch Folder\"].json.filePath}}"
+      },
+      "name": "Read File Content",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        400,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Detectar tipo de archivo y procesar\nconst fileName = $input.first().json.name;\nconst ext = fileName.split('.').pop().toLowerCase();\nconst filePath = $input.first().json.filePath;\nconst timestamp = new Date().toISOString();\n\nreturn {\n  fileName,\n  extension: ext,\n  filePath,\n  timestamp,\n  tipo_archivo: ext === 'md' ? 'markdown' : ext === 'json' ? 'json' : ext === 'yaml' || ext === 'yml' ? 'yaml' : 'texto',\n  tamaño_bytes: $input.first().json.size,\n  fuente: 'local_monitor'\n};"
+      },
+      "name": "Detect File Type",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        700,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.NEO4J_URI}}",
+        "authentication": "basicAuth",
+        "nodeCredentialType": "httpBasicAuth",
+        "method": "POST",
+        "bodyParametersUi": "keyvaluepairs",
+        "bodyParameters": {
+          "keyvaluepairs": [
+            {
+              "key": "query",
+              "value": "MERGE (f:ArchivoLocal {id: $id}) SET f += $props RETURN f"
+            },
+            {
+              "key": "params",
+              "value": "{\"id\": \"{{$node[\\\"Detect File Type\\\"].json.filePath}}\", \"props\": {{$node[\\\"Detect File Type\\\"].json}}}"
+            }
+          ]
+        }
+      },
+      "name": "Log to Neo4j",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1000,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Routear según tipo de archivo\nconst tipoArchivo = $input.first().json.tipo_archivo;\n\nreturn [{\n  tipo: tipoArchivo,\n  data: $input.first().json,\n  accion: tipoArchivo === 'markdown' ? 'procesar_obsidian' : tipoArchivo === 'json' ? 'parsear_json' : tipoArchivo === 'yaml' ? 'parsear_yaml' : 'analizar_texto'\n}];"
+      },
+      "name": "Route by Type",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.N8N_WEBHOOK_URL}}/obsidian-processor",
+        "method": "POST",
+        "bodyParametersUi": "json",
+        "bodyJson": "={{$input.all()}}"
+      },
+      "name": "Send to Obsidian Processor",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1600,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.N8N_WEBHOOK_URL}}/json-processor",
+        "method": "POST",
+        "bodyParametersUi": "json",
+        "bodyJson": "={{$input.all()}}"
+      },
+      "name": "Send to JSON Processor",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1600,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.N8N_WEBHOOK_URL}}/text-processor",
+        "method": "POST",
+        "bodyParametersUi": "json",
+        "bodyJson": "={{$input.all()}}"
+      },
+      "name": "Send to Text Processor",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1600,
+        500
+      ]
+    }
+  ],
+  "connections": {
+    "Watch Folder": {
+      "main": [
+        [
+          {
+            "node": "Read File Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read File Content": {
+      "main": [
+        [
+          {
+            "node": "Detect File Type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Detect File Type": {
+      "main": [
+        [
+          {
+            "node": "Log to Neo4j",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log to Neo4j": {
+      "main": [
+        [
+          {
+            "node": "Route by Type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route by Type": {
+      "main": [
+        [
+          {
+            "node": "Send to Obsidian Processor",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send to JSON Processor",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send to Text Processor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

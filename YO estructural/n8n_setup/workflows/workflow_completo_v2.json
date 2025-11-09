@@ -1,0 +1,159 @@
+{
+  "name": "🚀 YO Estructural - Workflow Completo v2",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generador-maximo",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Webhook Entrada",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "generador-maximo-v2"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Validar entrada y generar datos demo\nconst concepto = ($input.item.json.concepto || 'SOPORTE').trim().toUpperCase();\n\nif (concepto.length === 0) {\n  throw new Error('Concepto vacío');\n}\n\n// Simular 5 rutas fenomenológicas\nconst rutas = [\n  {\n    \"tipo\": \"etimologica\",\n    \"ruta\": [concepto, \"raíz etimológica\", \"origen\", \"significado primario\"],\n    \"certeza\": 0.95,\n    \"similitud\": 0.92\n  },\n  {\n    \"tipo\": \"sinonímica\",\n    \"ruta\": [concepto, \"sinónimo cercano\", \"equivalente\", \"alternativa\"],\n    \"certeza\": 0.88,\n    \"similitud\": 0.85\n  },\n  {\n    \"tipo\": \"antonímica\",\n    \"ruta\": [concepto, \"opuesto\", \"contrario\", \"negación\"],\n    \"certeza\": 0.82,\n    \"similitud\": 0.78\n  },\n  {\n    \"tipo\": \"metafórica\",\n    \"ruta\": [concepto, \"figura\", \"analogía\", \"representación\"],\n    \"certeza\": 0.90,\n    \"similitud\": 0.87\n  },\n  {\n    \"tipo\": \"contextual\",\n    \"ruta\": [concepto, \"contexto\", \"aplicación\", \"uso práctico\"],\n    \"certeza\": 0.85,\n    \"similitud\": 0.83\n  }\n];\n\nreturn {\n  concepto: concepto,\n  rutas: rutas,\n  certeza_combinada: 0.88,\n  similitud_promedio: 0.85,\n  es_maximo_relacional: true,\n  timestamp_inicio: new Date().toISOString()\n};"
+      },
+      "name": "Generar Datos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://neo4j:7474/db/neo4j/tx/commit",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "requestMethod": "POST",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\"statements\": [{\"statement\": \"MERGE (m:MAXIMO_RELACIONAL {concepto: $concepto}) ON CREATE SET m.certeza_combinada = $certeza, m.similitud_promedio = $similitud, m.timestamp_creacion = datetime(), m.rutas_json = $rutas_json, m.es_maximo = $es_maximo ON MATCH SET m.certeza_combinada = $certeza, m.similitud_promedio = $similitud, m.timestamp_actualizacion = datetime(), m.rutas_json = $rutas_json RETURN m\", \"parameters\": {\"concepto\": $json.concepto, \"certeza\": $json.certeza_combinada, \"similitud\": $json.similitud_promedio, \"rutas_json\": JSON.stringify($json.rutas), \"es_maximo\": $json.es_maximo_relacional}}]}) }}",
+        "options": {
+          "timeout": 15000
+        }
+      },
+      "name": "Neo4j Guardar",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [650, 150],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "bhsKVzTLGPF8CcX2",
+          "name": "Neo4j Basic Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "requestMethod": "POST",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\"contents\": [{\"parts\": [{\"text\": \"Analiza BREVEMENTE estas 5 rutas fenomenológicas del concepto \\\"\" + $json.concepto + \"\\\" en máximo 2 líneas:\\n\\n\" + JSON.stringify($json.rutas.map(r => ({tipo: r.tipo, ruta: r.ruta.join(' -> ')})), null, 1) + \"\\n\\nResponde en JSON: {\\\"convergen\\\": bool, \\\"definicion\\\": \\\"una línea\\\", \\\"confianza\\\": 0-1}\"}]}], \"generationConfig\": {\"temperature\": 0.2, \"maxOutputTokens\": 500}}) }}",
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "name": "Gemini Analizar",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [650, 450],
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "QXutyEqOTa9HzYuh",
+          "name": "Gemini API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Combinar resultados de ambas llamadas\nconst datosGenerados = $input.first().json;\nconst neoResponse = $input.last().json;\nlet geminiAnalisis = {};\n\n// Extraer respuesta de Neo4j\nconst neoResult = neoResponse.results?.[0] || {};\nconst neoSuccess = neoResult.data !== undefined;\n\n// Extraer respuesta de Gemini (la última entrada es de Gemini)\nconst inputs = Object.values($input.all());\nconst geminiResult = inputs[inputs.length - 1].json;\n\ntry {\n  const textoGemini = geminiResult.candidates?.[0]?.content?.parts?.[0]?.text || '{}';\n  let jsonStr = textoGemini.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n  // Si está entre llaves, parsearlo\n  const match = jsonStr.match(/\\{[^}]*\\}/);\n  if (match) {\n    geminiAnalisis = JSON.parse(match[0]);\n  } else {\n    geminiAnalisis = { definicion: textoGemini, convergen: true, confianza: 0.7 };\n  }\n} catch (e) {\n  geminiAnalisis = { error: e.message, raw: geminiResult?.candidates?.[0]?.content?.parts?.[0]?.text };\n}\n\nreturn {\n  concepto: datosGenerados.concepto,\n  es_maximo_relacional: datosGenerados.es_maximo_relacional,\n  certeza_combinada: datosGenerados.certeza_combinada,\n  similitud_promedio: datosGenerados.similitud_promedio,\n  rutas: datosGenerados.rutas,\n  gemini_analisis: geminiAnalisis,\n  neo4j_guardado: neoSuccess,\n  sistema: \"YO Estructural v2.0\",\n  timestamp_fin: new Date().toISOString()\n};"
+      },
+      "name": "Combinar Resultados",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json, null, 2) }}"
+      },
+      "name": "Respuesta Final",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1050, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Entrada": {
+      "main": [
+        [
+          {
+            "node": "Generar Datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generar Datos": {
+      "main": [
+        [
+          {
+            "node": "Neo4j Guardar",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Gemini Analizar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Neo4j Guardar": {
+      "main": [
+        [
+          {
+            "node": "Combinar Resultados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Analizar": {
+      "main": [
+        [
+          {
+            "node": "Combinar Resultados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Combinar Resultados": {
+      "main": [
+        [
+          {
+            "node": "Respuesta Final",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

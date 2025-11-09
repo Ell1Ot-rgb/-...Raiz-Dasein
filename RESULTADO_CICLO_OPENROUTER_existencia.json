@@ -1,0 +1,32 @@
+{
+  "concepto": "EXISTENCIA",
+  "rutas_descubiertas": [
+    {
+      "nombre": "neurobiologia_cognitiva",
+      "descripcion": "Explora la relación entre la actividad neuronal y la percepción de la existencia, analizando cómo los procesos cerebrales contribuyen a la construcción del sentido de realidad individual y colectivo.",
+      "justificacion": "Es crucial entender cómo la biología del cerebro influye en nuestra percepción y experiencia de la existencia, mostrando cómo la subjetividad está ligada a procesos neurobiológicos complejos.",
+      "ejemplo": "En estudios de neuroimagen se evidencia que ciertos patrones de actividad cerebral están asociados a la sensación de presencia y autoconciencia, mostrando la base fisiológica de la existencia subjetiva.",
+      "nivel_profundidad": 5
+    },
+    {
+      "nombre": "teoria_relatividad",
+      "descripcion": "Aborda la existencia desde la perspectiva de la relatividad espacio-temporal, explorando cómo la percepción del tiempo y la realidad varía según el marco de referencia y la velocidad relativa de los observadores.",
+      "justificacion": "La teoría de la relatividad desafía las percepciones comunes sobre la existencia al demostrar que fenómenos como la dilatación del tiempo y la contracción del espacio influyen en nuestra comprensión del ser.",
+      "ejemplo": "En experimentos de física con partículas a velocidades cercanas a la luz se evidencia que el tiempo se deforma, cuestionando la linealidad temporal y la estabilidad de la existencia.",
+      "nivel_profundidad": 5
+    },
+    {
+      "nombre": "rituales_antropologicos",
+      "descripcion": "Analiza cómo los rituales culturales y simbólicos influyen en la construcción de significado y sentido de existencia individual y colectiva, explorando cómo las prácticas rituales modelan la realidad.",
+      "justificacion": "Los rituales son fundamentales para comprender la existencia humana, ya que revelan cómo las acciones simbólicas y ceremoniales configuran identidades, relaciones y cosmovisiones en las culturas.",
+      "ejemplo": "Los rituales funerarios en diferentes culturas ilustran cómo la muerte y la trascendencia se entrelazan en la existencia humana, mostrando la importancia de los ritos en la comprensión de la vida.",
+      "nivel_profundidad": 4
+    }
+  ],
+  "total_encontradas": 3,
+  "tokens_usados": 1345,
+  "llamadas_api": 1,
+  "timestamp": "2025-11-09T02:40:42.312688",
+  "modelo": "openai/gpt-3.5-turbo",
+  "nota": "Ejecución reducida por OpenRouter (solo Fase 1)"
+}

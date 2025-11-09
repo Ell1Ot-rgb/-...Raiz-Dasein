@@ -1,0 +1,122 @@
+# requirements_dualcore.txt
+# ==================================================
+# DEPENDENCIAS OPTIMIZADAS PARA DUAL-CORE AMD 8GB RAM
+# Versiones pinned para reproducibilidad
+# ==================================================
+
+# ==========================================
+# CORE CIENTÍFICO (Optimizado para dual-core)
+# ==========================================
+
+# ⚠️ CRÍTICO: numpy 1.24.3 (no 1.25+, mucho más lento en dual-core)
+numpy==1.24.3
+
+# Compatible con numpy 1.24
+scipy==1.11.1
+
+# Machine Learning (optimizado para 8GB)
+scikit-learn==1.3.0
+joblib==1.3.1
+
+# ==========================================
+# NLP - MODELOS LIGEROS (< 100MB cada uno)
+# ==========================================
+
+# Procesamiento de texto
+spacy==3.6.1
+
+# Embeddings - sentence-transformers VERSIÓN EXACTA (crítico)
+sentence-transformers==2.2.2
+
+# Nota: all-MiniLM-L6-v2 se descarga automáticamente (80MB)
+# NO instalar modelos grandes:
+# - NO: distilbert-base-multilingual-cased-sentences (500MB)
+# - NO: sentence-bert-large (600MB+)
+# - SÍ: all-MiniLM-L6-v2 (80MB, 384 dims) ← USAR ESTE
+
+# ==========================================
+# NEO4J (Remoto en PC2)
+# ==========================================
+
+neo4j==5.13.0
+pydriver==5.13.0
+
+# Async (opcional, para futuro)
+neo4j-driver-async==5.13.0
+aiohttp==3.8.5
+
+# ==========================================
+# GRAFOS Y ANÁLISIS RELACIONAL
+# ==========================================
+
+# Principal para máximo relacional
+networkx==3.1
+
+# Alternativa más rápida (opcional)
+python-igraph==0.10.6
+
+# ==========================================
+# UTILIDADES Y HERRAMIENTAS
+# ==========================================
+
+# Monitoreo de recursos
+psutil==5.9.5
+
+# Configuración desde .env
+python-dotenv==1.0.0
+
+# Validación de datos
+pydantic==2.0.3
+
+# Archivos de configuración
+pyyaml==6.0.1
+
+# ==========================================
+# PERFORMANCE Y JSON
+# ==========================================
+
+# JSON más rápido que stdlib
+ujson==5.8.0
+
+# Alternativa ultra-rápida
+orjson==3.9.7
+
+# ==========================================
+# LOGGING
+# ==========================================
+
+loguru==0.7.0
+
+# ==========================================
+# TESTING (para desarrollo)
+# ==========================================
+
+pytest==7.4.0
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+
+# ==========================================
+# NOTAS IMPORTANTES
+# ==========================================
+
+# 1. EVITAR estas librerías en dual-core:
+#    - torch (1.5GB+)
+#    - tensorflow (2GB+)
+#    - large spacy models (500MB+)
+#    - large sentence-transformers models
+#
+# 2. NO instalar:
+#    - GPU drivers (no hay GPU en dual-core)
+#    - Heavy ML frameworks
+#
+# 3. LightRAG:
+#    - Corre en PC2 (remoto)
+#    - En PC1 solo necesitas cliente HTTP (aiohttp)
+#    - No instalar lightrag localmente
+#
+# 4. Instalación:
+#    pip install -r requirements_dualcore.txt
+#    python -m spacy download es_core_news_sm
+#
+# 5. Verificación:
+#    python -c "import numpy; import networkx; import sentence_transformers; print('✓ OK')"

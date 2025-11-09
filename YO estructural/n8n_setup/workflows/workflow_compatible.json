@@ -1,0 +1,183 @@
+{
+  "name": "Generador Máximo Relacional - Compatible",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generar-maximo",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "generador-maximo"
+    },
+    {
+      "parameters": {
+        "jsCode": "const concepto = $input.item.json.concepto;\n\nif (!concepto || concepto.trim() === '') {\n  throw new Error('Concepto vacío');\n}\n\nreturn {\n  concepto: concepto.trim().toUpperCase(),\n  timestamp: new Date().toISOString(),\n  session_id: `session_${Date.now()}`\n};"
+      },
+      "name": "Validar",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://yo_estructural_api:8000/api/generador/rutas",
+        "authentication": "none",
+        "requestMethod": "POST",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\"concepto\": $json.concepto, \"usar_neo4j\": true, \"usar_gemini\": true}) }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "name": "API Generador",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://neo4j:7474/db/neo4j/tx/commit",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "requestMethod": "POST",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\"statements\": [{\"statement\": \"MERGE (m:MAXIMO_RELACIONAL {concepto: $concepto}) ON CREATE SET m.certeza_combinada = $certeza, m.similitud_promedio = $similitud, m.timestamp_creacion = datetime(), m.rutas_json = $rutas_json ON MATCH SET m.certeza_combinada = $certeza, m.similitud_promedio = $similitud, m.timestamp_actualizacion = datetime(), m.rutas_json = $rutas_json RETURN m\", \"parameters\": {\"concepto\": $json.concepto, \"certeza\": $json.certeza_combinada, \"similitud\": $json.similitud_promedio, \"rutas_json\": JSON.stringify($json.rutas)}}]}) }}",
+        "options": {}
+      },
+      "name": "Neo4j Guardar",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [850, 200],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "neo4j_auth",
+          "name": "Neo4j Basic Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "requestMethod": "POST",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\"contents\": [{\"parts\": [{\"text\": \"Analiza las siguientes 5 rutas fenomenológicas del concepto \\\"\" + $json.concepto + \"\\\" y determina si convergen hacia una definición unificada:\\n\\n\" + JSON.stringify($json.rutas, null, 2) + \"\\n\\nRespuesta en formato JSON:\\n{\\n  \\\"convergen\\\": true/false,\\n  \\\"razon\\\": \\\"...\\\",\\n  \\\"definicion_unificada\\\": \\\"...\\\",\\n  \\\"confianza\\\": 0-1,\\n  \\\"recomendaciones\\\": [\\\"...\\\"]\\n}\"}]}], \"generationConfig\": {\"temperature\": 0.3, \"maxOutputTokens\": 2048}}) }}",
+        "options": {}
+      },
+      "name": "Gemini API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [850, 400],
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "gemini_api",
+          "name": "Gemini API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const apiResult = $input.first().json;\nconst geminiResult = $input.last().json;\n\n// Extraer texto de Gemini\nlet analisisGemini = {};\ntry {\n  const textoGemini = geminiResult.candidates[0].content.parts[0].text;\n  // Limpiar markdown si existe\n  let jsonStr = textoGemini.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n  analisisGemini = JSON.parse(jsonStr);\n} catch (e) {\n  analisisGemini = { error: 'No se pudo parsear respuesta de Gemini', raw: geminiResult };\n}\n\nreturn {\n  concepto: apiResult.concepto,\n  es_maximo_relacional: apiResult.es_maximo_relacional,\n  certeza_combinada: apiResult.certeza_combinada,\n  similitud_promedio: apiResult.similitud_promedio,\n  rutas: apiResult.rutas,\n  gemini_analisis: analisisGemini,\n  neo4j_guardado: true,\n  timestamp: new Date().toISOString()\n};"
+      },
+      "name": "Combinar",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json, null, 2) }}"
+      },
+      "name": "Responder",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1250, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Validar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar": {
+      "main": [
+        [
+          {
+            "node": "API Generador",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "API Generador": {
+      "main": [
+        [
+          {
+            "node": "Neo4j Guardar",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Gemini API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Neo4j Guardar": {
+      "main": [
+        [
+          {
+            "node": "Combinar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini API": {
+      "main": [
+        [
+          {
+            "node": "Combinar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Combinar": {
+      "main": [
+        [
+          {
+            "node": "Responder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

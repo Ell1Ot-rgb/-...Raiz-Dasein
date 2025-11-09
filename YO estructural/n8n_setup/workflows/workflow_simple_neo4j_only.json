@@ -1,0 +1,117 @@
+{
+  "name": "Demo Simple - Solo Neo4j",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "demo-simple",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "demo-simple"
+    },
+    {
+      "parameters": {
+        "jsCode": "const concepto = $input.item.json.concepto || 'SOPORTE';\n\n// Crear datos de ejemplo simulando el generador\nconst rutasEjemplo = [\n  {\n    \"tipo\": \"etimologica\",\n    \"ruta\": [\"SOPORTE\", \"supportare\", \"sub-portare\", \"llevar desde abajo\"],\n    \"certeza\": 0.95,\n    \"similitud\": 0.92\n  },\n  {\n    \"tipo\": \"sinonímica\",\n    \"ruta\": [\"SOPORTE\", \"apoyo\", \"sustento\", \"base\"],\n    \"certeza\": 0.88,\n    \"similitud\": 0.85\n  },\n  {\n    \"tipo\": \"antonímica\",\n    \"ruta\": [\"SOPORTE\", \"abandonar\", \"desamparo\", \"ausencia\"],\n    \"certeza\": 0.82,\n    \"similitud\": 0.78\n  },\n  {\n    \"tipo\": \"metafórica\",\n    \"ruta\": [\"SOPORTE\", \"pilar\", \"fundamento\", \"columna\"],\n    \"certeza\": 0.90,\n    \"similitud\": 0.87\n  },\n  {\n    \"tipo\": \"contextual\",\n    \"ruta\": [\"SOPORTE\", \"ayuda técnica\", \"asistencia\", \"servicio\"],\n    \"certeza\": 0.85,\n    \"similitud\": 0.83\n  }\n];\n\nreturn {\n  concepto: concepto.trim().toUpperCase(),\n  rutas: rutasEjemplo,\n  certeza_combinada: 0.88,\n  similitud_promedio: 0.85,\n  es_maximo_relacional: true,\n  timestamp: new Date().toISOString()\n};"
+      },
+      "name": "Generar Datos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://neo4j:7474/db/neo4j/tx/commit",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "requestMethod": "POST",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\"statements\": [{\"statement\": \"MERGE (m:MAXIMO_RELACIONAL {concepto: $concepto}) SET m.certeza_combinada = $certeza, m.similitud_promedio = $similitud, m.timestamp = datetime(), m.rutas_json = $rutas_json, m.es_maximo = $es_maximo RETURN m\", \"parameters\": {\"concepto\": $json.concepto, \"certeza\": $json.certeza_combinada, \"similitud\": $json.similitud_promedio, \"rutas_json\": JSON.stringify($json.rutas), \"es_maximo\": $json.es_maximo_relacional}}]}) }}",
+        "options": {}
+      },
+      "name": "Guardar Neo4j",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [650, 300],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "bhsKVzTLGPF8CcX2",
+          "name": "Neo4j Basic Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const datosOriginales = $input.item.json;\n\nreturn {\n  success: true,\n  concepto: datosOriginales.concepto,\n  es_maximo_relacional: datosOriginales.es_maximo_relacional,\n  certeza_combinada: datosOriginales.certeza_combinada,\n  similitud_promedio: datosOriginales.similitud_promedio,\n  rutas: datosOriginales.rutas,\n  neo4j_guardado: true,\n  sistema: \"YO Estructural v1.0 - Demo Simplificado\",\n  mensaje: \"Datos guardados exitosamente en Neo4j. Gemini deshabilitado para evitar timeouts.\",\n  timestamp: new Date().toISOString()\n};"
+      },
+      "name": "Preparar Respuesta",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json, null, 2) }}"
+      },
+      "name": "Responder",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1050, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Generar Datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generar Datos": {
+      "main": [
+        [
+          {
+            "node": "Guardar Neo4j",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar Neo4j": {
+      "main": [
+        [
+          {
+            "node": "Preparar Respuesta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Respuesta": {
+      "main": [
+        [
+          {
+            "node": "Responder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

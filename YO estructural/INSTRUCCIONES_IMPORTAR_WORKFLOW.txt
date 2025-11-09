@@ -1,0 +1,143 @@
+#!/bin/bash
+
+# Script para obtener instrucciones de importación manual de workflows en n8n
+
+cat << 'EOF'
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📦 IMPORTACIÓN MANUAL DE WORKFLOW EN n8n
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️  La API de n8n requiere un API Key que solo se puede generar
+   desde la interfaz web. Por ahora, necesitas importar manualmente.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 PASOS PARA IMPORTAR EL WORKFLOW:
+
+1. Abre n8n en tu navegador:
+   ──────────────────────────
+   https://sinister-wand-5vqjp756r4xcvpvw-5678.app.github.dev
+   
+   Usuario: admin
+   Password: fenomenologia2024
+
+2. Crear un nuevo workflow:
+   ────────────────────────
+   • Click en "Workflows" (barra lateral izquierda)
+   • Click en "+ Add workflow" (arriba)
+
+3. Importar desde archivo:
+   ────────────────────────
+   • Click en el icono "..." (tres puntos verticales arriba a la derecha)
+   • Selecciona "Import from File"
+   • En el file browser, navega a:
+     
+     /workspaces/-...Raiz-Dasein/YO estructural/n8n_setup/workflows/
+     
+   • Selecciona: workflow_5_generador_maximo_relacional.json
+   • Click "Open"
+
+4. Verificar que se importó:
+   ──────────────────────────
+   Deberías ver un workflow con estos nodos:
+   • Webhook: Recibir Concepto
+   • Validar y Preparar (Code)
+   • API: Generar Rutas (HTTP Request)
+   • ¿Es Máximo Relacional? (IF)
+   • Neo4j: Guardar Máximo
+   • Gemini: Analizar Convergencia
+   • Combinar Resultados (Code)
+   • Responder: Máximo Detectado
+   • Neo4j: Conectar Similares
+
+5. Configurar Credenciales:
+   ────────────────────────
+   
+   A) Para el nodo "Neo4j: Guardar Máximo":
+      • Click en el nodo
+      • En "Credential to connect with", selecciona:
+        "Neo4j YO Estructural"
+        (la que creaste antes)
+   
+   B) Para el nodo "Gemini: Analizar Convergencia":
+      • Click en el nodo
+      • En "Credential to connect with", selecciona:
+        "Google Gemini API"
+        (la que creaste antes)
+   
+   C) Para el nodo "Neo4j: Conectar Similares":
+      • Click en el nodo
+      • En "Credential to connect with", selecciona:
+        "Neo4j YO Estructural"
+
+6. Guardar el workflow:
+   ────────────────────
+   • Click en "Save" (arriba a la derecha)
+
+7. Activar el workflow:
+   ────────────────────
+   • Switch arriba a la derecha: "Inactive" → "Active"
+   • El workflow ahora está escuchando en:
+     https://sinister-wand-5vqjp756r4xcvpvw-5678.app.github.dev/webhook/generar-maximo
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🧪 PROBAR EL WORKFLOW:
+
+Una vez activado, prueba con:
+
+curl -X POST https://sinister-wand-5vqjp756r4xcvpvw-5678.app.github.dev/webhook/generar-maximo \
+  -H "Content-Type: application/json" \
+  -d '{"concepto": "SOPORTE"}'
+
+Deberías recibir una respuesta JSON con:
+- concepto: "SOPORTE"
+- es_maximo_relacional: true/false
+- certeza_combinada: 0-1
+- rutas: [... 5 rutas ...]
+- gemini_analisis: {...}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔧 ALTERNATIVA: Generar API Key para Importación Automática
+
+Si prefieres usar el script de importación automática:
+
+1. En n8n, ve a: Settings (⚙️) → API
+2. Click en "Create API Key"
+3. Copia el API Key generado
+4. Edita el archivo .env y agrega:
+   N8N_API_KEY=tu-api-key-aqui
+5. Vuelve a ejecutar: ./importar_workflows_n8n.sh
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 ESTADO ACTUAL:
+
+✅ n8n corriendo
+✅ Neo4j corriendo
+✅ Credenciales configuradas:
+   • Neo4j YO Estructural
+   • Google Gemini API
+✅ Workflow listo para importar:
+   n8n_setup/workflows/workflow_5_generador_maximo_relacional.json
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 TIP: Si el archivo no aparece en el file browser de n8n,
+    puedes copiar el contenido del JSON y pegarlo:
+
+1. Lee el archivo:
+   cat n8n_setup/workflows/workflow_5_generador_maximo_relacional.json
+
+2. Copia todo el contenido
+
+3. En n8n, en lugar de "Import from File":
+   • Click en "Import from URL"
+   • Pega el JSON completo en el campo de texto
+   • Click "Import"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF

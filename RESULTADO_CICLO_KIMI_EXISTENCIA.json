@@ -1,0 +1,319 @@
+{
+  "concepto": "EXISTENCIA",
+  "rutas_descubiertas": [
+    {
+      "nombre": "ser-en-el-mundo",
+      "descripcion": "Exploración de la existencia como ser-en-el-mundo según Heidegger",
+      "justificacion": "Heidegger plantea que la existencia humana se define por su relación con el mundo circundante, donde el Dasein se encuentra inmerso en un entorno que moldea su ser.",
+      "ejemplo": "Un individuo experimenta la angustia al confrontar su propia mortalidad y la fugacidad de la vida, lo que le lleva a cuestionar su existencia y su lugar en el mundo.",
+      "nivel_profundidad": 5
+    },
+    {
+      "nombre": "existencia-quantica",
+      "descripcion": "Exploración de la existencia desde una perspectiva cuántica",
+      "justificacion": "La física cuántica plantea la existencia de realidades múltiples y la superposición de estados, lo que desafía la noción tradicional de existencia como algo estático y definido.",
+      "ejemplo": "El experimento de la doble rendija demuestra la dualidad onda-partícula, sugiriendo que la realidad se construye a través de la observación y la interacción.",
+      "nivel_profundidad": 4
+    },
+    {
+      "nombre": "existencia-ecologica",
+      "descripcion": "Análisis de la existencia en relación con la ecología y el medio ambiente",
+      "justificacion": "La existencia humana está intrínsecamente ligada al entorno natural, donde nuestras acciones tienen un impacto directo en la salud del planeta y de todas las formas de vida que lo habitan.",
+      "ejemplo": "La crisis climática global pone en evidencia la fragilidad de nuestra existencia y la necesidad de replantear nuestra relación con la naturaleza.",
+      "nivel_profundidad": 4
+    },
+    {
+      "nombre": "existencia-temporalidad",
+      "descripcion": "Exploración de la existencia a través de la temporalidad y la finitud",
+      "justificacion": "La conciencia del paso del tiempo y la inevitable mortalidad nos confronta con la fragilidad de nuestra existencia y nos invita a reflexionar sobre el significado de nuestra vida en un contexto temporal.",
+      "ejemplo": "El filósofo Kierkegaard plantea que la angustia existencial surge de la conciencia de nuestra finitud y de la responsabilidad de dar sentido a nuestra existencia en un tiempo limitado.",
+      "nivel_profundidad": 5
+    },
+    {
+      "nombre": "existencia-corporalidad",
+      "descripcion": "Análisis de la existencia a través de la corporalidad y la experiencia sensorial",
+      "justificacion": "Nuestra existencia se manifiesta a través de nuestro cuerpo y de la interacción con el mundo físico, donde las sensaciones y percepciones moldean nuestra experiencia del ser.",
+      "ejemplo": "El dolor físico nos confronta con nuestra vulnerabilidad y nos recuerda la realidad de nuestra existencia encarnada, marcada por la fragilidad y la limitación.",
+      "nivel_profundidad": 4
+    },
+    {
+      "nombre": "existencia-interconectividad",
+      "descripcion": "Exploración de la existencia a través de la interconectividad y las relaciones",
+      "justificacion": "La existencia humana se configura a través de las relaciones con otros seres y con el entorno, donde la interdependencia y la reciprocidad juegan un papel fundamental en la construcción de la identidad y del sentido de la vida.",
+      "ejemplo": "El filósofo Levinas plantea que la ética surge de la responsabilidad hacia el otro, lo que revela la intrínseca interconectividad de la existencia humana.",
+      "nivel_profundidad": 5
+    },
+    {
+      "nombre": "existencia-ontologia",
+      "descripcion": "Análisis de la existencia desde una perspectiva ontológica",
+      "justificacion": "La ontología se ocupa del estudio del ser y de la realidad, planteando preguntas fundamentales sobre la naturaleza de la existencia y su relación con la esencia.",
+      "ejemplo": "La paradoja del ser y la nada en la filosofía de Sartre cuestiona la existencia de un ser trascendental y pone en tela de juicio la estabilidad de la realidad.",
+      "nivel_profundidad": 4
+    },
+    {
+      "nombre": "existencia-fenomenologia",
+      "descripcion": "Exploración de la existencia desde una perspectiva fenomenológica",
+      "justificacion": "La fenomenología se centra en el estudio de la experiencia consciente y en la construcción de significados a través de la percepción y la intencionalidad, ofreciendo una visión profunda de la existencia humana.",
+      "ejemplo": "La reducción fenomenológica de Husserl invita a explorar la estructura de la conciencia y a descubrir los fundamentos de la existencia a través de la experiencia vivida.",
+      "nivel_profundidad": 5
+    },
+    {
+      "nombre": "existencia-etica",
+      "descripcion": "Análisis de la existencia desde una perspectiva ética",
+      "justificacion": "La ética se ocupa de las normas y valores que guían nuestras acciones y decisiones, planteando interrogantes sobre la responsabilidad moral y el significado de una existencia ética.",
+      "ejemplo": "El dilema moral de Kant sobre la mentira plantea cuestiones fundamentales sobre la integridad y la coherencia en la existencia humana, mostrando la complejidad de las decisiones éticas.",
+      "nivel_profundidad": 4
+    },
+    {
+      "nombre": "existencia-neurociencia",
+      "descripcion": "Exploración de la existencia desde una perspectiva neurocientífica",
+      "justificacion": "La neurociencia estudia los procesos cerebrales y la conciencia, ofreciendo nuevas perspectivas sobre la relación entre la actividad neuronal y la experiencia consciente, y planteando cuestiones sobre la naturaleza de la existencia.",
+      "ejemplo": "La plasticidad neuronal muestra la capacidad del cerebro para adaptarse y cambiar a lo largo de la vida, lo que sugiere que la existencia humana es moldeable y dinámica.",
+      "nivel_profundidad": 4
+    },
+    {
+      "nombre": "existencia-espacialidad",
+      "descripcion": "Análisis de la existencia a través de la espacialidad y la relación con el entorno físico",
+      "justificacion": "La existencia se configura a través de la interacción con el espacio físico y la percepción del entorno, donde la espacialidad influye en la experiencia y en la construcción del ser.",
+      "ejemplo": "La sensación de claustrofobia revela la importancia del espacio en la configuración de la existencia humana, mostrando cómo la limitación espacial puede afectar nuestra percepción del mundo y de nosotros mismos.",
+      "nivel_profundidad": 4
+    },
+    {
+      "nombre": "existencia-esencialismo",
+      "descripcion": "Exploración de la existencia desde una perspectiva esencialista",
+      "justificacion": "El esencialismo plantea la existencia de propiedades inherentes y permanentes en los seres, sugiriendo que la esencia define la existencia y la identidad de los individuos.",
+      "ejemplo": "La teoría de las ideas de Platón propone la existencia de realidades eternas y perfectas, que sirven como modelos de existencia y de conocimiento, mostrando la influencia de la esencialidad en la construcción del ser.",
+      "nivel_profundidad": 5
+    }
+  ],
+  "analisis_profundos": {
+    "ser-en-el-mundo": {
+      "ruta": "ser-en-el-mundo",
+      "analisis_profundo": "La existencia es un concepto fundamental en la filosofía que plantea preguntas sobre la realidad y la naturaleza de nuestro ser en el mundo. Desde una perspectiva filosófica, la existencia puede ser vista como la manifestación de la conciencia en un entorno físico y social. Se debate si nuestra existencia es resultado de una causalidad determinista o si poseemos libre albedrío para forjar nuestro propio camino.",
+      "ejemplos": [
+        "Un individuo que se cuestiona su propósito en la vida",
+        "Un filósofo que reflexiona sobre la naturaleza del ser",
+        "Un artista que busca expresar su existencia a través de su obra"
+      ],
+      "certeza": 0.85,
+      "aplicaciones": [
+        "Reflexionar sobre nuestras acciones y decisiones en la vida cotidiana",
+        "Buscar significado y trascendencia en nuestras experiencias"
+      ],
+      "paradojas": [
+        "La paradoja de la existencia sin sentido, donde se cuestiona si nuestras acciones tienen un propósito real en un universo aparentemente indiferente"
+      ]
+    },
+    "existencia-temporalidad": {
+      "ruta": "existencia-temporalidad",
+      "analisis_profundo": "La existencia se relaciona estrechamente con la temporalidad en la filosofía, ya que implica la noción de ser en un determinado momento. Según Heidegger, la existencia humana se caracteriza por su temporalidad, ya que estamos siempre proyectándonos hacia el futuro. Esto nos lleva a cuestionarnos sobre la autenticidad de nuestra existencia en relación con el tiempo.",
+      "ejemplos": [
+        "El nacimiento de un ser humano marca el inicio de su existencia en el tiempo.",
+        "El envejecimiento y la muerte son procesos que evidencian la temporalidad de la existencia.",
+        "Un proyecto de vida que se cumple a lo largo del tiempo es una manifestación de la existencia en la temporalidad."
+      ],
+      "certeza": 0.85,
+      "aplicaciones": [
+        "La reflexión sobre la temporalidad de la existencia puede llevar a una mayor conciencia del momento presente y a una valoración más profunda de la vida.",
+        "En el ámbito terapéutico, entender la relación entre existencia y temporalidad puede ayudar a los individuos a superar crisis existenciales y encontrar sentido en su vida."
+      ],
+      "paradojas": [
+        "La paradoja de vivir el presente sabiendo que nuestra existencia está marcada por el paso del tiempo y la inevitabilidad de la muerte."
+      ]
+    },
+    "existencia-interconectividad": {
+      "ruta": "existencia-interconectividad",
+      "analisis_profundo": "La interconectividad en la existencia se refiere a la idea de que todo en el universo está intrínsecamente relacionado y depende de otros elementos para existir. Desde un punto de vista filosófico, esto plantea la noción de que la existencia de un ser o entidad no puede ser entendida de forma aislada, sino que debe ser analizada en relación con su entorno y las conexiones que tiene con otros seres. Esta interconectividad nos lleva a cuestionar la naturaleza de la individualidad y la unidad en el universo, así como la idea de que todo está interrelacionado en un tejido cósmico.",
+      "ejemplos": [
+        "La relación simbiótica entre las plantas y los animales en un ecosistema",
+        "La dependencia de los seres humanos de la naturaleza para su supervivencia",
+        "El efecto mariposa en la teoría del caos"
+      ],
+      "certeza": 0.85,
+      "aplicaciones": [
+        "Ecología",
+        "Teoría de sistemas"
+      ],
+      "paradojas": [
+        "La paradoja de la individualidad en un universo interconectado"
+      ]
+    },
+    "existencia-fenomenologia": {
+      "ruta": "existencia-fenomenologia",
+      "analisis_profundo": "La existencia, desde una perspectiva fenomenológica, se entiende como la experiencia vivida de la realidad. Según la fenomenología, la existencia es la manera en que cada individuo experimenta su propia vida, sus pensamientos, emociones y percepciones. Se enfoca en la conciencia individual y en cómo se relaciona con el mundo circundante, considerando la subjetividad y la intersubjetividad. La existencia se convierte en un proceso continuo de autoconciencia y autorreflexión.",
+      "ejemplos": [
+        "La sensación de soledad en medio de una multitud",
+        "La percepción del paso del tiempo de forma subjetiva",
+        "La experiencia de la angustia existencial"
+      ],
+      "certeza": 0.85,
+      "aplicaciones": [
+        "Terapia existencial para ayudar a los individuos a encontrar sentido en sus vidas",
+        "Prácticas de mindfulness para aumentar la conciencia de la propia existencia"
+      ],
+      "paradojas": [
+        "La paradoja de la libertad individual frente a las limitaciones impuestas por la sociedad"
+      ]
+    },
+    "existencia-esencialismo": {
+      "ruta": "existencia-esencialismo",
+      "analisis_profundo": "El existencialismo es una corriente filosófica que se centra en la existencia individual y la libertad de elección. El esencialismo, por otro lado, sostiene que las entidades tienen una esencia innata que define su naturaleza. En el contexto de la existencia, el esencialismo puede llevar a preguntarse si realmente existe una esencia o naturaleza intrínseca en los individuos, o si son simplemente el resultado de sus elecciones y circunstancias. Esta tensión entre la libertad individual y una posible esencia predefinida es el corazón del debate entre existencialismo y esencialismo.",
+      "ejemplos": [
+        "El concepto de la 'autenticidad' en la filosofía existencialista, donde se enfatiza la importancia de vivir de acuerdo con los propios valores y creencias, en lugar de seguir normas externas.",
+        "La idea de que la identidad de una persona está determinada por factores como su género, raza o clase social, lo que puede chocar con la noción existencialista de que uno crea su propia identidad a través de sus elecciones y acciones.",
+        "El debate sobre si la vida humana tiene un propósito intrínseco o si es el individuo quien le da sentido a su existencia a través de sus proyectos y relaciones."
+      ],
+      "certeza": 0.85,
+      "aplicaciones": [
+        "En psicología, el enfoque existencialista puede ayudar a los individuos a explorar su sentido de identidad y propósito en la vida, fomentando la autoconciencia y la toma de decisiones auténticas.",
+        "En el ámbito de la ética, la tensión entre el existencialismo y el esencialismo puede influir en la forma en que se entienden los valores morales y la responsabilidad personal."
+      ],
+      "paradojas": [
+        "La paradoja de la libertad individual frente a una posible esencia predefinida en los individuos, que plantea la cuestión de si realmente somos libres para elegir nuestra existencia o si estamos limitados por factores más allá de nuestro control."
+      ]
+    }
+  },
+  "grafo": {
+    "nodos": [
+      {
+        "id": "EXISTENCIA",
+        "tipo": "Concepto"
+      },
+      {
+        "id": "ser-en-el-mundo",
+        "tipo": "Ruta"
+      },
+      {
+        "id": "existencia-quantica",
+        "tipo": "Ruta"
+      },
+      {
+        "id": "existencia-ecologica",
+        "tipo": "Ruta"
+      },
+      {
+        "id": "existencia-temporalidad",
+        "tipo": "Ruta"
+      },
+      {
+        "id": "existencia-corporalidad",
+        "tipo": "Ruta"
+      },
+      {
+        "id": "existencia-interconectividad",
+        "tipo": "Ruta"
+      },
+      {
+        "id": "existencia-ontologia",
+        "tipo": "Ruta"
+      },
+      {
+        "id": "existencia-fenomenologia",
+        "tipo": "Ruta"
+      },
+      {
+        "id": "existencia-etica",
+        "tipo": "Ruta"
+      },
+      {
+        "id": "existencia-neurociencia",
+        "tipo": "Ruta"
+      },
+      {
+        "id": "existencia-espacialidad",
+        "tipo": "Ruta"
+      },
+      {
+        "id": "existencia-esencialismo",
+        "tipo": "Ruta"
+      }
+    ],
+    "relaciones": [
+      {
+        "origen": "EXISTENCIA",
+        "destino": "ser-en-el-mundo",
+        "tipo": "explora",
+        "peso": 1.0
+      },
+      {
+        "origen": "EXISTENCIA",
+        "destino": "existencia-quantica",
+        "tipo": "explora",
+        "peso": 1.0
+      },
+      {
+        "origen": "EXISTENCIA",
+        "destino": "existencia-ecologica",
+        "tipo": "explora",
+        "peso": 1.0
+      },
+      {
+        "origen": "EXISTENCIA",
+        "destino": "existencia-temporalidad",
+        "tipo": "explora",
+        "peso": 1.0
+      },
+      {
+        "origen": "EXISTENCIA",
+        "destino": "existencia-corporalidad",
+        "tipo": "explora",
+        "peso": 1.0
+      },
+      {
+        "origen": "EXISTENCIA",
+        "destino": "existencia-interconectividad",
+        "tipo": "explora",
+        "peso": 1.0
+      },
+      {
+        "origen": "EXISTENCIA",
+        "destino": "existencia-ontologia",
+        "tipo": "explora",
+        "peso": 1.0
+      },
+      {
+        "origen": "EXISTENCIA",
+        "destino": "existencia-fenomenologia",
+        "tipo": "explora",
+        "peso": 1.0
+      },
+      {
+        "origen": "EXISTENCIA",
+        "destino": "existencia-etica",
+        "tipo": "explora",
+        "peso": 1.0
+      },
+      {
+        "origen": "EXISTENCIA",
+        "destino": "existencia-neurociencia",
+        "tipo": "explora",
+        "peso": 1.0
+      },
+      {
+        "origen": "EXISTENCIA",
+        "destino": "existencia-espacialidad",
+        "tipo": "explora",
+        "peso": 1.0
+      },
+      {
+        "origen": "EXISTENCIA",
+        "destino": "existencia-esencialismo",
+        "tipo": "explora",
+        "peso": 1.0
+      }
+    ]
+  },
+  "estadisticas": {
+    "total_rutas": 12,
+    "analisis_realizados": 5,
+    "nodos_grafo": 13,
+    "relaciones": 12
+  },
+  "metricas": {
+    "tokens_usados": 5628,
+    "llamadas_api": 7,
+    "duracion_segundos": 30.181476
+  },
+  "modelo": "openai/gpt-3.5-turbo",
+  "timestamp": "2025-11-09T06:23:55.311955"
+}

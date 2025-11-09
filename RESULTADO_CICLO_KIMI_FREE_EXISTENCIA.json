@@ -1,0 +1,126 @@
+{
+  "concepto": "EXISTENCIA",
+  "rutas_descubiertas": [
+    {
+      "nombre": "presencia_silenciosa",
+      "descripcion": "La existencia como presencia silenciosa que precede toda articulación",
+      "profundidad": 5,
+      "ejemplo": "El silencio que precede y sobrevive a toda palabra"
+    },
+    {
+      "nombre": "apertura_ontologica",
+      "descripcion": "El acto de abrir el ser a su propia manifestación",
+      "profundidad": 5,
+      "ejemplo": "El acto primordial que permite que el ser se revele a sí mismo"
+    },
+    {
+      "nombre": "ek_sistere",
+      "descripcion": "El acto de existir como permanencia en el ser",
+      "profundidad": 5,
+      "ejemplo": "El acto de mantenerse en el ser sin ser reducido a mera presencia"
+    },
+    {
+      "nombre": "ek_sistere",
+      "descripcion": "El acto de existir como permanencia en el ser",
+      "profundidad": 5,
+      "ejemplo": "El acto de mantenerse en el ser sin ser reducido a mera presencia"
+    },
+    {
+      "nombre": "transcendencia_inmanente",
+      "descripcion": "La existencia como trascendencia inmanente",
+      "profundidad": 5,
+      "ejemplo": "El ser que se trasciende a sí mismo en el acto mismo de ser"
+    },
+    {
+      "nombre": "facticidad_nuda",
+      "descripcion": "La existencia como facticidad pura y simple",
+      "profundidad": 5,
+      "ejemplo": "El ser como el 'es' mismo, sin más atributos o modalidades"
+    },
+    {
+      "nombre": "ek_sistere",
+      "descripcion": "El acto de existir como permanencia en el ser",
+      "profundidad": 5,
+      "ejemplo": "El acto de mantenerse en el ser sin ser reducido a mera presencia"
+    },
+    {
+      "nombre": "presencia_pura",
+      "descripcion": "La existencia como presencia pura y simple",
+      "profundidad": 5,
+      "ejemplo": "El ser como presencia sin más atributos o modalidades"
+    },
+    {
+      "nombre": "apertura_ontologica",
+      "descripcion": "El acto de abrir el ser a su propia manifestación",
+      "profundidad": 5,
+      "ejemplo": "El acto primordial que permite que el ser se revele a sí mismo"
+    },
+    {
+      "nombre": "ek_sistere",
+      "descripcion": "El acto de existir como permanencia en el ser",
+      "profundidad": 5,
+      "ejemplo": "El acto de mantenerse en el ser sin ser reducido a mera presencia"
+    }
+  ],
+  "analisis_profundos": {
+    "presencia_silenciosa": {
+      "ruta": "presencia_silenciosa",
+      "analisis": "La ruta 'presencia_silenciosa' en el concepto 'EXISTENCIA' representa una tensión entre la presencia y el silencio, donde la existencia se manifiesta no a través de la palabra sino a través del silencio profundo que habita en el corazón de los seres. Esta ruta nos invita a considerar que la existencia no es un acto de habla sino un acto de silencio que se hace presente en el mundo.",
+      "certeza": 0.85,
+      "ejemplos": [
+        "El silencio de la existencia en la obra de Samuel Beckett",
+        "El silencio como presencia en la obra de Samuel Beckett"
+      ],
+      "aplicaciones": [
+        "aplicacion1",
+        "aplicacion2"
+      ],
+      "paradojas": [
+        "paradoja1"
+      ]
+    },
+    "apertura_ontologica": {
+      "ruta": "apertura_ontologica",
+      "analisis": "La apertura ontológica revela que la existencia no es un predicado más, sino la condición trascendental que hace posible todo predicado. Esta vía muestra que 'existir' no es un acto, sino el fundamento mismo del ser que se manifiesta en la apertura ontológica como donación originaria.",
+      "certeza": 0.85,
+      "ejemplos": [
+        "El ser-no-más que caracteriza al Dasein heideggeriano",
+        "La existencia como donación en Jean-Luc Marion"
+      ],
+      "aplicaciones": [
+        "fenomenologia de la religion",
+        "ontologia fundamental"
+      ],
+      "paradojas": [
+        "la paradoja del ser que se da sin mediación"
+      ]
+    },
+    "ek_sistere": {
+      "ruta": "ek_sistere",
+      "analisis": "La ruta ek_sistere se refiere al acto de 'poner fuera' o 'mostrar' el ser, lo que implica que la existencia no es simplemente 'ser', sino un acto de mostrarse, de hacerse visible o audible para el otro. Esto sugiere que la existencia es inherente al encuentro, al 'estar-con' (Mit-sein), y que el ser no puede ser reducido a un simple 'estar ahi' (Dasein), sino que es un acto de mostrarse, de hacerse presente para el otro. Por lo tanto, la existencia es un fenómeno de encuentro, un 'estar-con' que se da en el lenguaje y la acción, y que la esencia del ser humano es ser-para-el-otro, no un ser-ahi aislado.",
+      "certeza": 0.85,
+      "ejemplos": [
+        "El ser humano se muestra en el lenguaje y la acción, no como un objeto sino como un sujeto que responde por su ser y su palabra",
+        "La existencia es un acto de mostrarse al otro en el lenguaje y la acción, no un estado de ser en sí mismo"
+      ],
+      "aplicaciones": [
+        "Responsabilidad y rendición de cuentas en la política y la ética",
+        "El arte y la literatura como formas de mostrarse y de hacerse cargo del ser"
+      ],
+      "paradojas": [
+        "El ser humano es el único ser que puede ser cuestionado por su ser y su palabra, y que puede ser acusado de inautenticidad o de traición a su ser o a su palabra"
+      ]
+    }
+  },
+  "estadisticas": {
+    "total_rutas": 10,
+    "analisis_realizados": 3
+  },
+  "metricas": {
+    "tokens_usados": 2105,
+    "llamadas_api": 4,
+    "duracion_segundos": 46.571901
+  },
+  "modelo": "moonshotai/kimi-k2:free",
+  "timestamp": "2025-11-09T06:41:10.031227"
+}
